@@ -1,0 +1,310 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Poppins:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap');
+
+@import "tailwindcss";
+
+@layer base {
+  html, body {
+    background-color: #08080F !important;
+    background: #08080F !important;
+    color: #F0EBE0;
+  }
+}
+
+@theme {
+  --color-charcoal: #1A1A2E;
+  --color-charcoal-deep: #0A0A14;
+  --color-charcoal-light: #16213E;
+  --color-coir: #8B6914;
+  --color-gold: #C9A84C;
+  --color-gold-light: #E8D5A0;
+  --color-sand: #D4B896;
+  --color-text-primary: #F5F0E8;
+  --color-text-secondary: #9E9484;
+  --color-text-muted: #5E574A;
+}
+
+/* ================================================
+   SMART COIR — PREMIUM DESIGN SYSTEM v2
+   ================================================ */
+
+:root {
+  --bg-primary: #08080F;
+  --bg-secondary: #0E0E18;
+  --bg-tertiary: #141422;
+  --bg-card: #12121E;
+  
+  --accent: #C9A84C;
+  --accent-dim: rgba(201, 168, 76, 0.12);
+  --accent-glow: rgba(201, 168, 76, 0.25);
+  --accent-bright: #E8C55A;
+  
+  --brown: #8B6914;
+  --brown-light: #A88A3E;
+  --sand: #D4B896;
+  
+  --text-1: #F0EBE0;
+  --text-2: #A09888;
+  --text-3: #8A8070;
+  
+  --border: rgba(255, 255, 255, 0.1);
+  --border-hover: rgba(201, 168, 76, 0.25);
+  
+  --glass: rgba(255, 255, 255, 0.03);
+  --glass-hover: rgba(255, 255, 255, 0.06);
+  
+  --radius: 16px;
+  --radius-sm: 10px;
+  --radius-lg: 24px;
+  --radius-full: 9999px;
+}
+
+/* ================================================
+   RESET & BASE
+   ================================================ */
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+  background: #08080F !important;
+  background-color: #08080F !important;
+  color-scheme: dark;
+}
+
+body {
+  font-family: 'Inter', -apple-system, sans-serif !important;
+  background: #08080F !important;
+  background-color: #08080F !important;
+  color: #F0EBE0 !important;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  line-height: 1.6;
+  min-height: 100vh;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+}
+
+a { text-decoration: none; color: inherit; }
+a:focus, a:active, a:focus-visible, button:focus, button:active, button:focus-visible {
+  outline: none !important;
+  box-shadow: none !important;
+}
+ul, ol { list-style: none; }
+img { max-width: 100%; display: block; }
+
+/* ================================================
+   SCROLLBAR
+   ================================================ */
+::-webkit-scrollbar { width: 5px; }
+::-webkit-scrollbar-track { background: var(--bg-primary); }
+::-webkit-scrollbar-thumb { background: var(--brown); border-radius: 10px; }
+::-webkit-scrollbar-thumb:hover { background: var(--accent); }
+
+/* ================================================
+   LAYOUT
+   ================================================ */
+.container-main {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 32px;
+}
+
+@media (max-width: 768px) {
+  .container-main { padding: 0 20px; }
+}
+
+/* ================================================
+   GLASS CARD
+   ================================================ */
+.card-glass {
+  background: var(--glass);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.card-glass:hover {
+  background: var(--glass-hover);
+  border-color: var(--border-hover);
+  box-shadow: 0 0 40px rgba(201, 168, 76, 0.08);
+  transform: translateY(-6px);
+}
+
+/* ================================================
+   BUTTONS
+   ================================================ */
+.btn-gold {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 16px 36px;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
+  font-size: 14px;
+  letter-spacing: 0.5px;
+  border: none;
+  border-radius: var(--radius-full);
+  cursor: pointer;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  background: linear-gradient(135deg, #8B6914 0%, #C9A84C 50%, #D4B896 100%);
+  color: #08080F;
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-gold:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 40px rgba(201, 168, 76, 0.35);
+}
+
+.btn-gold::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.25), transparent);
+  transform: translateX(-100%);
+  transition: transform 0.6s;
+}
+
+.btn-gold:hover::after {
+  transform: translateX(100%);
+}
+
+.btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 15px 36px;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 500;
+  font-size: 14px;
+  letter-spacing: 0.5px;
+  border: 1.5px solid rgba(201, 168, 76, 0.4);
+  border-radius: var(--radius-full);
+  cursor: pointer;
+  background: transparent;
+  color: var(--accent);
+  transition: all 0.4s ease;
+}
+
+.btn-ghost:hover {
+  background: var(--accent-dim);
+  border-color: var(--accent);
+  box-shadow: 0 0 30px rgba(201, 168, 76, 0.15);
+  transform: translateY(-2px);
+}
+
+/* ================================================
+   TEXT UTILITIES
+   ================================================ */
+.text-gradient {
+  background: linear-gradient(135deg, #C9A84C 0%, #E8C55A 50%, #D4B896 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.label-accent {
+  font-family: 'Poppins', sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.section-title {
+  font-size: clamp(2.2rem, 5vw, 3.5rem);
+  font-weight: 700;
+  line-height: 1.1;
+  margin-bottom: 20px;
+}
+
+.section-desc {
+  font-size: 17px;
+  line-height: 1.7;
+  color: var(--text-2);
+  max-width: 560px;
+}
+
+/* ================================================
+   DIVIDERS & SPACERS
+   ================================================ */
+.section-divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent 0%, var(--accent) 50%, transparent 100%);
+  opacity: 0.15;
+  margin: 0;
+}
+
+.spacer-xl { height: 160px; }
+.spacer-lg { height: 120px; }
+.spacer-md { height: 80px; }
+.spacer-sm { height: 40px; }
+
+/* ================================================
+   ANIMATIONS
+   ================================================ */
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-16px); }
+}
+
+@keyframes pulse-ring {
+  0% { transform: scale(1); opacity: 0.6; }
+  100% { transform: scale(1.6); opacity: 0; }
+}
+
+@keyframes grain {
+  0%, 100% { transform: translate(0, 0); }
+  10% { transform: translate(-2%, -5%); }
+  30% { transform: translate(1%, -8%); }
+  50% { transform: translate(5%, 4%); }
+  70% { transform: translate(4%, 2%); }
+  90% { transform: translate(-1%, 3%); }
+}
+
+/* ================================================
+   NOISE OVERLAY
+   ================================================ */
+.noise-overlay::before {
+  content: '';
+  position: fixed;
+  inset: -50%;
+  width: 200%;
+  height: 200%;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.7' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.025'/%3E%3C/svg%3E");
+  opacity: 0.5;
+  pointer-events: none;
+  z-index: 1;
+  animation: grain 6s steps(8) infinite;
+}
+
+/* ================================================
+   RESPONSIVE
+   ================================================ */
+@media (max-width: 1024px) {
+  .spacer-xl { height: 100px; }
+  .spacer-lg { height: 80px; }
+}
+
+@media (max-width: 768px) {
+  .spacer-xl { height: 80px; }
+  .spacer-lg { height: 60px; }
+  .spacer-md { height: 48px; }
+  
+  .btn-gold, .btn-ghost {
+    padding: 14px 28px;
+    font-size: 13px;
+  }
+}
