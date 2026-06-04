@@ -103,7 +103,7 @@ export default function ProductShowcase() {
                       textTransform: 'uppercase', padding: '5px 12px',
                       borderRadius: 'var(--radius-full)',
                       background: 'var(--accent-dim)',
-                      border: '1px solid rgba(201,168,76,0.15)',
+                      border: '1px solid rgba(45,106,79,0.15)',
                       color: 'var(--accent)', fontFamily: 'Poppins',
                     }}>
                       {product.grade}
@@ -112,7 +112,7 @@ export default function ProductShowcase() {
                       fontSize: 9, fontWeight: 500, letterSpacing: 1.5,
                       textTransform: 'uppercase', padding: '5px 12px',
                       borderRadius: 'var(--radius-full)',
-                      background: 'rgba(255,255,255,0.04)',
+                      background: 'rgba(0,0,0,0.04)',
                       border: '1px solid var(--border)',
                       color: 'var(--text-3)', fontFamily: 'Poppins',
                     }}>
@@ -151,7 +151,7 @@ export default function ProductShowcase() {
                       style={{
                         padding: '14px 12px',
                         borderRadius: 'var(--radius-sm)',
-                        background: 'rgba(255,255,255,0.02)',
+                        background: 'var(--bg-secondary)',
                         border: '1px solid var(--border)',
                         textAlign: 'center',
                       }}
@@ -159,7 +159,7 @@ export default function ProductShowcase() {
                       <div style={{ fontSize: 10, color: 'var(--text-3)', marginBottom: 4, fontFamily: 'Poppins', textTransform: 'uppercase', letterSpacing: 1 }}>
                         {s.key}
                       </div>
-                      <div style={{ fontSize: 14, fontWeight: 600, color: 'var(--sand)' }}>
+                      <div style={{ fontSize: 14, fontWeight: 600, color: 'var(--accent)' }}>
                         {s.val}
                       </div>
                     </div>

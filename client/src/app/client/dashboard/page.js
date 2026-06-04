@@ -67,8 +67,8 @@ export default function ClientDashboard() {
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        background: '#08080F',
-        color: '#F0EBE0',
+        background: '#F8F5F0',
+        color: '#1A1A2E',
         fontFamily: 'Poppins',
       }}>
         {t('loadingDashboard')}
@@ -79,16 +79,16 @@ export default function ClientDashboard() {
   const getStatusColor = (status) => {
     switch (status) {
       case 'pending': return { text: '#E8C55A', bg: 'rgba(232, 197, 90, 0.1)' };
-      case 'confirmed': return { text: '#C9A84C', bg: 'rgba(201, 168, 76, 0.1)' };
+      case 'confirmed': return { text: '#2D6A4F', bg: 'rgba(45, 106, 79, 0.1)' };
       case 'processing': return { text: '#3498db', bg: 'rgba(52, 152, 219, 0.1)' };
       case 'shipped': return { text: '#9b59b6', bg: 'rgba(155, 89, 182, 0.1)' };
       case 'delivered': return { text: '#2ecc71', bg: 'rgba(46, 204, 113, 0.1)' };
-      default: return { text: '#A09888', bg: 'rgba(255, 255, 255, 0.05)' };
+      default: return { text: '#5C5C6B', bg: 'rgba(0, 0, 0, 0.03)' };
     }
   };
 
   return (
-    <div style={{ padding: '32px 24px', maxWidth: '1200px', margin: '0 auto' }}>
+    <div style={{ padding: '40px 64px' }}>
       
       {/* Welcome Banner */}
       <motion.div
@@ -96,8 +96,8 @@ export default function ClientDashboard() {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
         style={{
-          background: 'linear-gradient(135deg, rgba(201, 168, 76, 0.04) 0%, rgba(139, 105, 20, 0.02) 100%)',
-          border: '1px solid rgba(201, 168, 76, 0.08)',
+          background: 'linear-gradient(135deg, rgba(45, 106, 79, 0.04) 0%, rgba(27, 67, 50, 0.02) 100%)',
+          border: '1px solid rgba(45, 106, 79, 0.08)',
           borderRadius: '20px',
           padding: '32px',
           marginBottom: '32px',
@@ -109,11 +109,11 @@ export default function ClientDashboard() {
         }}
       >
         <div>
-          <h1 style={{ fontSize: '26px', fontWeight: 700, fontFamily: 'Space Grotesk', color: '#F0EBE0', marginBottom: '8px' }}>
+          <h1 style={{ fontSize: '26px', fontWeight: 700, fontFamily: 'Space Grotesk', color: '#1A1A2E', marginBottom: '8px' }}>
             {t('welcome')}, {user.name} 👋
           </h1>
-          <p style={{ fontSize: '14px', color: '#A09888', fontFamily: 'Poppins' }}>
-            {t('repOf')} <strong style={{ color: '#C9A84C' }}>{user.company || 'Direct Buyer'}</strong>. {t('manageCoirOrders')}
+          <p style={{ fontSize: '14px', color: '#5C5C6B', fontFamily: 'Poppins' }}>
+            {t('repOf')} <strong style={{ color: '#2D6A4F' }}>{user.company || 'Direct Buyer'}</strong>. {t('manageCoirOrders')}
           </p>
         </div>
         <div style={{ display: 'flex', gap: '12px' }}>
@@ -134,10 +134,10 @@ export default function ClientDashboard() {
         marginBottom: '40px',
       }}>
         {[
-          { label: t('totalOrdersPlaced'), val: stats.totalOrders, icon: '📦', color: '#A09888' },
-          { label: t('activeShipments'), val: stats.activeOrders, icon: '🚚', color: '#C9A84C' },
+          { label: t('totalOrdersPlaced'), val: stats.totalOrders, icon: '📦', color: '#5C5C6B' },
+          { label: t('activeShipments'), val: stats.activeOrders, icon: '🚚', color: '#2D6A4F' },
           { label: t('completedDeliveries'), val: stats.completedOrders, icon: '✅', color: '#2ecc71' },
-          { label: t('totalInvestments'), val: `₹${stats.totalSpent.toLocaleString('en-IN')}`, icon: '💰', color: '#C9A84C' },
+          { label: t('totalInvestments'), val: `₹${stats.totalSpent.toLocaleString('en-IN')}`, icon: '💰', color: '#2D6A4F' },
         ].map((s, i) => (
           <motion.div
             key={i}
@@ -145,9 +145,9 @@ export default function ClientDashboard() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.1 * i }}
             style={{
-              background: 'rgba(255, 255, 255, 0.01)',
+              background: 'rgba(0, 0, 0, 0.01)',
               backdropFilter: 'blur(20px)',
-              border: '1px solid rgba(255, 255, 255, 0.05)',
+              border: '1px solid rgba(0, 0, 0, 0.03)',
               borderRadius: '16px',
               padding: '24px',
               display: 'flex',
@@ -156,10 +156,10 @@ export default function ClientDashboard() {
             }}
           >
             <div>
-              <div style={{ fontSize: '12px', color: '#8A8070', fontFamily: 'Poppins', marginBottom: '8px', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
+              <div style={{ fontSize: '12px', color: '#8E8E9A', fontFamily: 'Poppins', marginBottom: '8px', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
                 {s.label}
               </div>
-              <div style={{ fontSize: '24px', fontWeight: 700, fontFamily: 'Space Grotesk', color: '#F0EBE0' }}>
+              <div style={{ fontSize: '24px', fontWeight: 700, fontFamily: 'Space Grotesk', color: '#1A1A2E' }}>
                 {s.val}
               </div>
             </div>
@@ -173,9 +173,9 @@ export default function ClientDashboard() {
         
         {/* Left Side: Recent Orders Table */}
         <div style={{
-          background: 'rgba(255, 255, 255, 0.01)',
+          background: 'rgba(0, 0, 0, 0.01)',
           backdropFilter: 'blur(20px)',
-          border: '1px solid rgba(255, 255, 255, 0.05)',
+          border: '1px solid rgba(0, 0, 0, 0.03)',
           borderRadius: '20px',
           padding: '28px',
         }}>
@@ -183,24 +183,24 @@ export default function ClientDashboard() {
             <h3 style={{ fontSize: '18px', fontWeight: 600, fontFamily: 'Space Grotesk' }}>
               {t('recentOrders')}
             </h3>
-            <Link href="/client/orders" style={{ fontSize: '13px', color: '#C9A84C', textDecoration: 'none' }}>
+            <Link href="/client/orders" style={{ fontSize: '13px', color: '#2D6A4F', textDecoration: 'none' }}>
               {t('viewAllOrders')} →
             </Link>
           </div>
 
           {ordersLoading ? (
-            <div style={{ color: '#8A8070', fontSize: '14px', textAlign: 'center', padding: '40px' }}>
+            <div style={{ color: '#8E8E9A', fontSize: '14px', textAlign: 'center', padding: '40px' }}>
               {t('loadingRecentOrders')}
             </div>
           ) : orders.length === 0 ? (
-            <div style={{ color: '#8A8070', fontSize: '14px', textAlign: 'center', padding: '40px' }}>
+            <div style={{ color: '#8E8E9A', fontSize: '14px', textAlign: 'center', padding: '40px' }}>
               {t('noOrdersFoundClickHere')}
             </div>
           ) : (
             <div style={{ overflowX: 'auto' }}>
               <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left', fontSize: '14px' }}>
                 <thead>
-                  <tr style={{ borderBottom: '1px solid rgba(255,255,255,0.05)', color: '#8A8070' }}>
+                  <tr style={{ borderBottom: '1px solid rgba(0, 0, 0, 0.03)', color: '#8E8E9A' }}>
                     <th style={{ padding: '12px 8px' }}>{t('orderRef')}</th>
                     <th style={{ padding: '12px 8px' }}>{t('items')}</th>
                     <th style={{ padding: '12px 8px' }}>{t('totalAmount')}</th>
@@ -212,11 +212,11 @@ export default function ClientDashboard() {
                   {orders.slice(0, 5).map((order) => {
                     const st = getStatusColor(order.status);
                     return (
-                      <tr key={order._id} style={{ borderBottom: '1px solid rgba(255,255,255,0.03)', color: '#F0EBE0' }}>
+                      <tr key={order._id} style={{ borderBottom: '1px solid rgba(0, 0, 0, 0.02)', color: '#1A1A2E' }}>
                         <td style={{ padding: '16px 8px', fontWeight: 600, fontFamily: 'Space Grotesk' }}>
                           #{order.orderNumber || order._id.substring(order._id.length - 6).toUpperCase()}
                         </td>
-                        <td style={{ padding: '16px 8px', color: '#A09888' }}>
+                        <td style={{ padding: '16px 8px', color: '#5C5C6B' }}>
                           {order.items?.length || 1} {t('productsUnit')}
                         </td>
                         <td style={{ padding: '16px 8px', fontWeight: 500 }}>
@@ -236,7 +236,7 @@ export default function ClientDashboard() {
                             {t('status' + order.status.charAt(0).toUpperCase() + order.status.slice(1))}
                           </span>
                         </td>
-                        <td style={{ padding: '16px 8px', color: '#8A8070', fontSize: '12px' }}>
+                        <td style={{ padding: '16px 8px', color: '#8E8E9A', fontSize: '12px' }}>
                           {new Date(order.createdAt).toLocaleDateString()}
                         </td>
                       </tr>
@@ -253,23 +253,23 @@ export default function ClientDashboard() {
           
           {/* Action box */}
           <div style={{
-            background: 'rgba(255, 255, 255, 0.01)',
+            background: 'rgba(0, 0, 0, 0.01)',
             backdropFilter: 'blur(20px)',
-            border: '1px solid rgba(255, 255, 255, 0.05)',
+            border: '1px solid rgba(0, 0, 0, 0.03)',
             borderRadius: '20px',
             padding: '24px',
           }}>
-            <h4 style={{ fontSize: '15px', fontWeight: 600, fontFamily: 'Space Grotesk', marginBottom: '16px', color: '#C9A84C' }}>
+            <h4 style={{ fontSize: '15px', fontWeight: 600, fontFamily: 'Space Grotesk', marginBottom: '16px', color: '#2D6A4F' }}>
               {t('quickActions')}
             </h4>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
-              <Link href="/client/inventory" style={{ display: 'flex', alignItems: 'center', gap: '10px', color: '#A09888', fontSize: '13px', textDecoration: 'none', padding: '10px', borderRadius: '8px', background: 'rgba(255,255,255,0.01)' }} onMouseEnter={(e)=>e.target.style.color='#F0EBE0'} onMouseLeave={(e)=>e.target.style.color='#A09888'}>
+              <Link href="/client/inventory" style={{ display: 'flex', alignItems: 'center', gap: '10px', color: '#5C5C6B', fontSize: '13px', textDecoration: 'none', padding: '10px', borderRadius: '8px', background: 'rgba(0, 0, 0, 0.01)' }} onMouseEnter={(e)=>e.target.style.color='#1A1A2E'} onMouseLeave={(e)=>e.target.style.color='#5C5C6B'}>
                 {t('orderCoirProducts')}
               </Link>
-              <Link href="/client/profile" style={{ display: 'flex', alignItems: 'center', gap: '10px', color: '#A09888', fontSize: '13px', textDecoration: 'none', padding: '10px', borderRadius: '8px', background: 'rgba(255,255,255,0.01)' }} onMouseEnter={(e)=>e.target.style.color='#F0EBE0'} onMouseLeave={(e)=>e.target.style.color='#A09888'}>
+              <Link href="/client/profile" style={{ display: 'flex', alignItems: 'center', gap: '10px', color: '#5C5C6B', fontSize: '13px', textDecoration: 'none', padding: '10px', borderRadius: '8px', background: 'rgba(0, 0, 0, 0.01)' }} onMouseEnter={(e)=>e.target.style.color='#1A1A2E'} onMouseLeave={(e)=>e.target.style.color='#5C5C6B'}>
                 {t('updateCompanyProfile')}
               </Link>
-              <Link href="/client/contact" style={{ display: 'flex', alignItems: 'center', gap: '10px', color: '#A09888', fontSize: '13px', textDecoration: 'none', padding: '10px', borderRadius: '8px', background: 'rgba(255,255,255,0.01)' }} onMouseEnter={(e)=>e.target.style.color='#F0EBE0'} onMouseLeave={(e)=>e.target.style.color='#A09888'}>
+              <Link href="/client/contact" style={{ display: 'flex', alignItems: 'center', gap: '10px', color: '#5C5C6B', fontSize: '13px', textDecoration: 'none', padding: '10px', borderRadius: '8px', background: 'rgba(0, 0, 0, 0.01)' }} onMouseEnter={(e)=>e.target.style.color='#1A1A2E'} onMouseLeave={(e)=>e.target.style.color='#5C5C6B'}>
                 {t('supportInquiry')}
               </Link>
             </div>
@@ -277,15 +277,15 @@ export default function ClientDashboard() {
 
           {/* Help Box */}
           <div style={{
-            background: 'rgba(201, 168, 76, 0.02)',
-            border: '1px solid rgba(201, 168, 76, 0.08)',
+            background: 'rgba(45, 106, 79, 0.02)',
+            border: '1px solid rgba(45, 106, 79, 0.08)',
             borderRadius: '20px',
             padding: '24px',
           }}>
-            <h4 style={{ fontSize: '15px', fontWeight: 600, fontFamily: 'Space Grotesk', marginBottom: '8px', color: '#C9A84C' }}>
+            <h4 style={{ fontSize: '15px', fontWeight: 600, fontFamily: 'Space Grotesk', marginBottom: '8px', color: '#2D6A4F' }}>
               {t('needAssistance')}
             </h4>
-            <p style={{ fontSize: '12px', color: '#8A8070', lineHeight: 1.6, marginBottom: '16px', fontFamily: 'Poppins' }}>
+            <p style={{ fontSize: '12px', color: '#8E8E9A', lineHeight: 1.6, marginBottom: '16px', fontFamily: 'Poppins' }}>
               {t('assistanceDesc')}
             </p>
             <Link href="/client/contact" className="btn-ghost" style={{ padding: '8px 16px', fontSize: '11px', display: 'inline-block', textDecoration: 'none' }}>

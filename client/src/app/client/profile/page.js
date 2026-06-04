@@ -81,14 +81,14 @@ export default function ClientProfile() {
   };
 
   return (
-    <div style={{ padding: '32px 24px', maxWidth: '800px', margin: '0 auto' }}>
+    <div style={{ padding: '40px 64px' }}>
       
       {/* Title */}
       <div style={{ marginBottom: '40px' }}>
-        <h1 style={{ fontSize: '32px', fontWeight: 700, fontFamily: 'Space Grotesk', color: '#F0EBE0', marginBottom: '8px' }}>
+        <h1 style={{ fontSize: '32px', fontWeight: 700, fontFamily: 'Space Grotesk', color: '#1A1A2E', marginBottom: '8px' }}>
           {t('profile')}
         </h1>
-        <p style={{ color: '#A09888', fontSize: '15px', fontFamily: 'Poppins' }}>
+        <p style={{ color: '#5C5C6B', fontSize: '15px', fontFamily: 'Poppins' }}>
           {t('profileSettingsDesc')}
         </p>
       </div>
@@ -97,9 +97,9 @@ export default function ClientProfile() {
         initial={{ opacity: 0, y: 15 }}
         animate={{ opacity: 1, y: 0 }}
         style={{
-          background: 'rgba(255, 255, 255, 0.01)',
+          background: 'rgba(0, 0, 0, 0.01)',
           backdropFilter: 'blur(20px)',
-          border: '1px solid rgba(255,255,255,0.06)',
+          border: '1px solid rgba(0, 0, 0, 0.03)',
           borderRadius: '20px',
           padding: '40px',
           boxShadow: '0 20px 45px rgba(0,0,0,0.3)',
@@ -112,7 +112,7 @@ export default function ClientProfile() {
         )}
 
         {errorMsg && (
-          <div style={{ padding: '12px 16px', background: 'rgba(239, 68, 68, 0.1)', border: '1px solid rgba(239, 68, 68, 0.2)', borderRadius: '12px', color: '#ef4444', fontSize: '13px', marginBottom: '24px', fontFamily: 'Poppins' }}>
+          <div style={{ padding: '12px 16px', background: 'rgba(239, 68, 68, 0.1)', border: '1px solid rgba(239, 68, 68, 0.2)', borderRadius: '12px', color: '#D00000', fontSize: '13px', marginBottom: '24px', fontFamily: 'Poppins' }}>
             {errorMsg}
           </div>
         )}
@@ -121,12 +121,12 @@ export default function ClientProfile() {
           
           {/* Section 1: Basic Info */}
           <div>
-            <h3 style={{ fontSize: '16px', fontWeight: 600, fontFamily: 'Space Grotesk', color: '#C9A84C', marginBottom: '16px', borderBottom: '1px solid rgba(255,255,255,0.04)', paddingBottom: '8px' }}>
+            <h3 style={{ fontSize: '16px', fontWeight: 600, fontFamily: 'Space Grotesk', color: '#2D6A4F', marginBottom: '16px', borderBottom: '1px solid rgba(0, 0, 0, 0.02)', paddingBottom: '8px' }}>
               {t('companyContactInfo')}
             </h3>
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px' }} className="form-row">
               <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
-                <label style={{ fontSize: '12px', color: '#8A8070', fontFamily: 'Poppins' }}>{t('fullName')}</label>
+                <label style={{ fontSize: '12px', color: '#8E8E9A', fontFamily: 'Poppins' }}>{t('fullName')}</label>
                 <input
                   type="text"
                   name="name"
@@ -134,14 +134,14 @@ export default function ClientProfile() {
                   onChange={handleChange}
                   required
                   style={{
-                    padding: '12px 16px', borderRadius: '12px', background: 'rgba(255,255,255,0.02)',
-                    border: '1px solid rgba(255,255,255,0.08)', color: '#F0EBE0', outline: 'none', fontSize: '14px', fontFamily: 'Poppins'
+                    padding: '12px 16px', borderRadius: '12px', background: 'rgba(0, 0, 0, 0.015)',
+                    border: '1px solid rgba(0, 0, 0, 0.04)', color: '#1A1A2E', outline: 'none', fontSize: '14px', fontFamily: 'Poppins'
                   }}
                 />
               </div>
 
               <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
-                <label style={{ fontSize: '12px', color: '#8A8070', fontFamily: 'Poppins' }}>{t('companyName')}</label>
+                <label style={{ fontSize: '12px', color: '#8E8E9A', fontFamily: 'Poppins' }}>{t('companyName')}</label>
                 <input
                   type="text"
                   name="company"
@@ -149,14 +149,14 @@ export default function ClientProfile() {
                   onChange={handleChange}
                   required
                   style={{
-                    padding: '12px 16px', borderRadius: '12px', background: 'rgba(255,255,255,0.02)',
-                    border: '1px solid rgba(255,255,255,0.08)', color: '#F0EBE0', outline: 'none', fontSize: '14px', fontFamily: 'Poppins'
+                    padding: '12px 16px', borderRadius: '12px', background: 'rgba(0, 0, 0, 0.015)',
+                    border: '1px solid rgba(0, 0, 0, 0.04)', color: '#1A1A2E', outline: 'none', fontSize: '14px', fontFamily: 'Poppins'
                   }}
                 />
               </div>
 
               <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
-                <label style={{ fontSize: '12px', color: '#8A8070', fontFamily: 'Poppins' }}>{t('contactPhone')}</label>
+                <label style={{ fontSize: '12px', color: '#8E8E9A', fontFamily: 'Poppins' }}>{t('contactPhone')}</label>
                 <input
                   type="tel"
                   name="phone"
@@ -164,8 +164,8 @@ export default function ClientProfile() {
                   onChange={handleChange}
                   required
                   style={{
-                    padding: '12px 16px', borderRadius: '12px', background: 'rgba(255,255,255,0.02)',
-                    border: '1px solid rgba(255,255,255,0.08)', color: '#F0EBE0', outline: 'none', fontSize: '14px', fontFamily: 'Poppins'
+                    padding: '12px 16px', borderRadius: '12px', background: 'rgba(0, 0, 0, 0.015)',
+                    border: '1px solid rgba(0, 0, 0, 0.04)', color: '#1A1A2E', outline: 'none', fontSize: '14px', fontFamily: 'Poppins'
                   }}
                 />
               </div>
@@ -174,12 +174,12 @@ export default function ClientProfile() {
 
           {/* Section 2: Address */}
           <div>
-            <h3 style={{ fontSize: '16px', fontWeight: 600, fontFamily: 'Space Grotesk', color: '#C9A84C', marginBottom: '16px', borderBottom: '1px solid rgba(255,255,255,0.04)', paddingBottom: '8px' }}>
+            <h3 style={{ fontSize: '16px', fontWeight: 600, fontFamily: 'Space Grotesk', color: '#2D6A4F', marginBottom: '16px', borderBottom: '1px solid rgba(0, 0, 0, 0.02)', paddingBottom: '8px' }}>
               {t('defaultCorporateAddress')}
             </h3>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
               <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
-                <label style={{ fontSize: '12px', color: '#8A8070', fontFamily: 'Poppins' }}>{t('streetAddress')}</label>
+                <label style={{ fontSize: '12px', color: '#8E8E9A', fontFamily: 'Poppins' }}>{t('streetAddress')}</label>
                 <input
                   type="text"
                   name="street"
@@ -187,65 +187,65 @@ export default function ClientProfile() {
                   onChange={handleChange}
                   placeholder={t('streetPlaceholder')}
                   style={{
-                    padding: '12px 16px', borderRadius: '12px', background: 'rgba(255,255,255,0.02)',
-                    border: '1px solid rgba(255,255,255,0.08)', color: '#F0EBE0', outline: 'none', fontSize: '14px', fontFamily: 'Poppins'
+                    padding: '12px 16px', borderRadius: '12px', background: 'rgba(0, 0, 0, 0.015)',
+                    border: '1px solid rgba(0, 0, 0, 0.04)', color: '#1A1A2E', outline: 'none', fontSize: '14px', fontFamily: 'Poppins'
                   }}
                 />
               </div>
 
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px' }} className="form-row">
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
-                  <label style={{ fontSize: '12px', color: '#8A8070', fontFamily: 'Poppins' }}>{t('city')}</label>
+                  <label style={{ fontSize: '12px', color: '#8E8E9A', fontFamily: 'Poppins' }}>{t('city')}</label>
                   <input
                     type="text"
                     name="city"
                     value={formData.city}
                     onChange={handleChange}
                     style={{
-                      padding: '12px 16px', borderRadius: '12px', background: 'rgba(255,255,255,0.02)',
-                      border: '1px solid rgba(255,255,255,0.08)', color: '#F0EBE0', outline: 'none', fontSize: '14px', fontFamily: 'Poppins'
+                      padding: '12px 16px', borderRadius: '12px', background: 'rgba(0, 0, 0, 0.015)',
+                      border: '1px solid rgba(0, 0, 0, 0.04)', color: '#1A1A2E', outline: 'none', fontSize: '14px', fontFamily: 'Poppins'
                     }}
                   />
                 </div>
 
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
-                  <label style={{ fontSize: '12px', color: '#8A8070', fontFamily: 'Poppins' }}>{t('stateProvince')}</label>
+                  <label style={{ fontSize: '12px', color: '#8E8E9A', fontFamily: 'Poppins' }}>{t('stateProvince')}</label>
                   <input
                     type="text"
                     name="state"
                     value={formData.state}
                     onChange={handleChange}
                     style={{
-                      padding: '12px 16px', borderRadius: '12px', background: 'rgba(255,255,255,0.02)',
-                      border: '1px solid rgba(255,255,255,0.08)', color: '#F0EBE0', outline: 'none', fontSize: '14px', fontFamily: 'Poppins'
+                      padding: '12px 16px', borderRadius: '12px', background: 'rgba(0, 0, 0, 0.015)',
+                      border: '1px solid rgba(0, 0, 0, 0.04)', color: '#1A1A2E', outline: 'none', fontSize: '14px', fontFamily: 'Poppins'
                     }}
                   />
                 </div>
 
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
-                  <label style={{ fontSize: '12px', color: '#8A8070', fontFamily: 'Poppins' }}>{t('country')}</label>
+                  <label style={{ fontSize: '12px', color: '#8E8E9A', fontFamily: 'Poppins' }}>{t('country')}</label>
                   <input
                     type="text"
                     name="country"
                     value={formData.country}
                     onChange={handleChange}
                     style={{
-                      padding: '12px 16px', borderRadius: '12px', background: 'rgba(255,255,255,0.02)',
-                      border: '1px solid rgba(255,255,255,0.08)', color: '#F0EBE0', outline: 'none', fontSize: '14px', fontFamily: 'Poppins'
+                      padding: '12px 16px', borderRadius: '12px', background: 'rgba(0, 0, 0, 0.015)',
+                      border: '1px solid rgba(0, 0, 0, 0.04)', color: '#1A1A2E', outline: 'none', fontSize: '14px', fontFamily: 'Poppins'
                     }}
                   />
                 </div>
 
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
-                  <label style={{ fontSize: '12px', color: '#8A8070', fontFamily: 'Poppins' }}>{t('zipPostalCode')}</label>
+                  <label style={{ fontSize: '12px', color: '#8E8E9A', fontFamily: 'Poppins' }}>{t('zipPostalCode')}</label>
                   <input
                     type="text"
                     name="zipCode"
                     value={formData.zipCode}
                     onChange={handleChange}
                     style={{
-                      padding: '12px 16px', borderRadius: '12px', background: 'rgba(255,255,255,0.02)',
-                      border: '1px solid rgba(255,255,255,0.08)', color: '#F0EBE0', outline: 'none', fontSize: '14px', fontFamily: 'Poppins'
+                      padding: '12px 16px', borderRadius: '12px', background: 'rgba(0, 0, 0, 0.015)',
+                      border: '1px solid rgba(0, 0, 0, 0.04)', color: '#1A1A2E', outline: 'none', fontSize: '14px', fontFamily: 'Poppins'
                     }}
                   />
                 </div>
@@ -259,14 +259,14 @@ export default function ClientProfile() {
             style={{
               padding: '14px',
               borderRadius: '12px',
-              background: 'linear-gradient(135deg, #8B6914 0%, #C9A84C 50%, #D4B896 100%)',
-              color: '#08080F',
+              background: 'linear-gradient(135deg, #1B4332 0%, #2D6A4F 50%, #95D5B2 100%)',
+              color: '#FFFFFF',
               fontWeight: 600,
               fontSize: '14px',
               fontFamily: 'Poppins',
               border: 'none',
               cursor: loading ? 'not-allowed' : 'pointer',
-              boxShadow: '0 4px 20px rgba(201, 168, 76, 0.2)',
+              boxShadow: '0 4px 20px rgba(45, 106, 79, 0.2)',
               marginTop: '10px',
               width: '200px',
               alignSelf: 'flex-start',

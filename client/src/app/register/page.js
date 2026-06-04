@@ -71,7 +71,7 @@ export default function RegisterPage() {
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
-      background: '#08080F',
+      background: '#F8F5F0',
       position: 'relative',
       overflow: 'hidden',
       padding: '24px',
@@ -84,7 +84,7 @@ export default function RegisterPage() {
         width: '50vw',
         height: '50vw',
         borderRadius: '50%',
-        background: 'radial-gradient(circle, rgba(201,168,76,0.05) 0%, transparent 70%)',
+        background: 'radial-gradient(circle, rgba(45, 106, 79,0.05) 0%, transparent 70%)',
         filter: 'blur(80px)',
         pointerEvents: 'none',
       }} />
@@ -95,7 +95,7 @@ export default function RegisterPage() {
         width: '50vw',
         height: '50vw',
         borderRadius: '50%',
-        background: 'radial-gradient(circle, rgba(139,105,20,0.06) 0%, transparent 70%)',
+        background: 'radial-gradient(circle, rgba(27, 67, 50,0.06) 0%, transparent 70%)',
         filter: 'blur(80px)',
         pointerEvents: 'none',
       }} />
@@ -108,12 +108,12 @@ export default function RegisterPage() {
         style={{
           width: '100%',
           maxWidth: '500px',
-          background: 'rgba(255, 255, 255, 0.02)',
+          background: 'rgba(0, 0, 0, 0.015)',
           backdropFilter: 'blur(24px)',
-          border: '1px solid rgba(255, 255, 255, 0.06)',
+          border: '1px solid rgba(0, 0, 0, 0.03)',
           borderRadius: '24px',
           padding: '44px 36px',
-          boxShadow: '0 24px 60px rgba(0, 0, 0, 0.4)',
+          boxShadow: '0 24px 60px rgba(0, 0, 0, 0.06)',
           position: 'relative',
           zIndex: 10,
         }}
@@ -126,23 +126,23 @@ export default function RegisterPage() {
               alt="Smart Coir Logo" 
               style={{ width: '44px', height: '44px', objectFit: 'contain' }} 
             />
-            <span style={{ fontSize: '24px', fontWeight: 700, fontFamily: 'Space Grotesk', color: '#F0EBE0' }}>
-              Smart<span style={{ color: '#C9A84C' }}>Coir</span>
+            <span style={{ fontSize: '24px', fontWeight: 700, fontFamily: 'Space Grotesk', color: '#1A1A2E' }}>
+              Smart<span style={{ color: '#2D6A4F' }}>Coir</span>
             </span>
           </Link>
-          <h2 style={{ fontSize: '20px', fontWeight: 600, color: '#F0EBE0', fontFamily: 'Space Grotesk', marginBottom: '6px' }}>
+          <h2 style={{ fontSize: '20px', fontWeight: 600, color: '#1A1A2E', fontFamily: 'Space Grotesk', marginBottom: '6px' }}>
             {t('createAccountPortal')}
           </h2>
-          <p style={{ fontSize: '13px', color: '#8A8070', fontFamily: 'Poppins' }}>
+          <p style={{ fontSize: '13px', color: '#8E8E9A', fontFamily: 'Poppins' }}>
             {step === 1 ? `${t('step')} 1: ${t('personalDetails')}` : `${t('step')} 2: ${t('companyDetails')}`}
           </p>
         </div>
 
         {/* Progress bar */}
-        <div style={{ width: '100%', height: '4px', background: 'rgba(255,255,255,0.04)', borderRadius: '2px', marginBottom: '28px', overflow: 'hidden' }}>
+        <div style={{ width: '100%', height: '4px', background: 'rgba(0, 0, 0, 0.02)', borderRadius: '2px', marginBottom: '28px', overflow: 'hidden' }}>
           <motion.div 
             animate={{ width: step === 1 ? '50%' : '100%' }}
-            style={{ height: '100%', background: 'linear-gradient(90deg, #8B6914, #C9A84C)' }}
+            style={{ height: '100%', background: 'linear-gradient(90deg, #1B4332, #2D6A4F)' }}
           />
         </div>
 
@@ -156,7 +156,7 @@ export default function RegisterPage() {
               borderRadius: '12px',
               background: 'rgba(239, 68, 68, 0.1)',
               border: '1px solid rgba(239, 68, 68, 0.2)',
-              color: '#ef4444',
+              color: '#D00000',
               fontSize: '13px',
               marginBottom: '24px',
               fontFamily: 'Poppins',
@@ -179,7 +179,7 @@ export default function RegisterPage() {
                 style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}
               >
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-                  <label style={{ fontSize: '11px', fontWeight: 500, color: '#A09888', fontFamily: 'Poppins', letterSpacing: '1px', textTransform: 'uppercase' }}>
+                  <label style={{ fontSize: '11px', fontWeight: 500, color: '#5C5C6B', fontFamily: 'Poppins', letterSpacing: '1px', textTransform: 'uppercase' }}>
                     {t('fullName')}
                   </label>
                   <input
@@ -193,9 +193,9 @@ export default function RegisterPage() {
                       width: '100%',
                       padding: '12px 16px',
                       borderRadius: '12px',
-                      background: 'rgba(255, 255, 255, 0.02)',
-                      border: '1px solid rgba(255, 255, 255, 0.08)',
-                      color: '#F0EBE0',
+                      background: 'rgba(0, 0, 0, 0.015)',
+                      border: '1px solid rgba(0, 0, 0, 0.04)',
+                      color: '#1A1A2E',
                       fontSize: '14px',
                       outline: 'none',
                       fontFamily: 'Poppins',
@@ -204,7 +204,7 @@ export default function RegisterPage() {
                 </div>
 
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-                  <label style={{ fontSize: '11px', fontWeight: 500, color: '#A09888', fontFamily: 'Poppins', letterSpacing: '1px', textTransform: 'uppercase' }}>
+                  <label style={{ fontSize: '11px', fontWeight: 500, color: '#5C5C6B', fontFamily: 'Poppins', letterSpacing: '1px', textTransform: 'uppercase' }}>
                     {t('emailAddress')}
                   </label>
                   <input
@@ -218,9 +218,9 @@ export default function RegisterPage() {
                       width: '100%',
                       padding: '12px 16px',
                       borderRadius: '12px',
-                      background: 'rgba(255, 255, 255, 0.02)',
-                      border: '1px solid rgba(255, 255, 255, 0.08)',
-                      color: '#F0EBE0',
+                      background: 'rgba(0, 0, 0, 0.015)',
+                      border: '1px solid rgba(0, 0, 0, 0.04)',
+                      color: '#1A1A2E',
                       fontSize: '14px',
                       outline: 'none',
                       fontFamily: 'Poppins',
@@ -229,7 +229,7 @@ export default function RegisterPage() {
                 </div>
 
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-                  <label style={{ fontSize: '11px', fontWeight: 500, color: '#A09888', fontFamily: 'Poppins', letterSpacing: '1px', textTransform: 'uppercase' }}>
+                  <label style={{ fontSize: '11px', fontWeight: 500, color: '#5C5C6B', fontFamily: 'Poppins', letterSpacing: '1px', textTransform: 'uppercase' }}>
                     {t('phone')}
                   </label>
                   <input
@@ -243,9 +243,9 @@ export default function RegisterPage() {
                       width: '100%',
                       padding: '12px 16px',
                       borderRadius: '12px',
-                      background: 'rgba(255, 255, 255, 0.02)',
-                      border: '1px solid rgba(255, 255, 255, 0.08)',
-                      color: '#F0EBE0',
+                      background: 'rgba(0, 0, 0, 0.015)',
+                      border: '1px solid rgba(0, 0, 0, 0.04)',
+                      color: '#1A1A2E',
                       fontSize: '14px',
                       outline: 'none',
                       fontFamily: 'Poppins',
@@ -254,7 +254,7 @@ export default function RegisterPage() {
                 </div>
 
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-                  <label style={{ fontSize: '11px', fontWeight: 500, color: '#A09888', fontFamily: 'Poppins', letterSpacing: '1px', textTransform: 'uppercase' }}>
+                  <label style={{ fontSize: '11px', fontWeight: 500, color: '#5C5C6B', fontFamily: 'Poppins', letterSpacing: '1px', textTransform: 'uppercase' }}>
                     {t('password')}
                   </label>
                   <input
@@ -268,9 +268,9 @@ export default function RegisterPage() {
                       width: '100%',
                       padding: '12px 16px',
                       borderRadius: '12px',
-                      background: 'rgba(255, 255, 255, 0.02)',
-                      border: '1px solid rgba(255, 255, 255, 0.08)',
-                      color: '#F0EBE0',
+                      background: 'rgba(0, 0, 0, 0.015)',
+                      border: '1px solid rgba(0, 0, 0, 0.04)',
+                      color: '#1A1A2E',
                       fontSize: '14px',
                       outline: 'none',
                       fontFamily: 'Poppins',
@@ -285,15 +285,15 @@ export default function RegisterPage() {
                     width: '100%',
                     padding: '14px',
                     borderRadius: '12px',
-                    background: 'linear-gradient(135deg, #8B6914 0%, #C9A84C 50%, #D4B896 100%)',
-                    color: '#08080F',
+                    background: 'linear-gradient(135deg, #1B4332 0%, #2D6A4F 50%, #95D5B2 100%)',
+                    color: '#FFFFFF',
                     fontWeight: 600,
                     fontSize: '14px',
                     fontFamily: 'Poppins',
                     border: 'none',
                     cursor: 'pointer',
                     marginTop: '10px',
-                    boxShadow: '0 4px 20px rgba(201, 168, 76, 0.2)',
+                    boxShadow: '0 4px 20px rgba(45, 106, 79, 0.2)',
                   }}
                 >
                   {t('continue')} →
@@ -311,7 +311,7 @@ export default function RegisterPage() {
                 style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}
               >
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-                  <label style={{ fontSize: '11px', fontWeight: 500, color: '#A09888', fontFamily: 'Poppins', letterSpacing: '1px', textTransform: 'uppercase' }}>
+                  <label style={{ fontSize: '11px', fontWeight: 500, color: '#5C5C6B', fontFamily: 'Poppins', letterSpacing: '1px', textTransform: 'uppercase' }}>
                     {t('companyName')}
                   </label>
                   <input
@@ -325,9 +325,9 @@ export default function RegisterPage() {
                       width: '100%',
                       padding: '12px 16px',
                       borderRadius: '12px',
-                      background: 'rgba(255, 255, 255, 0.02)',
-                      border: '1px solid rgba(255, 255, 255, 0.08)',
-                      color: '#F0EBE0',
+                      background: 'rgba(0, 0, 0, 0.015)',
+                      border: '1px solid rgba(0, 0, 0, 0.04)',
+                      color: '#1A1A2E',
                       fontSize: '14px',
                       outline: 'none',
                       fontFamily: 'Poppins',
@@ -336,7 +336,7 @@ export default function RegisterPage() {
                 </div>
 
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-                  <label style={{ fontSize: '11px', fontWeight: 500, color: '#A09888', fontFamily: 'Poppins', letterSpacing: '1px', textTransform: 'uppercase' }}>
+                  <label style={{ fontSize: '11px', fontWeight: 500, color: '#5C5C6B', fontFamily: 'Poppins', letterSpacing: '1px', textTransform: 'uppercase' }}>
                     {t('role')}
                   </label>
                   <select
@@ -347,9 +347,9 @@ export default function RegisterPage() {
                       width: '100%',
                       padding: '12px 16px',
                       borderRadius: '12px',
-                      background: '#12121E',
-                      border: '1px solid rgba(255, 255, 255, 0.08)',
-                      color: '#F0EBE0',
+                      background: '#FFFFFF',
+                      border: '1px solid rgba(0, 0, 0, 0.04)',
+                      color: '#1A1A2E',
                       fontSize: '14px',
                       outline: 'none',
                       fontFamily: 'Poppins',
@@ -368,8 +368,8 @@ export default function RegisterPage() {
                       padding: '14px',
                       borderRadius: '12px',
                       background: 'transparent',
-                      border: '1.5px solid rgba(201, 168, 76, 0.4)',
-                      color: '#C9A84C',
+                      border: '1.5px solid rgba(45, 106, 79, 0.4)',
+                      color: '#2D6A4F',
                       fontWeight: 600,
                       fontSize: '14px',
                       fontFamily: 'Poppins',
@@ -385,14 +385,14 @@ export default function RegisterPage() {
                       flex: 2,
                       padding: '14px',
                       borderRadius: '12px',
-                      background: 'linear-gradient(135deg, #8B6914 0%, #C9A84C 50%, #D4B896 100%)',
-                      color: '#08080F',
+                      background: 'linear-gradient(135deg, #1B4332 0%, #2D6A4F 50%, #95D5B2 100%)',
+                      color: '#FFFFFF',
                       fontWeight: 600,
                       fontSize: '14px',
                       fontFamily: 'Poppins',
                       border: 'none',
                       cursor: loading ? 'not-allowed' : 'pointer',
-                      boxShadow: '0 4px 20px rgba(201, 168, 76, 0.2)',
+                      boxShadow: '0 4px 20px rgba(45, 106, 79, 0.2)',
                     }}
                   >
                     {loading ? t('registering') : t('registerBtn')}
@@ -404,9 +404,9 @@ export default function RegisterPage() {
         </form>
 
         {/* Login footer link */}
-        <div style={{ marginTop: '32px', textAlign: 'center', fontSize: '13px', color: '#8A8070', fontFamily: 'Poppins' }}>
+        <div style={{ marginTop: '32px', textAlign: 'center', fontSize: '13px', color: '#8E8E9A', fontFamily: 'Poppins' }}>
           {t('alreadyHaveAccount')}{' '}
-          <Link href="/login" style={{ color: '#C9A84C', fontWeight: 500, textDecoration: 'none' }}>
+          <Link href="/login" style={{ color: '#2D6A4F', fontWeight: 500, textDecoration: 'none' }}>
             {t('backToLogin')}
           </Link>
         </div>

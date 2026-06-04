@@ -37,7 +37,7 @@ export default function ManufacturingProcess() {
           {/* Center line */}
           <div style={{
             position: 'absolute', left: '50%', top: 0, bottom: 0, width: 1,
-            background: 'linear-gradient(180deg, transparent, rgba(201,168,76,0.2), rgba(139,105,20,0.15), transparent)',
+            background: 'linear-gradient(180deg, transparent, rgba(45,106,79,0.2), rgba(27,67,50,0.15), transparent)',
           }} className="hidden lg:block" />
 
           {steps.map((step, i) => (
@@ -79,9 +79,9 @@ export default function ManufacturingProcess() {
                   width: 48, height: 48, borderRadius: '50%',
                   background: `linear-gradient(135deg, var(--brown), var(--accent))`,
                   display: 'flex', alignItems: 'center', justifyContent: 'center',
-                  fontSize: 14, fontWeight: 700, color: '#08080F',
+                  fontSize: 14, fontWeight: 700, color: '#FFFFFF',
                   fontFamily: 'Space Grotesk',
-                  boxShadow: '0 0 24px rgba(201,168,76,0.2)',
+                  boxShadow: '0 0 24px rgba(45,106,79,0.2)',
                 }}>
                   {step.num}
                 </div>

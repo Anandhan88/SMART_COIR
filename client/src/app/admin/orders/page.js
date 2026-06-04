@@ -108,23 +108,23 @@ export default function AdminOrders() {
   const getStatusColor = (status) => {
     switch (status) {
       case 'pending': return { text: '#E8C55A', bg: 'rgba(232, 197, 90, 0.1)' };
-      case 'confirmed': return { text: '#C9A84C', bg: 'rgba(201, 168, 76, 0.1)' };
+      case 'confirmed': return { text: '#2D6A4F', bg: 'rgba(45, 106, 79, 0.1)' };
       case 'processing': return { text: '#3498db', bg: 'rgba(52, 152, 219, 0.1)' };
       case 'shipped': return { text: '#9b59b6', bg: 'rgba(155, 89, 182, 0.1)' };
       case 'delivered': return { text: '#2ecc71', bg: 'rgba(46, 204, 113, 0.1)' };
-      default: return { text: '#A09888', bg: 'rgba(255, 255, 255, 0.05)' };
+      default: return { text: '#5C5C6B', bg: 'rgba(0, 0, 0, 0.03)' };
     }
   };
 
   return (
-    <div style={{ padding: '32px 24px', maxWidth: '1200px', margin: '0 auto' }}>
+    <div style={{ padding: '40px 64px' }}>
       
       {/* Title */}
       <div style={{ marginBottom: '40px' }}>
-        <h1 style={{ fontSize: '32px', fontWeight: 700, fontFamily: 'Space Grotesk', color: '#F0EBE0', marginBottom: '8px' }}>
+        <h1 style={{ fontSize: '32px', fontWeight: 700, fontFamily: 'Space Grotesk', color: '#1A1A2E', marginBottom: '8px' }}>
           {t('logisticsClientPurchases')}
         </h1>
-        <p style={{ color: '#A09888', fontSize: '15px', fontFamily: 'Poppins' }}>
+        <p style={{ color: '#5C5C6B', fontSize: '15px', fontFamily: 'Poppins' }}>
           {t('opsOrdersDesc')}
         </p>
       </div>
@@ -133,9 +133,9 @@ export default function AdminOrders() {
         
         {/* Left Side: Orders List */}
         <div style={{
-          background: 'rgba(255, 255, 255, 0.01)',
+          background: 'rgba(0, 0, 0, 0.01)',
           backdropFilter: 'blur(20px)',
-          border: '1px solid rgba(255, 255, 255, 0.05)',
+          border: '1px solid rgba(0, 0, 0, 0.03)',
           borderRadius: '20px',
           padding: '28px',
         }}>
@@ -144,11 +144,11 @@ export default function AdminOrders() {
           </h3>
 
           {loading ? (
-            <div style={{ color: '#8A8070', fontSize: '14px', textAlign: 'center', padding: '60px' }}>
+            <div style={{ color: '#8E8E9A', fontSize: '14px', textAlign: 'center', padding: '60px' }}>
               {t('loadingOpsLogs')}
             </div>
           ) : orders.length === 0 ? (
-            <div style={{ color: '#8A8070', fontSize: '14px', textAlign: 'center', padding: '60px' }}>
+            <div style={{ color: '#8E8E9A', fontSize: '14px', textAlign: 'center', padding: '60px' }}>
               {t('noOrdersInSystem')}
             </div>
           ) : (
@@ -163,8 +163,8 @@ export default function AdminOrders() {
                     style={{
                       padding: '20px',
                       borderRadius: '12px',
-                      background: isSelected ? 'rgba(201, 168, 76, 0.04)' : 'rgba(255,255,255,0.01)',
-                      border: isSelected ? '1px solid #C9A84C' : '1px solid rgba(255,255,255,0.05)',
+                      background: isSelected ? 'rgba(45, 106, 79, 0.04)' : 'rgba(0, 0, 0, 0.01)',
+                      border: isSelected ? '1px solid #2D6A4F' : '1px solid rgba(0, 0, 0, 0.03)',
                       cursor: 'pointer',
                       transition: 'all 0.3s',
                       display: 'flex',
@@ -172,20 +172,20 @@ export default function AdminOrders() {
                       alignItems: 'center',
                     }}
                     onMouseEnter={(e) => {
-                      if (!isSelected) e.currentTarget.style.borderColor = 'rgba(201, 168, 76, 0.2)';
+                      if (!isSelected) e.currentTarget.style.borderColor = 'rgba(45, 106, 79, 0.2)';
                     }}
                     onMouseLeave={(e) => {
-                      if (!isSelected) e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.05)';
+                      if (!isSelected) e.currentTarget.style.borderColor = 'rgba(0, 0, 0, 0.03)';
                     }}
                   >
                     <div>
-                      <div style={{ fontSize: '15px', fontWeight: 700, fontFamily: 'Space Grotesk', color: '#F0EBE0', marginBottom: '4px' }}>
+                      <div style={{ fontSize: '15px', fontWeight: 700, fontFamily: 'Space Grotesk', color: '#1A1A2E', marginBottom: '4px' }}>
                         #{order.orderNumber || order._id.substring(order._id.length - 6).toUpperCase()}
                       </div>
-                      <div style={{ fontSize: '12px', color: '#8A8070', fontFamily: 'Poppins', marginBottom: '6px' }}>
+                      <div style={{ fontSize: '12px', color: '#8E8E9A', fontFamily: 'Poppins', marginBottom: '6px' }}>
                         {order.client?.company || t('directClient')} • {new Date(order.createdAt).toLocaleDateString()}
                       </div>
-                      <div style={{ fontSize: '13px', color: '#A09888', fontWeight: 500 }}>
+                      <div style={{ fontSize: '13px', color: '#5C5C6B', fontWeight: 500 }}>
                         ₹{order.grandTotal?.toLocaleString('en-IN')} • {order.paymentStatus === 'paid' ? `🟢 ${t('paidStatus')}` : `🔴 ${t('unpaidStatus')}`}
                       </div>
                     </div>
@@ -217,29 +217,29 @@ export default function AdminOrders() {
               initial={{ opacity: 0, scale: 0.98 }}
               animate={{ opacity: 1, scale: 1 }}
               style={{
-                background: 'rgba(255, 255, 255, 0.02)',
+                background: 'rgba(0, 0, 0, 0.015)',
                 backdropFilter: 'blur(20px)',
-                border: '1px solid rgba(255, 255, 255, 0.06)',
+                border: '1px solid rgba(0, 0, 0, 0.03)',
                 borderRadius: '20px',
                 padding: '32px',
                 boxShadow: '0 15px 40px rgba(0,0,0,0.3)',
               }}
             >
               {/* Header */}
-              <div style={{ borderBottom: '1px solid rgba(255,255,255,0.05)', paddingBottom: '20px', marginBottom: '24px' }}>
+              <div style={{ borderBottom: '1px solid rgba(0, 0, 0, 0.03)', paddingBottom: '20px', marginBottom: '24px' }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px' }}>
-                  <h4 style={{ fontSize: '18px', fontWeight: 700, fontFamily: 'Space Grotesk', color: '#F0EBE0' }}>
+                  <h4 style={{ fontSize: '18px', fontWeight: 700, fontFamily: 'Space Grotesk', color: '#1A1A2E' }}>
                     {t('processOrderTitle')} #{selectedOrder.orderNumber || selectedOrder._id.substring(0,8).toUpperCase()}
                   </h4>
                 </div>
-                <div style={{ fontSize: '13px', color: '#A09888', fontFamily: 'Poppins' }}>
+                <div style={{ fontSize: '13px', color: '#5C5C6B', fontFamily: 'Poppins' }}>
                   {t('clientLabel')} <strong>{selectedOrder.client?.name}</strong> ({selectedOrder.client?.company})
                 </div>
               </div>
 
               {/* Action Buttons */}
               <div style={{ marginBottom: '32px', display: 'flex', flexDirection: 'column', gap: '14px' }}>
-                <h5 style={{ fontSize: '12px', fontWeight: 600, color: '#8A8070', textTransform: 'uppercase', letterSpacing: '0.5px', marginBottom: '4px', fontFamily: 'Poppins' }}>
+                <h5 style={{ fontSize: '12px', fontWeight: 600, color: '#8E8E9A', textTransform: 'uppercase', letterSpacing: '0.5px', marginBottom: '4px', fontFamily: 'Poppins' }}>
                   {t('workflowStatusActions')}
                 </h5>
                 <div style={{ display: 'flex', flexWrap: 'wrap', gap: '10px' }}>
@@ -248,7 +248,7 @@ export default function AdminOrders() {
                     <button
                       disabled={actionLoading}
                       onClick={() => updateStatus(selectedOrder._id, 'confirmed')}
-                      style={{ padding: '8px 16px', borderRadius: '10px', background: 'rgba(201,168,76,0.1)', border: '1px solid #C9A84C', color: '#C9A84C', cursor: 'pointer', fontSize: '12px', fontWeight: 600 }}
+                      style={{ padding: '8px 16px', borderRadius: '10px', background: 'rgba(45, 106, 79,0.1)', border: '1px solid #2D6A4F', color: '#2D6A4F', cursor: 'pointer', fontSize: '12px', fontWeight: 600 }}
                     >
                       ✓ {t('confirmOrderBtn')}
                     </button>
@@ -287,14 +287,14 @@ export default function AdminOrders() {
               </div>
 
               {/* Payment Actions */}
-              <div style={{ marginBottom: '32px', borderBottom: '1px solid rgba(255,255,255,0.05)', paddingBottom: '24px' }}>
-                <h5 style={{ fontSize: '12px', fontWeight: 600, color: '#8A8070', textTransform: 'uppercase', letterSpacing: '0.5px', marginBottom: '12px', fontFamily: 'Poppins' }}>
+              <div style={{ marginBottom: '32px', borderBottom: '1px solid rgba(0, 0, 0, 0.03)', paddingBottom: '24px' }}>
+                <h5 style={{ fontSize: '12px', fontWeight: 600, color: '#8E8E9A', textTransform: 'uppercase', letterSpacing: '0.5px', marginBottom: '12px', fontFamily: 'Poppins' }}>
                   {t('billingPaymentStatus')}
                 </h5>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '16px', justifyContent: 'space-between', fontFamily: 'Poppins', fontSize: '14px' }}>
                   <div>
-                    <span style={{ color: '#8A8070' }}>{t('paymentStatusLabel')} </span>
-                    <strong style={{ color: selectedOrder.paymentStatus === 'paid' ? '#2ecc71' : '#ef4444' }}>
+                    <span style={{ color: '#8E8E9A' }}>{t('paymentStatusLabel')} </span>
+                    <strong style={{ color: selectedOrder.paymentStatus === 'paid' ? '#2ecc71' : '#D00000' }}>
                       {selectedOrder.paymentStatus === 'paid' ? t('paidStatus').toUpperCase() : t('unpaidStatus').toUpperCase()}
                     </strong>
                   </div>
@@ -311,7 +311,7 @@ export default function AdminOrders() {
                       <button
                         disabled={actionLoading}
                         onClick={() => updatePaymentStatus(selectedOrder._id, 'unpaid')}
-                        style={{ padding: '6px 12px', borderRadius: '8px', background: 'rgba(239, 68, 68, 0.1)', border: '1px solid #ef4444', color: '#ef4444', cursor: 'pointer', fontSize: '12px', fontWeight: 500 }}
+                        style={{ padding: '6px 12px', borderRadius: '8px', background: 'rgba(239, 68, 68, 0.1)', border: '1px solid #D00000', color: '#D00000', cursor: 'pointer', fontSize: '12px', fontWeight: 500 }}
                       >
                         {t('resetUnpaidBtn')}
                       </button>
@@ -322,32 +322,32 @@ export default function AdminOrders() {
 
               {/* Shipping Address */}
               <div style={{ marginBottom: '24px', fontSize: '13px', fontFamily: 'Poppins' }}>
-                <h5 style={{ fontSize: '12px', fontWeight: 600, color: '#8A8070', textTransform: 'uppercase', letterSpacing: '0.5px', marginBottom: '8px' }}>
+                <h5 style={{ fontSize: '12px', fontWeight: 600, color: '#8E8E9A', textTransform: 'uppercase', letterSpacing: '0.5px', marginBottom: '8px' }}>
                   {t('deliveryAddress')}
                 </h5>
-                <p style={{ color: '#F0EBE0', lineHeight: 1.5 }}>{selectedOrder.shippingAddress}</p>
+                <p style={{ color: '#1A1A2E', lineHeight: 1.5 }}>{selectedOrder.shippingAddress}</p>
               </div>
 
               {/* Items List */}
-              <div style={{ borderBottom: '1px solid rgba(255,255,255,0.05)', paddingBottom: '20px', marginBottom: '24px' }}>
-                <h5 style={{ fontSize: '12px', fontWeight: 600, color: '#8A8070', textTransform: 'uppercase', letterSpacing: '0.5px', marginBottom: '12px', fontFamily: 'Poppins' }}>
+              <div style={{ borderBottom: '1px solid rgba(0, 0, 0, 0.03)', paddingBottom: '20px', marginBottom: '24px' }}>
+                <h5 style={{ fontSize: '12px', fontWeight: 600, color: '#8E8E9A', textTransform: 'uppercase', letterSpacing: '0.5px', marginBottom: '12px', fontFamily: 'Poppins' }}>
                   {t('purchasedItems')}
                 </h5>
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
                   {selectedOrder.items?.map((item, idx) => (
                     <div key={idx} style={{ display: 'flex', justifyContent: 'space-between', fontSize: '14px', fontFamily: 'Poppins' }}>
                       <div>
-                        <span style={{ color: '#F0EBE0', fontWeight: 500 }}>{item.product?.name || 'Coir Item'}</span>
-                        <div style={{ fontSize: '12px', color: '#8A8070' }}>{t('quantityLabel')} {item.quantity} kg</div>
+                        <span style={{ color: '#1A1A2E', fontWeight: 500 }}>{item.product?.name || 'Coir Item'}</span>
+                        <div style={{ fontSize: '12px', color: '#8E8E9A' }}>{t('quantityLabel')} {item.quantity} kg</div>
                       </div>
-                      <strong style={{ color: '#C9A84C' }}>₹{(item.totalPrice || item.quantity * item.unitPrice).toLocaleString('en-IN')}</strong>
+                      <strong style={{ color: '#2D6A4F' }}>₹{(item.totalPrice || item.quantity * item.unitPrice).toLocaleString('en-IN')}</strong>
                     </div>
                   ))}
                 </div>
               </div>
 
               {/* Billing Totals */}
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', fontSize: '13px', fontFamily: 'Poppins', color: '#A09888' }}>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', fontSize: '13px', fontFamily: 'Poppins', color: '#5C5C6B' }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between' }}>
                   <span>{t('subtotal')}</span>
                   <span>₹{selectedOrder.totalAmount?.toLocaleString('en-IN')}</span>
@@ -360,7 +360,7 @@ export default function AdminOrders() {
                   <span>{t('shippingLogistics')}</span>
                   <span>₹{(selectedOrder.shippingCost || 0).toLocaleString('en-IN')}</span>
                 </div>
-                <div style={{ display: 'flex', justifyContent: 'space-between', borderTop: '1px solid rgba(255,255,255,0.05)', paddingTop: '8px', fontWeight: 600, fontSize: '16px', color: '#C9A84C' }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', borderTop: '1px solid rgba(0, 0, 0, 0.03)', paddingTop: '8px', fontWeight: 600, fontSize: '16px', color: '#2D6A4F' }}>
                   <span>{t('grandTotal')}</span>
                   <span>₹{selectedOrder.grandTotal?.toLocaleString('en-IN')}</span>
                 </div>
@@ -369,12 +369,12 @@ export default function AdminOrders() {
             </motion.div>
           ) : (
             <div style={{
-              background: 'rgba(255, 255, 255, 0.01)',
-              border: '1px solid rgba(255, 255, 255, 0.04)',
+              background: 'rgba(0, 0, 0, 0.01)',
+              border: '1px solid rgba(0, 0, 0, 0.02)',
               borderRadius: '20px',
               padding: '48px 24px',
               textAlign: 'center',
-              color: '#8A8070',
+              color: '#8E8E9A',
               fontSize: '14px',
               fontFamily: 'Poppins',
             }}>
@@ -395,30 +395,30 @@ export default function AdminOrders() {
               exit={{ opacity: 0, scale: 0.95 }}
               style={{
                 position: 'fixed', top: '30%', left: '50%', transform: 'translate(-50%, -50%)',
-                width: '90%', maxWidth: '420px', background: '#12121E', border: '1px solid rgba(255,255,255,0.08)',
+                width: '90%', maxWidth: '420px', background: '#FFFFFF', border: '1px solid rgba(0, 0, 0, 0.04)',
                 borderRadius: '20px', padding: '28px', zIndex: 100, boxShadow: '0 10px 40px rgba(0,0,0,0.5)',
               }}
             >
-              <h3 style={{ fontSize: '16px', fontWeight: 600, fontFamily: 'Space Grotesk', marginBottom: '16px', color: '#C9A84C' }}>
+              <h3 style={{ fontSize: '16px', fontWeight: 600, fontFamily: 'Space Grotesk', marginBottom: '16px', color: '#2D6A4F' }}>
                 {t('enterShippingDetailsTitle')}
               </h3>
               <form onSubmit={handleShipSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
-                  <label style={{ fontSize: '12px', color: '#8A8070', fontFamily: 'Poppins' }}>{t('logisticsCarrierLabel')}</label>
+                  <label style={{ fontSize: '12px', color: '#8E8E9A', fontFamily: 'Poppins' }}>{t('logisticsCarrierLabel')}</label>
                   <input
                     type="text"
                     value={shippingForm.carrier}
                     onChange={(e) => setShippingForm({ ...shippingForm, carrier: e.target.value })}
                     required
                     style={{
-                      padding: '10px 14px', borderRadius: '10px', background: 'rgba(255,255,255,0.02)',
-                      border: '1px solid rgba(255,255,255,0.08)', color: '#F0EBE0', outline: 'none', fontSize: '14px', fontFamily: 'Poppins'
+                      padding: '10px 14px', borderRadius: '10px', background: 'rgba(0, 0, 0, 0.015)',
+                      border: '1px solid rgba(0, 0, 0, 0.04)', color: '#1A1A2E', outline: 'none', fontSize: '14px', fontFamily: 'Poppins'
                     }}
                   />
                 </div>
                 
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
-                  <label style={{ fontSize: '12px', color: '#8A8070', fontFamily: 'Poppins' }}>{t('trackingNumberLabel')}</label>
+                  <label style={{ fontSize: '12px', color: '#8E8E9A', fontFamily: 'Poppins' }}>{t('trackingNumberLabel')}</label>
                   <input
                     type="text"
                     value={shippingForm.trackingNumber}
@@ -426,28 +426,28 @@ export default function AdminOrders() {
                     placeholder="E.g. TRK9876543210"
                     required
                     style={{
-                      padding: '10px 14px', borderRadius: '10px', background: 'rgba(255,255,255,0.02)',
-                      border: '1px solid rgba(255,255,255,0.08)', color: '#F0EBE0', outline: 'none', fontSize: '14px', fontFamily: 'Poppins'
+                      padding: '10px 14px', borderRadius: '10px', background: 'rgba(0, 0, 0, 0.015)',
+                      border: '1px solid rgba(0, 0, 0, 0.04)', color: '#1A1A2E', outline: 'none', fontSize: '14px', fontFamily: 'Poppins'
                     }}
                   />
                 </div>
 
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
-                  <label style={{ fontSize: '12px', color: '#8A8070', fontFamily: 'Poppins' }}>{t('estimatedDeliveryDateLabel')}</label>
+                  <label style={{ fontSize: '12px', color: '#8E8E9A', fontFamily: 'Poppins' }}>{t('estimatedDeliveryDateLabel')}</label>
                   <input
                     type="date"
                     value={shippingForm.estimatedDelivery}
                     onChange={(e) => setShippingForm({ ...shippingForm, estimatedDelivery: e.target.value })}
                     style={{
-                      padding: '10px 14px', borderRadius: '10px', background: 'rgba(255,255,255,0.02)',
-                      border: '1px solid rgba(255,255,255,0.08)', color: '#F0EBE0', outline: 'none', fontSize: '14px', fontFamily: 'Poppins'
+                      padding: '10px 14px', borderRadius: '10px', background: 'rgba(0, 0, 0, 0.015)',
+                      border: '1px solid rgba(0, 0, 0, 0.04)', color: '#1A1A2E', outline: 'none', fontSize: '14px', fontFamily: 'Poppins'
                     }}
                   />
                 </div>
 
                 <div style={{ display: 'flex', gap: '10px', marginTop: '10px' }}>
-                  <button type="button" onClick={() => setShowShipModal(false)} style={{ flex: 1, padding: '10px', borderRadius: '10px', background: 'transparent', border: '1px solid rgba(255,255,255,0.1)', color: '#A09888', cursor: 'pointer', fontSize: '13px' }}>{t('cancelBtn')}</button>
-                  <button type="submit" style={{ flex: 2, padding: '10px', borderRadius: '10px', background: 'linear-gradient(135deg, #8B6914 0%, #C9A84C 50%, #D4B896 100%)', color: '#08080F', fontWeight: 600, border: 'none', cursor: 'pointer', fontSize: '13px' }}>{t('dispatchOrderBtn')}</button>
+                  <button type="button" onClick={() => setShowShipModal(false)} style={{ flex: 1, padding: '10px', borderRadius: '10px', background: 'transparent', border: '1px solid rgba(0, 0, 0, 0.05)', color: '#5C5C6B', cursor: 'pointer', fontSize: '13px' }}>{t('cancelBtn')}</button>
+                  <button type="submit" style={{ flex: 2, padding: '10px', borderRadius: '10px', background: 'linear-gradient(135deg, #1B4332 0%, #2D6A4F 50%, #95D5B2 100%)', color: '#FFFFFF', fontWeight: 600, border: 'none', cursor: 'pointer', fontSize: '13px' }}>{t('dispatchOrderBtn')}</button>
                 </div>
               </form>
             </motion.div>

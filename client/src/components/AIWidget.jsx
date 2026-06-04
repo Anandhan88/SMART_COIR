@@ -117,10 +117,10 @@ export default function AIWidget() {
           width: '56px',
           height: '56px',
           borderRadius: '50%',
-          background: 'linear-gradient(135deg, #8B6914 0%, #C9A84C 50%, #D4B896 100%)',
-          color: '#08080F',
+          background: 'linear-gradient(135deg, #1B4332 0%, #2D6A4F 50%, #40916C 100%)',
+          color: '#FFFFFF',
           border: 'none',
-          boxShadow: '0 8px 32px rgba(201, 168, 76, 0.4), 0 0 10px rgba(201, 168, 76, 0.2)',
+          boxShadow: '0 8px 32px rgba(45, 106, 79, 0.3), 0 0 10px rgba(45, 106, 79, 0.1)',
           cursor: 'pointer',
           display: 'flex',
           alignItems: 'center',
@@ -145,11 +145,11 @@ export default function AIWidget() {
               right: 0,
               width: '360px',
               height: '500px',
-              background: 'rgba(14, 14, 24, 0.95)',
+              background: 'rgba(248, 245, 240, 0.98)',
               backdropFilter: 'blur(20px)',
-              border: '1px solid rgba(201, 168, 76, 0.25)',
+              border: '1px solid rgba(45, 106, 79, 0.2)',
               borderRadius: '20px',
-              boxShadow: '0 20px 50px rgba(0, 0, 0, 0.6), inset 0 0 20px rgba(255,255,255,0.02)',
+              boxShadow: '0 20px 50px rgba(0, 0, 0, 0.1), inset 0 0 20px rgba(255,255,255,0.8)',
               display: 'flex',
               flexDirection: 'column',
               overflow: 'hidden'
@@ -158,8 +158,8 @@ export default function AIWidget() {
             {/* Header */}
             <div style={{
               padding: '16px 20px',
-              background: 'rgba(255,255,255,0.02)',
-              borderBottom: '1px solid rgba(255,255,255,0.06)',
+              background: 'rgba(45, 106, 79, 0.05)',
+              borderBottom: '1px solid rgba(45, 106, 79, 0.1)',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'space-between'
@@ -167,18 +167,18 @@ export default function AIWidget() {
               <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
                 <span style={{ fontSize: '20px' }}>🤖</span>
                 <div>
-                  <h4 style={{ margin: 0, fontSize: '14px', fontWeight: 600, fontFamily: 'Space Grotesk', color: '#F0EBE0' }}>
+                  <h4 style={{ margin: 0, fontSize: '14px', fontWeight: 600, fontFamily: 'Space Grotesk', color: '#1A1A2E' }}>
                     {t('aiAssistant')}
                   </h4>
-                  <span style={{ fontSize: '10px', color: '#C9A84C', display: 'flex', alignItems: 'center', gap: '4px' }}>
-                    <span style={{ width: '6px', height: '6px', borderRadius: '50%', background: '#C9A84C', display: 'inline-block' }}></span>
+                  <span style={{ fontSize: '10px', color: '#2D6A4F', display: 'flex', alignItems: 'center', gap: '4px' }}>
+                    <span style={{ width: '6px', height: '6px', borderRadius: '50%', background: '#2D6A4F', display: 'inline-block' }}></span>
                     {t('online')}
                   </span>
                 </div>
               </div>
               <button 
                 onClick={() => setIsOpen(false)}
-                style={{ background: 'none', border: 'none', color: '#8A8070', fontSize: '18px', cursor: 'pointer', outline: 'none' }}
+                style={{ background: 'none', border: 'none', color: '#5C5C6B', fontSize: '18px', cursor: 'pointer', outline: 'none' }}
               >
                 ×
               </button>
@@ -216,14 +216,15 @@ export default function AIWidget() {
                     style={{
                       alignSelf: isUser ? 'flex-end' : 'flex-start',
                       maxWidth: '80%',
-                      background: isUser ? 'rgba(201, 168, 76, 0.15)' : 'rgba(255, 255, 255, 0.03)',
-                      border: isUser ? '1px solid rgba(201, 168, 76, 0.3)' : '1px solid rgba(255, 255, 255, 0.05)',
-                      color: '#F0EBE0',
+                      background: isUser ? '#2D6A4F' : 'var(--bg-card)',
+                      border: isUser ? '1px solid #1B4332' : '1px solid var(--border)',
+                      color: isUser ? '#FFFFFF' : 'var(--text-1)',
                       padding: '10px 14px',
                       borderRadius: isUser ? '16px 16px 2px 16px' : '16px 16px 16px 2px',
                       fontSize: '12.5px',
                       lineHeight: 1.5,
-                      fontFamily: 'Poppins'
+                      fontFamily: 'Poppins',
+                      boxShadow: isUser ? '0 2px 8px rgba(45, 106, 79, 0.15)' : '0 2px 8px rgba(0, 0, 0, 0.02)'
                     }}
                   >
                     {msg.content}
@@ -235,17 +236,17 @@ export default function AIWidget() {
               {isTyping && (
                 <div style={{
                   alignSelf: 'flex-start',
-                  background: 'rgba(255, 255, 255, 0.03)',
-                  border: '1px solid rgba(255, 255, 255, 0.05)',
+                  background: 'var(--bg-card)',
+                  border: '1px solid var(--border)',
                   padding: '12px 16px',
                   borderRadius: '16px 16px 16px 2px',
                   display: 'flex',
                   gap: '4px',
                   alignItems: 'center'
                 }}>
-                  <span style={{ width: '6px', height: '6px', borderRadius: '50%', background: '#C9A84C', display: 'inline-block', animation: 'bounce 1.4s infinite ease-in-out' }}></span>
-                  <span style={{ width: '6px', height: '6px', borderRadius: '50%', background: '#C9A84C', display: 'inline-block', animation: 'bounce 1.4s infinite ease-in-out 0.2s' }}></span>
-                  <span style={{ width: '6px', height: '6px', borderRadius: '50%', background: '#C9A84C', display: 'inline-block', animation: 'bounce 1.4s infinite ease-in-out 0.4s' }}></span>
+                  <span style={{ width: '6px', height: '6px', borderRadius: '50%', background: '#2D6A4F', display: 'inline-block', animation: 'bounce 1.4s infinite ease-in-out' }}></span>
+                  <span style={{ width: '6px', height: '6px', borderRadius: '50%', background: '#2D6A4F', display: 'inline-block', animation: 'bounce 1.4s infinite ease-in-out 0.2s' }}></span>
+                  <span style={{ width: '6px', height: '6px', borderRadius: '50%', background: '#2D6A4F', display: 'inline-block', animation: 'bounce 1.4s infinite ease-in-out 0.4s' }}></span>
                 </div>
               )}
               
@@ -260,16 +261,16 @@ export default function AIWidget() {
                 flexDirection: 'column',
                 gap: '6px'
               }}>
-                <span style={{ fontSize: '10px', color: '#8A8070', textTransform: 'uppercase', letterSpacing: '0.5px' }}>{t('suggestedQuestions')}:</span>
+                <span style={{ fontSize: '10px', color: 'var(--text-3)', textTransform: 'uppercase', letterSpacing: '0.5px' }}>{t('suggestedQuestions')}:</span>
                 <div style={{ display: 'flex', gap: '6px', flexWrap: 'wrap' }}>
                   {suggestions.map((item, i) => (
                     <button
                       key={i}
                       onClick={() => handleSendMessage(item.query)}
                       style={{
-                        background: 'rgba(201, 168, 76, 0.05)',
-                        border: '1px solid rgba(201, 168, 76, 0.15)',
-                        color: '#C9A84C',
+                        background: 'rgba(45, 106, 79, 0.05)',
+                        border: '1px solid rgba(45, 106, 79, 0.15)',
+                        color: '#2D6A4F',
                         fontSize: '11px',
                         padding: '6px 10px',
                         borderRadius: '10px',
@@ -278,12 +279,12 @@ export default function AIWidget() {
                         textAlign: 'left'
                       }}
                       onMouseEnter={(e) => {
-                        e.target.style.background = 'rgba(201, 168, 76, 0.12)';
-                        e.target.style.borderColor = '#C9A84C';
+                        e.target.style.background = 'rgba(45, 106, 79, 0.12)';
+                        e.target.style.borderColor = '#2D6A4F';
                       }}
                       onMouseLeave={(e) => {
-                        e.target.style.background = 'rgba(201, 168, 76, 0.05)';
-                        e.target.style.borderColor = 'rgba(201, 168, 76, 0.15)';
+                        e.target.style.background = 'rgba(45, 106, 79, 0.05)';
+                        e.target.style.borderColor = 'rgba(45, 106, 79, 0.15)';
                       }}
                     >
                       {item.text}
@@ -296,8 +297,8 @@ export default function AIWidget() {
             {/* Input Footer */}
             <div style={{
               padding: '16px 20px',
-              background: 'rgba(255,255,255,0.01)',
-              borderTop: '1px solid rgba(255,255,255,0.06)',
+              background: 'rgba(0, 0, 0, 0.01)',
+              borderTop: '1px solid var(--border)',
               display: 'flex',
               gap: '10px'
             }}>
@@ -310,11 +311,11 @@ export default function AIWidget() {
                 disabled={isTyping}
                 style={{
                   flex: 1,
-                  background: 'rgba(255,255,255,0.02)',
-                  border: '1px solid rgba(255,255,255,0.08)',
+                  background: '#FFFFFF',
+                  border: '1px solid var(--border)',
                   borderRadius: '12px',
                   padding: '10px 14px',
-                  color: '#F0EBE0',
+                  color: 'var(--text-1)',
                   fontSize: '13px',
                   outline: 'none',
                   fontFamily: 'Poppins'
@@ -326,8 +327,8 @@ export default function AIWidget() {
                 style={{
                   padding: '10px 16px',
                   borderRadius: '12px',
-                  background: 'linear-gradient(135deg, #8B6914 0%, #C9A84C 50%)',
-                  color: '#08080F',
+                  background: 'linear-gradient(135deg, #1B4332 0%, #2D6A4F 50%)',
+                  color: '#FFFFFF',
                   fontWeight: 600,
                   fontSize: '13px',
                   border: 'none',

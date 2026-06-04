@@ -10,7 +10,10 @@ exports.getProducts = async (req, res) => {
     if (category) query.category = category;
     if (qualityGrade) query.qualityGrade = qualityGrade;
     if (search) {
-      query.$text = { $search: search };
+      query.$or = [
+        { sku: search },
+        { name: { $regex: search, $options: 'i' } }
+      ];
     }
 
     const sortOptions = {};
@@ -49,16 +52,9 @@ exports.getProduct = async (req, res) => {
       return res.status(404).json({ success: false, message: 'Product not found' });
     }
 
-    // Generate QR Code containing product specifications
+    // Generate QR Code containing product SKU or ID
     const QRCode = require('qrcode');
-    const qrText = JSON.stringify({
-      id: product._id,
-      name: product.name,
-      sku: product.sku,
-      category: product.category,
-      price: `INR ${product.price?.amount || 0} per ${product.price?.perUnit || 'kg'}`,
-      grade: product.qualityGrade
-    });
+    const qrText = product.sku || product._id.toString();
     
     let qrCodeUrl = '';
     try {

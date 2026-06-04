@@ -16,7 +16,7 @@ export default function HeroSection() {
         display: 'flex',
         alignItems: 'center',
         overflow: 'hidden',
-        background: '#08080F',
+        background: '#F8F5F0',
       }}
     >
       {/* Background Image */}
@@ -28,16 +28,16 @@ export default function HeroSection() {
           backgroundSize: 'cover',
           backgroundPosition: 'center',
           backgroundRepeat: 'no-repeat',
-          opacity: 0.95,
+          opacity: 0.85,
         }}
       />
 
-      {/* Dark overlay gradient for text readability */}
+      {/* Light overlay gradient for text readability */}
       <div
         style={{
           position: 'absolute',
           inset: 0,
-          background: 'linear-gradient(90deg, rgba(8,8,15,0.8) 0%, rgba(8,8,15,0.55) 30%, rgba(8,8,15,0.12) 60%, rgba(8,8,15,0) 100%)',
+          background: 'linear-gradient(90deg, rgba(248,245,240,0.8) 0%, rgba(248,245,240,0.5) 30%, rgba(248,245,240,0) 80%)',
         }}
       />
 
@@ -49,11 +49,11 @@ export default function HeroSection() {
           left: 0,
           right: 0,
           height: 200,
-          background: 'linear-gradient(to top, #08080F, transparent)',
+          background: 'linear-gradient(to top, #F8F5F0, transparent)',
         }}
       />
 
-      {/* Subtle gold accent glow */}
+      {/* Subtle green accent glow */}
       <div style={{
         position: 'absolute',
         top: '30%',
@@ -61,7 +61,7 @@ export default function HeroSection() {
         width: 400,
         height: 400,
         borderRadius: '50%',
-        background: 'radial-gradient(circle, rgba(201,168,76,0.08) 0%, transparent 70%)',
+        background: 'radial-gradient(circle, rgba(45,106,79,0.08) 0%, transparent 70%)',
         pointerEvents: 'none',
         filter: 'blur(60px)',
       }} />
@@ -80,19 +80,19 @@ export default function HeroSection() {
               gap: 10,
               padding: '10px 22px',
               borderRadius: 'var(--radius-full)',
-              background: 'rgba(201, 168, 76, 0.1)',
-              border: '1px solid rgba(201, 168, 76, 0.2)',
+              background: 'rgba(45, 106, 79, 0.08)',
+              border: '1px solid rgba(45, 106, 79, 0.2)',
               marginBottom: 40,
             }}
           >
             <span style={{
               width: 7, height: 7, borderRadius: '50%',
-              background: '#C9A84C',
-              boxShadow: '0 0 10px #C9A84C',
+              background: '#2D6A4F',
+              boxShadow: '0 0 10px rgba(45,106,79,0.5)',
             }} />
             <span style={{
               fontSize: 10, fontWeight: 600, letterSpacing: 3,
-              textTransform: 'uppercase', color: '#C9A84C',
+              textTransform: 'uppercase', color: '#2D6A4F',
               fontFamily: 'Poppins',
             }}>
               {t('badge')}
@@ -105,25 +105,25 @@ export default function HeroSection() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.9, delay: 0.4 }}
             style={{
-              fontSize: 'clamp(2.8rem, 5.5vw, 4.5rem)',
+              fontSize: 'clamp(2.2rem, 4.2vw, 3.4rem)',
               fontWeight: 800,
               lineHeight: 1.08,
               marginBottom: 32,
               fontFamily: 'Space Grotesk',
               letterSpacing: '-0.03em',
-              color: '#F0EBE0',
+              color: '#1A1A2E',
             }}
           >
             {t('heroTitle1')}{' '}
             <span style={{
-              background: 'linear-gradient(135deg, #8B6914, #C9A84C)',
+              background: 'linear-gradient(135deg, #1B4332, #2D6A4F)',
               WebkitBackgroundClip: 'text',
               WebkitTextFillColor: 'transparent',
               backgroundClip: 'text',
             }}>{t('heroTitle2')}</span>
             <br />
             {t('heroTitle3')}{' '}
-            <span style={{ color: '#C9A84C' }}>{t('heroTitle4')}</span>
+            <span style={{ color: '#2D6A4F' }}>{t('heroTitle4')}</span>
           </motion.h1>
 
           {/* Subheading */}
@@ -132,9 +132,9 @@ export default function HeroSection() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.6 }}
             style={{
-              fontSize: 18,
+              fontSize: 16,
               lineHeight: 1.8,
-              color: '#A09888',
+              color: '#2A2A38',
               maxWidth: 520,
               marginBottom: 52,
             }}
@@ -156,24 +156,24 @@ export default function HeroSection() {
                 fontSize: 15,
                 fontWeight: 700,
                 fontFamily: 'Poppins',
-                color: '#08080F',
-                background: 'linear-gradient(135deg, #8B6914 0%, #C9A84C 50%, #D4B896 100%)',
+                color: '#FFFFFF',
+                background: 'linear-gradient(135deg, #1B4332 0%, #2D6A4F 50%, #40916C 100%)',
                 border: 'none',
                 borderRadius: 'var(--radius-full, 999px)',
                 cursor: 'pointer',
                 transition: 'all 0.3s',
-                boxShadow: '0 4px 20px rgba(201, 168, 76, 0.35)',
+                boxShadow: '0 4px 20px rgba(45, 106, 79, 0.3)',
                 display: 'flex',
                 alignItems: 'center',
                 gap: 10,
               }}
               onMouseEnter={e => {
                 e.currentTarget.style.transform = 'translateY(-2px)';
-                e.currentTarget.style.boxShadow = '0 8px 30px rgba(201, 168, 76, 0.5)';
+                e.currentTarget.style.boxShadow = '0 8px 30px rgba(45, 106, 79, 0.4)';
               }}
               onMouseLeave={e => {
                 e.currentTarget.style.transform = 'translateY(0)';
-                e.currentTarget.style.boxShadow = '0 4px 20px rgba(201, 168, 76, 0.35)';
+                e.currentTarget.style.boxShadow = '0 4px 20px rgba(45, 106, 79, 0.3)';
               }}
             >
               {t('getStarted')}
@@ -186,20 +186,20 @@ export default function HeroSection() {
                 fontSize: 15,
                 fontWeight: 600,
                 fontFamily: 'Poppins',
-                color: '#F0EBE0',
+                color: '#2D6A4F',
                 background: 'transparent',
-                border: '1px solid rgba(255,255,255,0.2)',
+                border: '1.5px solid rgba(45, 106, 79, 0.35)',
                 borderRadius: 'var(--radius-full, 999px)',
                 cursor: 'pointer',
                 transition: 'all 0.3s',
               }}
               onMouseEnter={e => {
-                e.currentTarget.style.borderColor = '#C9A84C';
-                e.currentTarget.style.color = '#C9A84C';
+                e.currentTarget.style.background = 'rgba(45, 106, 79, 0.06)';
+                e.currentTarget.style.borderColor = '#2D6A4F';
               }}
               onMouseLeave={e => {
-                e.currentTarget.style.borderColor = 'rgba(255,255,255,0.2)';
-                e.currentTarget.style.color = '#F0EBE0';
+                e.currentTarget.style.background = 'transparent';
+                e.currentTarget.style.borderColor = 'rgba(45, 106, 79, 0.35)';
               }}
             >
               {t('viewInventory')}
@@ -215,7 +215,7 @@ export default function HeroSection() {
               display: 'flex',
               gap: 56,
               paddingTop: 40,
-              borderTop: '1px solid rgba(255, 255, 255, 0.08)',
+              borderTop: '1px solid rgba(0, 0, 0, 0.08)',
             }}
           >
             {[
@@ -228,7 +228,7 @@ export default function HeroSection() {
                   fontSize: 34,
                   fontWeight: 800,
                   fontFamily: 'Space Grotesk',
-                  color: '#C9A84C',
+                  color: '#2D6A4F',
                   letterSpacing: '-0.02em',
                   lineHeight: 1,
                 }}>
@@ -239,7 +239,7 @@ export default function HeroSection() {
                   fontWeight: 500,
                   letterSpacing: 2,
                   textTransform: 'uppercase',
-                  color: '#8A8070',
+                  color: '#8E8E9A',
                   fontFamily: 'Poppins',
                   marginTop: 10,
                 }}>
@@ -270,7 +270,7 @@ export default function HeroSection() {
         <span style={{
           fontSize: 10, letterSpacing: 4,
           textTransform: 'uppercase',
-          color: '#8A8070',
+          color: '#8E8E9A',
           fontFamily: 'Poppins',
         }}>
           {t('scrollExplore')}
@@ -280,11 +280,11 @@ export default function HeroSection() {
           transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
           style={{
             width: 24, height: 40, borderRadius: 12,
-            border: '1.5px solid #8A8070',
+            border: '1.5px solid #8E8E9A',
             display: 'flex', justifyContent: 'center', paddingTop: 8,
           }}
         >
-          <div style={{ width: 3, height: 8, borderRadius: 2, background: '#C9A84C' }} />
+          <div style={{ width: 3, height: 8, borderRadius: 2, background: '#2D6A4F' }} />
         </motion.div>
       </motion.div>
     </section>

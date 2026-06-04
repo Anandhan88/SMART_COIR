@@ -26,7 +26,7 @@ export default function Navbar() {
     }
   }, [langOpen]);
 
-  const navBg = scrolled ? 'rgba(8, 8, 15, 0.8)' : 'transparent';
+  const navBg = scrolled ? 'rgba(248, 245, 240, 0.9)' : 'transparent';
   const langLabels = { en: '🇬🇧 EN', ta: '🇮🇳 தமிழ்', hi: '🇮🇳 हिन्दी' };
 
   return (
@@ -43,7 +43,7 @@ export default function Navbar() {
         padding: scrolled ? '14px 0' : '24px 0',
         background: navBg,
         backdropFilter: scrolled ? 'blur(24px) saturate(180%)' : 'none',
-        borderBottom: scrolled ? '1px solid rgba(201, 168, 76, 0.08)' : 'none',
+        borderBottom: scrolled ? '1px solid rgba(0, 0, 0, 0.06)' : 'none',
         transition: 'all 0.5s cubic-bezier(0.16, 1, 0.3, 1)',
       }}
     >
@@ -66,10 +66,10 @@ export default function Navbar() {
             style={{ width: 40, height: 40, objectFit: 'contain' }}
           />
           <div>
-            <div style={{ fontSize: 20, fontWeight: 700, fontFamily: 'Space Grotesk', color: 'var(--text-1)', lineHeight: 1.2 }}>
-              Smart<span style={{ color: 'var(--accent)' }}>Coir</span>
+            <div style={{ fontSize: 20, fontWeight: 700, fontFamily: 'Space Grotesk', color: '#111122', lineHeight: 1.2 }}>
+              Smart<span style={{ color: '#2D6A4F' }}>Coir</span>
             </div>
-            <div style={{ fontSize: 9, letterSpacing: 3, textTransform: 'uppercase', color: 'var(--text-3)', fontFamily: 'Poppins' }}>
+            <div style={{ fontSize: 9, letterSpacing: 3, textTransform: 'uppercase', color: '#737380', fontFamily: 'Poppins' }}>
               Manufacturing
             </div>
           </div>
@@ -87,9 +87,9 @@ export default function Navbar() {
                 fontSize: 12,
                 fontWeight: 600,
                 fontFamily: 'Poppins',
-                color: 'var(--text-2)',
-                background: 'rgba(255,255,255,0.05)',
-                border: '1px solid rgba(255,255,255,0.1)',
+                color: scrolled ? '#5C5C6B' : '#FFFFFF',
+                background: scrolled ? 'rgba(0,0,0,0.04)' : 'rgba(255,255,255,0.15)',
+                border: scrolled ? '1px solid rgba(0,0,0,0.08)' : '1px solid rgba(255,255,255,0.25)',
                 borderRadius: '10px',
                 cursor: 'pointer',
                 transition: 'all 0.3s',
@@ -99,7 +99,7 @@ export default function Navbar() {
               }}
             >
               {langLabels[lang]}
-              <span style={{ fontSize: 10, opacity: 0.6 }}>▼</span>
+              <span style={{ fontSize: 10, opacity: scrolled ? 0.6 : 0.9 }}>▼</span>
             </button>
 
             <AnimatePresence>
@@ -113,9 +113,9 @@ export default function Navbar() {
                     position: 'absolute',
                     top: '110%',
                     right: 0,
-                    background: 'rgba(14, 14, 24, 0.98)',
+                    background: 'rgba(248, 245, 240, 0.98)',
                     backdropFilter: 'blur(20px)',
-                    border: '1px solid rgba(255,255,255,0.1)',
+                    border: '1px solid rgba(0,0,0,0.08)',
                     borderRadius: '12px',
                     boxShadow: '0 10px 30px rgba(0,0,0,0.5)',
                     overflow: 'hidden',
@@ -137,9 +137,9 @@ export default function Navbar() {
                         fontSize: 13,
                         fontFamily: 'Poppins',
                         fontWeight: lang === item.code ? 600 : 400,
-                        color: lang === item.code ? 'var(--accent)' : 'var(--text-1)',
+                        color: lang === item.code ? '#2D6A4F' : '#1A1A2E',
                         background: lang === item.code
-                          ? 'rgba(201, 168, 76, 0.08)'
+                          ? 'rgba(45, 106, 79, 0.08)'
                           : 'transparent',
                         border: 'none',
                         cursor: 'pointer',
@@ -150,7 +150,7 @@ export default function Navbar() {
                         gap: 8,
                       }}
                       onMouseEnter={(e) => {
-                        if (lang !== item.code) e.currentTarget.style.background = 'rgba(255,255,255,0.03)';
+                        if (lang !== item.code) e.currentTarget.style.background = 'rgba(0,0,0,0.03)';
                       }}
                       onMouseLeave={(e) => {
                         if (lang !== item.code) e.currentTarget.style.background = 'transparent';
@@ -172,20 +172,22 @@ export default function Navbar() {
               fontSize: 13,
               fontWeight: 600,
               fontFamily: 'Poppins',
-              color: '#F0EBE0',
+              color: scrolled ? '#1A1A2E' : '#FFFFFF',
               background: 'transparent',
-              border: '1px solid rgba(255,255,255,0.15)',
+              border: scrolled ? '1px solid rgba(0,0,0,0.12)' : '1px solid rgba(255,255,255,0.3)',
               borderRadius: 999,
               cursor: 'pointer',
               transition: 'all 0.3s',
             }}
             onMouseEnter={e => {
-              e.currentTarget.style.borderColor = 'var(--accent)';
-              e.currentTarget.style.color = 'var(--accent)';
+              e.currentTarget.style.borderColor = scrolled ? '#2D6A4F' : '#FFFFFF';
+              e.currentTarget.style.color = scrolled ? '#2D6A4F' : '#FFFFFF';
+              if (!scrolled) e.currentTarget.style.background = 'rgba(255,255,255,0.1)';
             }}
             onMouseLeave={e => {
-              e.currentTarget.style.borderColor = 'rgba(255,255,255,0.15)';
-              e.currentTarget.style.color = '#F0EBE0';
+              e.currentTarget.style.borderColor = scrolled ? 'rgba(0,0,0,0.12)' : 'rgba(255,255,255,0.3)';
+              e.currentTarget.style.color = scrolled ? '#1A1A2E' : '#FFFFFF';
+              if (!scrolled) e.currentTarget.style.background = 'transparent';
             }}
           >
             {t('login')}
@@ -199,21 +201,21 @@ export default function Navbar() {
               fontSize: 13,
               fontWeight: 600,
               fontFamily: 'Poppins',
-              color: '#08080F',
-              background: 'linear-gradient(135deg, #8B6914 0%, #C9A84C 50%, #D4B896 100%)',
+              color: '#FFFFFF',
+              background: 'linear-gradient(135deg, #1B4332 0%, #2D6A4F 50%, #40916C 100%)',
               border: 'none',
               borderRadius: 999,
               cursor: 'pointer',
               transition: 'all 0.3s',
-              boxShadow: '0 4px 15px rgba(201, 168, 76, 0.3)',
+              boxShadow: '0 4px 15px rgba(45, 106, 79, 0.25)',
             }}
             onMouseEnter={e => {
               e.currentTarget.style.transform = 'translateY(-1px)';
-              e.currentTarget.style.boxShadow = '0 6px 20px rgba(201, 168, 76, 0.4)';
+              e.currentTarget.style.boxShadow = '0 6px 20px rgba(45, 106, 79, 0.35)';
             }}
             onMouseLeave={e => {
               e.currentTarget.style.transform = 'translateY(0)';
-              e.currentTarget.style.boxShadow = '0 4px 15px rgba(201, 168, 76, 0.3)';
+              e.currentTarget.style.boxShadow = '0 4px 15px rgba(45, 106, 79, 0.25)';
             }}
           >
             {t('getStarted')} →

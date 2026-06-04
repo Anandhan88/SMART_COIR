@@ -209,14 +209,14 @@ export default function AdminSupportChat() {
   };
 
   return (
-    <div style={{ padding: '32px 24px', maxWidth: '1200px', margin: '0 auto', height: 'calc(100vh - 120px)', display: 'flex', flexDirection: 'column' }}>
+    <div style={{ padding: '40px 64px', height: 'calc(100vh - 120px)', display: 'flex', flexDirection: 'column' }}>
       
       {/* Title */}
       <div style={{ marginBottom: '24px' }}>
-        <h1 style={{ fontSize: '28px', fontWeight: 700, fontFamily: 'Space Grotesk', color: '#F0EBE0', marginBottom: '6px' }}>
+        <h1 style={{ fontSize: '28px', fontWeight: 700, fontFamily: 'Space Grotesk', color: '#1A1A2E', marginBottom: '6px' }}>
           {t('opsSupportDesk')}
         </h1>
-        <p style={{ color: '#A09888', fontSize: '14px', fontFamily: 'Poppins' }}>
+        <p style={{ color: '#5C5C6B', fontSize: '14px', fontFamily: 'Poppins' }}>
           {t('opsChatDesc')}
         </p>
       </div>
@@ -225,28 +225,28 @@ export default function AdminSupportChat() {
         flex: 1,
         display: 'grid',
         gridTemplateColumns: '320px 1fr',
-        background: 'rgba(255, 255, 255, 0.01)',
+        background: 'rgba(0, 0, 0, 0.01)',
         backdropFilter: 'blur(24px)',
-        border: '1px solid rgba(255, 255, 255, 0.05)',
+        border: '1px solid rgba(0, 0, 0, 0.03)',
         borderRadius: '24px',
         overflow: 'hidden',
       }} className="chat-grid-responsive">
 
         {/* Left Side Navigation & Directory */}
         <div style={{
-          borderRight: '1px solid rgba(255, 255, 255, 0.05)',
+          borderRight: '1px solid rgba(0, 0, 0, 0.03)',
           background: 'rgba(0, 0, 0, 0.1)',
           display: 'flex',
           flexDirection: 'column',
         }}>
           {/* Tabs */}
-          <div style={{ display: 'flex', borderBottom: '1px solid rgba(255, 255, 255, 0.04)', padding: '12px' }}>
+          <div style={{ display: 'flex', borderBottom: '1px solid rgba(0, 0, 0, 0.02)', padding: '12px' }}>
             <button
               onClick={() => setViewMode('chats')}
               style={{
                 flex: 1, padding: '10px', borderRadius: '8px', border: 'none',
-                background: viewMode === 'chats' ? 'rgba(201, 168, 76, 0.1)' : 'transparent',
-                color: viewMode === 'chats' ? '#C9A84C' : '#8A8070',
+                background: viewMode === 'chats' ? 'rgba(45, 106, 79, 0.1)' : 'transparent',
+                color: viewMode === 'chats' ? '#2D6A4F' : '#8E8E9A',
                 fontWeight: 600, fontSize: '13px', cursor: 'pointer', fontFamily: 'Poppins'
               }}
             >
@@ -256,8 +256,8 @@ export default function AdminSupportChat() {
               onClick={() => setViewMode('clients')}
               style={{
                 flex: 1, padding: '10px', borderRadius: '8px', border: 'none',
-                background: viewMode === 'clients' ? 'rgba(201, 168, 76, 0.1)' : 'transparent',
-                color: viewMode === 'clients' ? '#C9A84C' : '#8A8070',
+                background: viewMode === 'clients' ? 'rgba(45, 106, 79, 0.1)' : 'transparent',
+                color: viewMode === 'clients' ? '#2D6A4F' : '#8E8E9A',
                 fontWeight: 600, fontSize: '13px', cursor: 'pointer', fontFamily: 'Poppins'
               }}
             >
@@ -269,11 +269,11 @@ export default function AdminSupportChat() {
           <div style={{ flex: 1, overflowY: 'auto', padding: '12px' }}>
             {viewMode === 'chats' ? (
               loadingChats ? (
-                <div style={{ color: '#8A8070', fontSize: '13px', textAlign: 'center', marginTop: '24px' }}>
+                <div style={{ color: '#8E8E9A', fontSize: '13px', textAlign: 'center', marginTop: '24px' }}>
                   {t('loadingChatThreads')}
                 </div>
               ) : chats.length === 0 ? (
-                <div style={{ color: '#8A8070', fontSize: '13px', textAlign: 'center', marginTop: '24px', padding: '0 12px' }}>
+                <div style={{ color: '#8E8E9A', fontSize: '13px', textAlign: 'center', marginTop: '24px', padding: '0 12px' }}>
                   {t('noActiveChatsDesc')}
                 </div>
               ) : (
@@ -295,17 +295,17 @@ export default function AdminSupportChat() {
                           textAlign: 'left',
                           cursor: 'pointer',
                           transition: 'all 0.3s',
-                          background: isSelected ? 'rgba(201, 168, 76, 0.08)' : 'transparent',
-                          borderLeft: isSelected ? '3px solid #C9A84C' : '3px solid transparent',
-                          color: isSelected ? '#C9A84C' : '#F0EBE0',
+                          background: isSelected ? 'rgba(45, 106, 79, 0.08)' : 'transparent',
+                          borderLeft: isSelected ? '3px solid #2D6A4F' : '3px solid transparent',
+                          color: isSelected ? '#2D6A4F' : '#1A1A2E',
                           width: '100%',
                         }}
                       >
                         <div style={{
                           width: '38px', height: '38px', borderRadius: '50%',
-                          background: 'linear-gradient(135deg, #A09888, #C9A84C)',
+                          background: 'linear-gradient(135deg, #5C5C6B, #2D6A4F)',
                           display: 'flex', alignItems: 'center', justifyContent: 'center',
-                          color: '#08080F', fontWeight: 700, fontSize: '13px'
+                          color: '#FFFFFF', fontWeight: 700, fontSize: '13px'
                         }}>
                           {client.name?.charAt(0).toUpperCase() || '?'}
                         </div>
@@ -313,7 +313,7 @@ export default function AdminSupportChat() {
                           <div style={{ fontSize: '13px', fontWeight: 600, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
                             {client.name || t('unknownClient')}
                           </div>
-                          <div style={{ fontSize: '11px', color: '#8A8070', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+                          <div style={{ fontSize: '11px', color: '#8E8E9A', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
                             {chat.lastMessage?.content || t('noMessagesYet')}
                           </div>
                         </div>
@@ -324,11 +324,11 @@ export default function AdminSupportChat() {
               )
             ) : (
               loadingClients ? (
-                <div style={{ color: '#8A8070', fontSize: '13px', textAlign: 'center', marginTop: '24px' }}>
+                <div style={{ color: '#8E8E9A', fontSize: '13px', textAlign: 'center', marginTop: '24px' }}>
                   {t('loadingClientsList')}
                 </div>
               ) : clients.length === 0 ? (
-                <div style={{ color: '#8A8070', fontSize: '13px', textAlign: 'center', marginTop: '24px' }}>
+                <div style={{ color: '#8E8E9A', fontSize: '13px', textAlign: 'center', marginTop: '24px' }}>
                   {t('noBuyersRegistered')}
                 </div>
               ) : (
@@ -349,17 +349,17 @@ export default function AdminSupportChat() {
                           cursor: 'pointer',
                           transition: 'all 0.3s',
                           background: 'transparent',
-                          color: '#F0EBE0',
+                          color: '#1A1A2E',
                           width: '100%',
                         }}
-                        onMouseEnter={(e) => e.target.style.background = 'rgba(255,255,255,0.01)'}
+                        onMouseEnter={(e) => e.target.style.background = 'rgba(0, 0, 0, 0.01)'}
                         onMouseLeave={(e) => e.target.style.background = 'transparent'}
                       >
                         <div style={{
                           width: '38px', height: '38px', borderRadius: '50%',
                           background: 'linear-gradient(135deg, #555, #888)',
                           display: 'flex', alignItems: 'center', justifyContent: 'center',
-                          color: '#08080F', fontWeight: 700, fontSize: '13px'
+                          color: '#FFFFFF', fontWeight: 700, fontSize: '13px'
                         }}>
                           {client.name.charAt(0).toUpperCase()}
                         </div>
@@ -367,7 +367,7 @@ export default function AdminSupportChat() {
                           <div style={{ fontSize: '13px', fontWeight: 600, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
                             {client.name}
                           </div>
-                          <div style={{ fontSize: '11px', color: '#8A8070' }}>
+                          <div style={{ fontSize: '11px', color: '#8E8E9A' }}>
                             {client.company || 'Buyer'}
                           </div>
                         </div>
@@ -381,13 +381,13 @@ export default function AdminSupportChat() {
         </div>
 
         {/* Right Side: Chat Window */}
-        <div style={{ display: 'flex', flexDirection: 'column', background: 'rgba(8, 8, 15, 0.4)' }}>
+        <div style={{ display: 'flex', flexDirection: 'column', background: 'rgba(255, 255, 255, 0.4)' }}>
           {activeChat && selectedClient ? (
             <>
               {/* Header */}
               <div style={{
                 padding: '16px 24px',
-                borderBottom: '1px solid rgba(255, 255, 255, 0.05)',
+                borderBottom: '1px solid rgba(0, 0, 0, 0.03)',
                 display: 'flex',
                 alignItems: 'center',
                 gap: '12px',
@@ -395,16 +395,16 @@ export default function AdminSupportChat() {
               }}>
                 <div style={{
                   width: '38px', height: '38px', borderRadius: '50%',
-                  background: 'linear-gradient(135deg, #A09888, #C9A84C)',
+                  background: 'linear-gradient(135deg, #5C5C6B, #2D6A4F)',
                   display: 'flex', alignItems: 'center', justifyContent: 'center',
-                  color: '#08080F', fontWeight: 700, fontSize: '13px'
+                  color: '#FFFFFF', fontWeight: 700, fontSize: '13px'
                 }}>
                   {selectedClient.name?.charAt(0).toUpperCase() || '?'}
                 </div>
                 <div>
-                  <h4 style={{ fontSize: '14px', fontWeight: 600, color: '#F0EBE0' }}>{selectedClient.name}</h4>
-                  <div style={{ fontSize: '11px', color: '#8A8070' }}>
-                    {t('buyerRepFrom')} <strong style={{ color: '#C9A84C' }}>{selectedClient.company || 'Indiv.'}</strong>
+                  <h4 style={{ fontSize: '14px', fontWeight: 600, color: '#1A1A2E' }}>{selectedClient.name}</h4>
+                  <div style={{ fontSize: '11px', color: '#8E8E9A' }}>
+                    {t('buyerRepFrom')} <strong style={{ color: '#2D6A4F' }}>{selectedClient.company || 'Indiv.'}</strong>
                   </div>
                 </div>
               </div>
@@ -412,11 +412,11 @@ export default function AdminSupportChat() {
               {/* Message History */}
               <div style={{ flex: 1, overflowY: 'auto', padding: '24px', display: 'flex', flexDirection: 'column', gap: '16px' }}>
                 {loadingMessages ? (
-                  <div style={{ color: '#8A8070', fontSize: '13px', textAlign: 'center', margin: 'auto' }}>
+                  <div style={{ color: '#8E8E9A', fontSize: '13px', textAlign: 'center', margin: 'auto' }}>
                     {t('loadingMessageLogs')}
                   </div>
                 ) : messages.length === 0 ? (
-                  <div style={{ color: '#8A8070', fontSize: '13px', textAlign: 'center', margin: 'auto' }}>
+                  <div style={{ color: '#8E8E9A', fontSize: '13px', textAlign: 'center', margin: 'auto' }}>
                     {t('noMessagesThread')}
                   </div>
                 ) : (
@@ -435,9 +435,9 @@ export default function AdminSupportChat() {
                           maxWidth: '65%',
                           padding: '12px 16px',
                           borderRadius: isMe ? '16px 16px 2px 16px' : '16px 16px 16px 2px',
-                          background: isMe ? 'linear-gradient(135deg, #8B6914 0%, #C9A84C 100%)' : 'rgba(255,255,255,0.03)',
-                          border: isMe ? 'none' : '1px solid rgba(255,255,255,0.05)',
-                          color: isMe ? '#08080F' : '#F0EBE0',
+                          background: isMe ? 'linear-gradient(135deg, #1B4332 0%, #2D6A4F 100%)' : 'rgba(0, 0, 0, 0.02)',
+                          border: isMe ? 'none' : '1px solid rgba(0, 0, 0, 0.03)',
+                          color: isMe ? '#FFFFFF' : '#1A1A2E',
                           fontSize: '13.5px',
                           lineHeight: 1.5,
                           fontFamily: 'Poppins',
@@ -446,7 +446,7 @@ export default function AdminSupportChat() {
                           <div>{msg.content}</div>
                           <div style={{
                             fontSize: '9px',
-                            color: isMe ? 'rgba(8, 8, 15, 0.6)' : '#8A8070',
+                            color: isMe ? 'rgba(255, 255, 255, 0.6)' : '#8E8E9A',
                             textAlign: 'right',
                             marginTop: '6px'
                           }}>
@@ -461,7 +461,7 @@ export default function AdminSupportChat() {
                 {/* Client Typing Indicator */}
                 {clientTyping && (
                   <div style={{ display: 'flex', justify: 'flex-start' }}>
-                    <div style={{ padding: '12px 16px', borderRadius: '16px', background: 'rgba(255,255,255,0.01)', border: '1px solid rgba(255,255,255,0.03)', color: '#8A8070', fontSize: '12px' }}>
+                    <div style={{ padding: '12px 16px', borderRadius: '16px', background: 'rgba(0, 0, 0, 0.01)', border: '1px solid rgba(0, 0, 0, 0.02)', color: '#8E8E9A', fontSize: '12px' }}>
                       {selectedClient.name} {t('isTypingText')}
                     </div>
                   </div>
@@ -470,7 +470,7 @@ export default function AdminSupportChat() {
               </div>
 
               {/* Input Area */}
-              <form onSubmit={handleSend} style={{ padding: '16px 24px', borderTop: '1px solid rgba(255,255,255,0.05)', background: 'rgba(0,0,0,0.15)', display: 'flex', gap: '12px' }}>
+              <form onSubmit={handleSend} style={{ padding: '16px 24px', borderTop: '1px solid rgba(0, 0, 0, 0.03)', background: 'rgba(0,0,0,0.15)', display: 'flex', gap: '12px' }}>
                 <input
                   type="text"
                   value={newMessage}
@@ -480,24 +480,24 @@ export default function AdminSupportChat() {
                     flex: 1,
                     padding: '12px 18px',
                     borderRadius: '12px',
-                    background: 'rgba(255,255,255,0.02)',
-                    border: '1px solid rgba(255, 255, 255, 0.08)',
-                    color: '#F0EBE0',
+                    background: 'rgba(0, 0, 0, 0.015)',
+                    border: '1px solid rgba(0, 0, 0, 0.04)',
+                    color: '#1A1A2E',
                     outline: 'none',
                     fontSize: '14px',
                     transition: 'all 0.3s',
                     fontFamily: 'Poppins',
                   }}
-                  onFocus={(e) => e.target.style.border = '1px solid #C9A84C'}
-                  onBlur={(e) => e.target.style.border = '1px solid rgba(255, 255, 255, 0.08)'}
+                  onFocus={(e) => e.target.style.border = '1px solid #2D6A4F'}
+                  onBlur={(e) => e.target.style.border = '1px solid rgba(0, 0, 0, 0.04)'}
                 />
                 <button
                   type="submit"
                   style={{
                     padding: '0 24px',
                     borderRadius: '12px',
-                    background: 'linear-gradient(135deg, #8B6914 0%, #C9A84C 100%)',
-                    color: '#08080F',
+                    background: 'linear-gradient(135deg, #1B4332 0%, #2D6A4F 100%)',
+                    color: '#FFFFFF',
                     border: 'none',
                     fontWeight: 600,
                     cursor: 'pointer',
@@ -511,7 +511,7 @@ export default function AdminSupportChat() {
               </form>
             </>
           ) : (
-            <div style={{ display: 'flex', flex: 1, alignItems: 'center', justify: 'center', color: '#8A8070', fontSize: '14px', fontFamily: 'Poppins' }}>
+            <div style={{ display: 'flex', flex: 1, alignItems: 'center', justify: 'center', color: '#8E8E9A', fontSize: '14px', fontFamily: 'Poppins' }}>
               {t('selectBuyerThreadDesc')}
             </div>
           )}

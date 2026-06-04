@@ -50,7 +50,7 @@ export default function LoginPage() {
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
-      background: '#08080F',
+      background: '#F8F5F0',
       position: 'relative',
       overflow: 'hidden',
       padding: '24px',
@@ -63,7 +63,7 @@ export default function LoginPage() {
         width: '50vw',
         height: '50vw',
         borderRadius: '50%',
-        background: 'radial-gradient(circle, rgba(201,168,76,0.05) 0%, transparent 70%)',
+        background: 'radial-gradient(circle, rgba(45, 106, 79,0.05) 0%, transparent 70%)',
         filter: 'blur(80px)',
         pointerEvents: 'none',
       }} />
@@ -74,7 +74,7 @@ export default function LoginPage() {
         width: '50vw',
         height: '50vw',
         borderRadius: '50%',
-        background: 'radial-gradient(circle, rgba(139,105,20,0.06) 0%, transparent 70%)',
+        background: 'radial-gradient(circle, rgba(27, 67, 50,0.06) 0%, transparent 70%)',
         filter: 'blur(80px)',
         pointerEvents: 'none',
       }} />
@@ -87,12 +87,12 @@ export default function LoginPage() {
         style={{
           width: '100%',
           maxWidth: '460px',
-          background: 'rgba(255, 255, 255, 0.02)',
+          background: 'rgba(255, 255, 255, 0.9)',
           backdropFilter: 'blur(24px)',
-          border: '1px solid rgba(255, 255, 255, 0.06)',
+          border: '1px solid rgba(45, 106, 79, 0.08)',
           borderRadius: '24px',
           padding: '44px 36px',
-          boxShadow: '0 24px 60px rgba(0, 0, 0, 0.4)',
+          boxShadow: '0 30px 70px rgba(45, 106, 79, 0.1), 0 10px 30px rgba(0, 0, 0, 0.04)',
           position: 'relative',
           zIndex: 10,
         }}
@@ -105,14 +105,14 @@ export default function LoginPage() {
               alt="Smart Coir Logo" 
               style={{ width: '44px', height: '44px', objectFit: 'contain' }} 
             />
-            <span style={{ fontSize: '24px', fontWeight: 700, fontFamily: 'Space Grotesk', color: '#F0EBE0' }}>
-              Smart<span style={{ color: '#C9A84C' }}>Coir</span>
+            <span style={{ fontSize: '24px', fontWeight: 700, fontFamily: 'Space Grotesk', color: '#1A1A2E' }}>
+              Smart<span style={{ color: '#2D6A4F' }}>Coir</span>
             </span>
           </Link>
-          <h2 style={{ fontSize: '20px', fontWeight: 600, color: '#F0EBE0', fontFamily: 'Space Grotesk', marginBottom: '6px' }}>
+          <h2 style={{ fontSize: '20px', fontWeight: 600, color: '#1A1A2E', fontFamily: 'Space Grotesk', marginBottom: '6px' }}>
             {t('signInPortal')}
           </h2>
-          <p style={{ fontSize: '13px', color: '#8A8070', fontFamily: 'Poppins' }}>
+          <p style={{ fontSize: '13px', color: '#8E8E9A', fontFamily: 'Poppins' }}>
             {t('selectRole')}
           </p>
         </div>
@@ -120,8 +120,8 @@ export default function LoginPage() {
         {/* Client / Admin Mode Switcher */}
         <div style={{
           display: 'flex',
-          background: 'rgba(255,255,255,0.02)',
-          border: '1px solid rgba(255,255,255,0.06)',
+          background: 'rgba(0, 0, 0, 0.015)',
+          border: '1px solid rgba(0, 0, 0, 0.03)',
           borderRadius: '12px',
           padding: '4px',
           marginBottom: '28px',
@@ -133,8 +133,8 @@ export default function LoginPage() {
               padding: '10px',
               borderRadius: '8px',
               border: 'none',
-              background: roleMode === 'client' ? 'rgba(201,168,76,0.1)' : 'transparent',
-              color: roleMode === 'client' ? '#C9A84C' : '#8A8070',
+              background: roleMode === 'client' ? 'rgba(45, 106, 79,0.1)' : 'transparent',
+              color: roleMode === 'client' ? '#2D6A4F' : '#8E8E9A',
               fontWeight: 600,
               fontSize: '13px',
               cursor: 'pointer',
@@ -151,8 +151,8 @@ export default function LoginPage() {
               padding: '10px',
               borderRadius: '8px',
               border: 'none',
-              background: roleMode === 'admin' ? 'rgba(201,168,76,0.1)' : 'transparent',
-              color: roleMode === 'admin' ? '#C9A84C' : '#8A8070',
+              background: roleMode === 'admin' ? 'rgba(45, 106, 79,0.1)' : 'transparent',
+              color: roleMode === 'admin' ? '#2D6A4F' : '#8E8E9A',
               fontWeight: 600,
               fontSize: '13px',
               cursor: 'pointer',
@@ -174,7 +174,7 @@ export default function LoginPage() {
               borderRadius: '12px',
               background: 'rgba(239, 68, 68, 0.1)',
               border: '1px solid rgba(239, 68, 68, 0.2)',
-              color: '#ef4444',
+              color: '#D00000',
               fontSize: '13px',
               marginBottom: '24px',
               fontFamily: 'Poppins',
@@ -187,7 +187,7 @@ export default function LoginPage() {
         {/* Form */}
         <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
           <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-            <label htmlFor="email" style={{ fontSize: '12px', fontWeight: 500, color: '#A09888', fontFamily: 'Poppins', letterSpacing: '1px', textTransform: 'uppercase' }}>
+            <label htmlFor="email" style={{ fontSize: '12px', fontWeight: 500, color: '#5C5C6B', fontFamily: 'Poppins', letterSpacing: '1px', textTransform: 'uppercase' }}>
               {t('emailAddress')}
             </label>
             <input
@@ -201,22 +201,22 @@ export default function LoginPage() {
                 width: '100%',
                 padding: '14px 16px',
                 borderRadius: '12px',
-                background: 'rgba(255, 255, 255, 0.02)',
-                border: '1px solid rgba(255, 255, 255, 0.08)',
-                color: '#F0EBE0',
+                background: 'rgba(0, 0, 0, 0.015)',
+                border: '1px solid rgba(0, 0, 0, 0.04)',
+                color: '#1A1A2E',
                 fontSize: '14px',
                 outline: 'none',
                 transition: 'all 0.3s ease',
                 fontFamily: 'Poppins',
               }}
               onFocus={(e) => {
-                e.target.style.border = '1px solid #C9A84C';
-                e.target.style.background = 'rgba(201, 168, 76, 0.02)';
-                e.target.style.boxShadow = '0 0 15px rgba(201, 168, 76, 0.1)';
+                e.target.style.border = '1px solid #2D6A4F';
+                e.target.style.background = 'rgba(45, 106, 79, 0.02)';
+                e.target.style.boxShadow = '0 0 15px rgba(45, 106, 79, 0.1)';
               }}
               onBlur={(e) => {
-                e.target.style.border = '1px solid rgba(255, 255, 255, 0.08)';
-                e.target.style.background = 'rgba(255, 255, 255, 0.02)';
+                e.target.style.border = '1px solid rgba(0, 0, 0, 0.04)';
+                e.target.style.background = 'rgba(0, 0, 0, 0.015)';
                 e.target.style.boxShadow = 'none';
               }}
             />
@@ -224,10 +224,10 @@ export default function LoginPage() {
 
           <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-              <label htmlFor="password" style={{ fontSize: '12px', fontWeight: 500, color: '#A09888', fontFamily: 'Poppins', letterSpacing: '1px', textTransform: 'uppercase' }}>
+              <label htmlFor="password" style={{ fontSize: '12px', fontWeight: 500, color: '#5C5C6B', fontFamily: 'Poppins', letterSpacing: '1px', textTransform: 'uppercase' }}>
                 {t('password')}
               </label>
-              <Link href="/login/forgot" style={{ fontSize: '12px', color: '#C9A84C', fontFamily: 'Poppins', textDecoration: 'none' }}>
+              <Link href="/login/forgot" style={{ fontSize: '12px', color: '#2D6A4F', fontFamily: 'Poppins', textDecoration: 'none' }}>
                 {t('forgotPassword')}
               </Link>
             </div>
@@ -242,22 +242,22 @@ export default function LoginPage() {
                 width: '100%',
                 padding: '14px 16px',
                 borderRadius: '12px',
-                background: 'rgba(255, 255, 255, 0.02)',
-                border: '1px solid rgba(255, 255, 255, 0.08)',
-                color: '#F0EBE0',
+                background: 'rgba(0, 0, 0, 0.015)',
+                border: '1px solid rgba(0, 0, 0, 0.04)',
+                color: '#1A1A2E',
                 fontSize: '14px',
                 outline: 'none',
                 transition: 'all 0.3s ease',
                 fontFamily: 'Poppins',
               }}
               onFocus={(e) => {
-                e.target.style.border = '1px solid #C9A84C';
-                e.target.style.background = 'rgba(201, 168, 76, 0.02)';
-                e.target.style.boxShadow = '0 0 15px rgba(201, 168, 76, 0.1)';
+                e.target.style.border = '1px solid #2D6A4F';
+                e.target.style.background = 'rgba(45, 106, 79, 0.02)';
+                e.target.style.boxShadow = '0 0 15px rgba(45, 106, 79, 0.1)';
               }}
               onBlur={(e) => {
-                e.target.style.border = '1px solid rgba(255, 255, 255, 0.08)';
-                e.target.style.background = 'rgba(255, 255, 255, 0.02)';
+                e.target.style.border = '1px solid rgba(0, 0, 0, 0.04)';
+                e.target.style.background = 'rgba(0, 0, 0, 0.015)';
                 e.target.style.boxShadow = 'none';
               }}
             />
@@ -270,8 +270,8 @@ export default function LoginPage() {
               width: '100%',
               padding: '14px',
               borderRadius: '12px',
-              background: 'linear-gradient(135deg, #8B6914 0%, #C9A84C 50%, #D4B896 100%)',
-              color: '#08080F',
+              background: 'linear-gradient(135deg, #1B4332 0%, #2D6A4F 50%, #95D5B2 100%)',
+              color: '#FFFFFF',
               fontWeight: 600,
               fontSize: '14px',
               fontFamily: 'Poppins',
@@ -282,17 +282,17 @@ export default function LoginPage() {
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
-              boxShadow: '0 4px 20px rgba(201, 168, 76, 0.2)',
+              boxShadow: '0 4px 20px rgba(45, 106, 79, 0.2)',
             }}
             onMouseEnter={(e) => {
               if (!loading) {
                 e.target.style.transform = 'translateY(-2px)';
-                e.target.style.boxShadow = '0 8px 30px rgba(201, 168, 76, 0.4)';
+                e.target.style.boxShadow = '0 8px 30px rgba(45, 106, 79, 0.4)';
               }
             }}
             onMouseLeave={(e) => {
               e.target.style.transform = 'none';
-              e.target.style.boxShadow = '0 4px 20px rgba(201, 168, 76, 0.2)';
+              e.target.style.boxShadow = '0 4px 20px rgba(45, 106, 79, 0.2)';
             }}
           >
             {loading ? t('authenticating') : `${t('signInBtn')} to ${roleMode === 'client' ? t('clientPortal') : t('adminPanel')}`}
@@ -301,9 +301,9 @@ export default function LoginPage() {
 
         {/* Register footer link */}
         {roleMode === 'client' && (
-          <div style={{ marginTop: '32px', textAlign: 'center', fontSize: '13px', color: '#8A8070', fontFamily: 'Poppins' }}>
+          <div style={{ marginTop: '32px', textAlign: 'center', fontSize: '13px', color: '#8E8E9A', fontFamily: 'Poppins' }}>
             {t('dontHaveAccount')}{' '}
-            <Link href="/register" style={{ color: '#C9A84C', fontWeight: 500, textDecoration: 'none' }}>
+            <Link href="/register" style={{ color: '#2D6A4F', fontWeight: 500, textDecoration: 'none' }}>
               {t('createOneNow')}
             </Link>
           </div>

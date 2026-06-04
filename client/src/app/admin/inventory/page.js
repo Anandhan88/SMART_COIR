@@ -213,15 +213,15 @@ export default function AdminInventory() {
   };
 
   return (
-    <div style={{ padding: '32px 24px', maxWidth: '1200px', margin: '0 auto' }}>
+    <div style={{ padding: '40px 64px' }}>
       
       {/* Header */}
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '40px', flexWrap: 'wrap', gap: '16px' }}>
         <div>
-          <h1 style={{ fontSize: '32px', fontWeight: 700, fontFamily: 'Space Grotesk', color: '#F0EBE0', marginBottom: '8px' }}>
+          <h1 style={{ fontSize: '32px', fontWeight: 700, fontFamily: 'Space Grotesk', color: '#1A1A2E', marginBottom: '8px' }}>
             {t('prodInventoryReserves')}
           </h1>
-          <p style={{ color: '#A09888', fontSize: '15px', fontFamily: 'Poppins' }}>
+          <p style={{ color: '#5C5C6B', fontSize: '15px', fontFamily: 'Poppins' }}>
             {t('manageCatalogStockDesc')}
           </p>
         </div>
@@ -229,10 +229,10 @@ export default function AdminInventory() {
           onClick={() => setShowAddForm(true)}
           style={{
             padding: '12px 24px', borderRadius: '12px',
-            background: 'linear-gradient(135deg, #8B6914 0%, #C9A84C 50%, #D4B896 100%)',
-            color: '#08080F', fontWeight: 600, fontSize: '14px', fontFamily: 'Poppins',
+            background: 'linear-gradient(135deg, #1B4332 0%, #2D6A4F 50%, #95D5B2 100%)',
+            color: '#FFFFFF', fontWeight: 600, fontSize: '14px', fontFamily: 'Poppins',
             border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '8px',
-            boxShadow: '0 4px 20px rgba(201, 168, 76, 0.2)'
+            boxShadow: '0 4px 20px rgba(45, 106, 79, 0.2)'
           }}
         >
           {t('addProductBtn')}
@@ -250,13 +250,13 @@ export default function AdminInventory() {
         {[
           { label: t('totalCatalogProducts'), val: summary.totalItems, icon: '📦' },
           { label: t('totalInStock'), val: summary.totalQuantity, icon: '📈' },
-          { label: t('lowStockWarnings'), val: summary.lowStock, icon: '⚠️', color: summary.lowStock > 0 ? '#ef4444' : '#F0EBE0' },
-          { label: t('outOfStockItems'), val: summary.outOfStock, icon: '🚨', color: summary.outOfStock > 0 ? '#ef4444' : '#F0EBE0' },
+          { label: t('lowStockWarnings'), val: summary.lowStock, icon: '⚠️', color: summary.lowStock > 0 ? '#D00000' : '#1A1A2E' },
+          { label: t('outOfStockItems'), val: summary.outOfStock, icon: '🚨', color: summary.outOfStock > 0 ? '#D00000' : '#1A1A2E' },
         ].map((s, i) => (
-          <div key={i} style={{ background: 'rgba(255, 255, 255, 0.01)', border: '1px solid rgba(255,255,255,0.05)', borderRadius: '16px', padding: '20px 24px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+          <div key={i} style={{ background: 'rgba(0, 0, 0, 0.01)', border: '1px solid rgba(0, 0, 0, 0.03)', borderRadius: '16px', padding: '20px 24px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
             <div>
-              <div style={{ fontSize: '11px', color: '#8A8070', fontFamily: 'Poppins', textTransform: 'uppercase', marginBottom: '6px' }}>{s.label}</div>
-              <div style={{ fontSize: '22px', fontWeight: 700, fontFamily: 'Space Grotesk', color: s.color || '#F0EBE0' }}>{s.val}</div>
+              <div style={{ fontSize: '11px', color: '#8E8E9A', fontFamily: 'Poppins', textTransform: 'uppercase', marginBottom: '6px' }}>{s.label}</div>
+              <div style={{ fontSize: '22px', fontWeight: 700, fontFamily: 'Space Grotesk', color: s.color || '#1A1A2E' }}>{s.val}</div>
             </div>
             <div style={{ fontSize: '28px' }}>{s.icon}</div>
           </div>
@@ -265,9 +265,9 @@ export default function AdminInventory() {
 
       {/* Stock Levels Table */}
       <div style={{
-        background: 'rgba(255, 255, 255, 0.01)',
+        background: 'rgba(0, 0, 0, 0.01)',
         backdropFilter: 'blur(20px)',
-        border: '1px solid rgba(255, 255, 255, 0.05)',
+        border: '1px solid rgba(0, 0, 0, 0.03)',
         borderRadius: '20px',
         padding: '28px',
       }}>
@@ -276,18 +276,18 @@ export default function AdminInventory() {
         </h3>
 
         {loading ? (
-          <div style={{ color: '#8A8070', fontSize: '14px', textAlign: 'center', padding: '60px' }}>
+          <div style={{ color: '#8E8E9A', fontSize: '14px', textAlign: 'center', padding: '60px' }}>
             {t('loadingStockDetails')}
           </div>
         ) : inventory.length === 0 ? (
-          <div style={{ color: '#8A8070', fontSize: '14px', textAlign: 'center', padding: '60px' }}>
+          <div style={{ color: '#8E8E9A', fontSize: '14px', textAlign: 'center', padding: '60px' }}>
             {t('noInventoryFound')}
           </div>
         ) : (
           <div style={{ overflowX: 'auto' }}>
             <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left', fontSize: '14px' }}>
               <thead>
-                <tr style={{ borderBottom: '1px solid rgba(255,255,255,0.05)', color: '#8A8070' }}>
+                <tr style={{ borderBottom: '1px solid rgba(0, 0, 0, 0.03)', color: '#8E8E9A' }}>
                   <th style={{ padding: '12px 8px' }}>{t('productLabel').replace(':', '')}</th>
                   <th style={{ padding: '12px 8px' }}>{t('skuLabel').split(' ')[0]}</th>
                   <th style={{ padding: '12px 8px' }}>{t('warehouseTableHead')}</th>
@@ -301,17 +301,17 @@ export default function AdminInventory() {
                   const p = item.product || {};
                   const isLow = item.quantity <= item.minStock;
                   return (
-                    <tr key={item._id} style={{ borderBottom: '1px solid rgba(255,255,255,0.03)', color: '#F0EBE0' }}>
+                    <tr key={item._id} style={{ borderBottom: '1px solid rgba(0, 0, 0, 0.02)', color: '#1A1A2E' }}>
                       <td style={{ padding: '16px 8px' }}>
                         <div style={{ fontWeight: 600 }}>{p.name || 'Unknown Product'}</div>
-                        <div style={{ fontSize: '12px', color: '#8A8070', textTransform: 'capitalize' }}>
+                        <div style={{ fontSize: '12px', color: '#8E8E9A', textTransform: 'capitalize' }}>
                           {p.category?.replace('-', ' ')} • {p.qualityGrade} Grade
                         </div>
                       </td>
-                      <td style={{ padding: '16px 8px', color: '#A09888', fontFamily: 'Space Grotesk' }}>
+                      <td style={{ padding: '16px 8px', color: '#5C5C6B', fontFamily: 'Space Grotesk' }}>
                         {p.sku || 'N/A'}
                       </td>
-                      <td style={{ padding: '16px 8px', color: '#A09888' }}>
+                      <td style={{ padding: '16px 8px', color: '#5C5C6B' }}>
                         {item.warehouse}
                       </td>
                       <td style={{ padding: '16px 8px', fontWeight: 600 }}>
@@ -321,8 +321,8 @@ export default function AdminInventory() {
                         <span style={{
                           padding: '3px 8px', borderRadius: '10px', fontSize: '10px', fontWeight: 600, textTransform: 'uppercase',
                           background: isLow ? 'rgba(239, 68, 68, 0.1)' : 'rgba(46, 204, 113, 0.1)',
-                          color: isLow ? '#ef4444' : '#2ecc71',
-                          border: `1px solid ${isLow ? '#ef4444' : '#2ecc71'}20`
+                          color: isLow ? '#D00000' : '#2ecc71',
+                          border: `1px solid ${isLow ? '#D00000' : '#2ecc71'}20`
                         }}>
                           {item.quantity <= 0 ? t('outOfStock') : isLow ? t('lowStockStatus') : t('inStockStatus')}
                         </span>
@@ -334,13 +334,13 @@ export default function AdminInventory() {
                               setAdjustingItem(item);
                               setAdjustQty(item.quantity);
                             }}
-                            style={{ background: 'none', border: 'none', color: '#C9A84C', cursor: 'pointer', fontSize: '13px' }}
+                            style={{ background: 'none', border: 'none', color: '#2D6A4F', cursor: 'pointer', fontSize: '13px' }}
                           >
                             ✏️ {t('stock')}
                           </button>
                           <button
                             onClick={() => handleDeleteProduct(p._id)}
-                            style={{ background: 'none', border: 'none', color: '#ef4444', cursor: 'pointer', fontSize: '13px' }}
+                            style={{ background: 'none', border: 'none', color: '#D00000', cursor: 'pointer', fontSize: '13px' }}
                           >
                             {t('deleteBtn')}
                           </button>
@@ -366,19 +366,19 @@ export default function AdminInventory() {
               exit={{ opacity: 0, scale: 0.95 }}
               style={{
                 position: 'fixed', top: '35%', left: '50%', transform: 'translate(-50%, -50%)',
-                width: '100%', maxWidth: '380px', background: '#12121E', border: '1px solid rgba(255,255,255,0.08)',
+                width: '100%', maxWidth: '380px', background: '#FFFFFF', border: '1px solid rgba(0, 0, 0, 0.04)',
                 borderRadius: '20px', padding: '28px', zIndex: 100, boxShadow: '0 10px 40px rgba(0,0,0,0.5)',
               }}
             >
-              <h3 style={{ fontSize: '16px', fontWeight: 600, fontFamily: 'Space Grotesk', marginBottom: '16px', color: '#C9A84C' }}>
+              <h3 style={{ fontSize: '16px', fontWeight: 600, fontFamily: 'Space Grotesk', marginBottom: '16px', color: '#2D6A4F' }}>
                 {t('adjustStockLevel')}
               </h3>
-              <p style={{ fontSize: '13px', color: '#A09888', marginBottom: '20px', fontFamily: 'Poppins' }}>
+              <p style={{ fontSize: '13px', color: '#5C5C6B', marginBottom: '20px', fontFamily: 'Poppins' }}>
                 {t('productLabel')} <strong>{adjustingItem.product?.name}</strong>
               </p>
               <form onSubmit={handleUpdateStock} style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
-                  <label style={{ fontSize: '12px', color: '#8A8070', fontFamily: 'Poppins' }}>{t('qtyInStockKg')}</label>
+                  <label style={{ fontSize: '12px', color: '#8E8E9A', fontFamily: 'Poppins' }}>{t('qtyInStockKg')}</label>
                   <input
                     type="number"
                     value={adjustQty}
@@ -386,14 +386,14 @@ export default function AdminInventory() {
                     min="0"
                     required
                     style={{
-                      padding: '10px 14px', borderRadius: '10px', background: 'rgba(255,255,255,0.02)',
-                      border: '1px solid rgba(255,255,255,0.08)', color: '#F0EBE0', outline: 'none', fontSize: '14px', fontFamily: 'Poppins'
+                      padding: '10px 14px', borderRadius: '10px', background: 'rgba(0, 0, 0, 0.015)',
+                      border: '1px solid rgba(0, 0, 0, 0.04)', color: '#1A1A2E', outline: 'none', fontSize: '14px', fontFamily: 'Poppins'
                     }}
                   />
                 </div>
                 <div style={{ display: 'flex', gap: '10px', marginTop: '8px' }}>
-                  <button type="button" onClick={() => setAdjustingItem(null)} style={{ flex: 1, padding: '10px', borderRadius: '10px', background: 'transparent', border: '1px solid rgba(255,255,255,0.1)', color: '#A09888', cursor: 'pointer', fontFamily: 'Poppins', fontSize: '13px' }}>{t('cancelBtn')}</button>
-                  <button type="submit" style={{ flex: 2, padding: '10px', borderRadius: '10px', background: 'linear-gradient(135deg, #8B6914 0%, #C9A84C 50%, #D4B896 100%)', color: '#08080F', fontWeight: 600, border: 'none', cursor: 'pointer', fontFamily: 'Poppins', fontSize: '13px' }}>{t('saveChangesBtn')}</button>
+                  <button type="button" onClick={() => setAdjustingItem(null)} style={{ flex: 1, padding: '10px', borderRadius: '10px', background: 'transparent', border: '1px solid rgba(0, 0, 0, 0.05)', color: '#5C5C6B', cursor: 'pointer', fontFamily: 'Poppins', fontSize: '13px' }}>{t('cancelBtn')}</button>
+                  <button type="submit" style={{ flex: 2, padding: '10px', borderRadius: '10px', background: 'linear-gradient(135deg, #1B4332 0%, #2D6A4F 50%, #95D5B2 100%)', color: '#FFFFFF', fontWeight: 600, border: 'none', cursor: 'pointer', fontFamily: 'Poppins', fontSize: '13px' }}>{t('saveChangesBtn')}</button>
                 </div>
               </form>
             </motion.div>
@@ -412,22 +412,22 @@ export default function AdminInventory() {
               exit={{ opacity: 0, y: 30 }}
               style={{
                 position: 'fixed', top: '10%', bottom: '10%', left: '50%', transform: 'translateX(-50%)',
-                width: '90%', maxWidth: '600px', background: '#0E0E18', border: '1px solid rgba(255,255,255,0.08)',
+                width: '90%', maxWidth: '600px', background: '#EFEBE4', border: '1px solid rgba(0, 0, 0, 0.04)',
                 borderRadius: '24px', padding: '36px', zIndex: 100, boxShadow: '0 20px 60px rgba(0,0,0,0.6)',
                 overflowY: 'auto', display: 'flex', flexDirection: 'column', gap: '20px'
               }}
             >
               <div>
-                <h3 style={{ fontSize: '20px', fontWeight: 700, fontFamily: 'Space Grotesk', color: '#C9A84C', marginBottom: '6px' }}>
+                <h3 style={{ fontSize: '20px', fontWeight: 700, fontFamily: 'Space Grotesk', color: '#2D6A4F', marginBottom: '6px' }}>
                   {t('createNewProductStockEntry')}
                 </h3>
-                <p style={{ fontSize: '13px', color: '#8A8070', fontFamily: 'Poppins' }}>
+                <p style={{ fontSize: '13px', color: '#8E8E9A', fontFamily: 'Poppins' }}>
                   {t('registerProductDesc')}
                 </p>
               </div>
 
               {errorMsg && (
-                <div style={{ padding: '12px 16px', background: 'rgba(239, 68, 68, 0.1)', border: '1px solid rgba(239, 68, 68, 0.2)', borderRadius: '12px', color: '#ef4444', fontSize: '13px', fontFamily: 'Poppins' }}>
+                <div style={{ padding: '12px 16px', background: 'rgba(239, 68, 68, 0.1)', border: '1px solid rgba(239, 68, 68, 0.2)', borderRadius: '12px', color: '#D00000', fontSize: '13px', fontFamily: 'Poppins' }}>
                   {errorMsg}
                 </div>
               )}
@@ -437,13 +437,13 @@ export default function AdminInventory() {
                 {/* Basic Info */}
                 <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px' }}>
                   <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
-                    <label style={{ fontSize: '12px', color: '#8A8070', fontFamily: 'Poppins' }}>{t('prodName')}</label>
-                    <input type="text" name="name" value={newProduct.name} onChange={handleInputChange} placeholder="E.g. Extra Soft Coir Pith" required style={{ padding: '10px 14px', borderRadius: '10px', background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255,255,255,0.08)', color: '#F0EBE0', outline: 'none', fontSize: '14px' }} />
+                    <label style={{ fontSize: '12px', color: '#8E8E9A', fontFamily: 'Poppins' }}>{t('prodName')}</label>
+                    <input type="text" name="name" value={newProduct.name} onChange={handleInputChange} placeholder="E.g. Extra Soft Coir Pith" required style={{ padding: '10px 14px', borderRadius: '10px', background: 'rgba(0, 0, 0, 0.015)', border: '1px solid rgba(0, 0, 0, 0.04)', color: '#1A1A2E', outline: 'none', fontSize: '14px' }} />
                   </div>
                   
                   <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
-                    <label style={{ fontSize: '12px', color: '#8A8070', fontFamily: 'Poppins' }}>{t('categories')}</label>
-                    <select name="category" value={newProduct.category} onChange={handleInputChange} style={{ padding: '10px 14px', borderRadius: '10px', background: '#12121E', border: '1px solid rgba(255,255,255,0.08)', color: '#F0EBE0', outline: 'none', fontSize: '14px' }}>
+                    <label style={{ fontSize: '12px', color: '#8E8E9A', fontFamily: 'Poppins' }}>{t('categories')}</label>
+                    <select name="category" value={newProduct.category} onChange={handleInputChange} style={{ padding: '10px 14px', borderRadius: '10px', background: '#FFFFFF', border: '1px solid rgba(0, 0, 0, 0.04)', color: '#1A1A2E', outline: 'none', fontSize: '14px' }}>
                       <option value="coir-rope">Coir Rope</option>
                       <option value="coir-yarn">Coir Yarn</option>
                       <option value="coir-bundle">Fiber Bundle</option>
@@ -455,13 +455,13 @@ export default function AdminInventory() {
 
                 <div style={{ display: 'grid', gridTemplateColumns: '1.5fr 1fr', gap: '16px' }}>
                   <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
-                    <label style={{ fontSize: '12px', color: '#8A8070', fontFamily: 'Poppins' }}>{t('skuLabel')}</label>
-                    <input type="text" name="sku" value={newProduct.sku} onChange={handleInputChange} placeholder="E.g. CP-SOFT-PITH" required style={{ padding: '10px 14px', borderRadius: '10px', background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255,255,255,0.08)', color: '#F0EBE0', outline: 'none', fontSize: '14px', fontFamily: 'Space Grotesk' }} />
+                    <label style={{ fontSize: '12px', color: '#8E8E9A', fontFamily: 'Poppins' }}>{t('skuLabel')}</label>
+                    <input type="text" name="sku" value={newProduct.sku} onChange={handleInputChange} placeholder="E.g. CP-SOFT-PITH" required style={{ padding: '10px 14px', borderRadius: '10px', background: 'rgba(0, 0, 0, 0.015)', border: '1px solid rgba(0, 0, 0, 0.04)', color: '#1A1A2E', outline: 'none', fontSize: '14px', fontFamily: 'Space Grotesk' }} />
                   </div>
 
                   <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
-                    <label style={{ fontSize: '12px', color: '#8A8070', fontFamily: 'Poppins' }}>{t('qualityGradeLabel')}</label>
-                    <select name="qualityGrade" value={newProduct.qualityGrade} onChange={handleInputChange} style={{ padding: '10px 14px', borderRadius: '10px', background: '#12121E', border: '1px solid rgba(255,255,255,0.08)', color: '#F0EBE0', outline: 'none', fontSize: '14px' }}>
+                    <label style={{ fontSize: '12px', color: '#8E8E9A', fontFamily: 'Poppins' }}>{t('qualityGradeLabel')}</label>
+                    <select name="qualityGrade" value={newProduct.qualityGrade} onChange={handleInputChange} style={{ padding: '10px 14px', borderRadius: '10px', background: '#FFFFFF', border: '1px solid rgba(0, 0, 0, 0.04)', color: '#1A1A2E', outline: 'none', fontSize: '14px' }}>
                       <option value="Premium">Premium</option>
                       <option value="Standard">Standard</option>
                       <option value="Export Grade">Export Grade</option>
@@ -472,42 +472,42 @@ export default function AdminInventory() {
                 </div>
 
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
-                  <label style={{ fontSize: '12px', color: '#8A8070', fontFamily: 'Poppins' }}>{t('description')}</label>
-                  <textarea name="description" value={newProduct.description} onChange={handleInputChange} placeholder="Full product features and industrial details..." rows="3" required style={{ padding: '10px 14px', borderRadius: '10px', background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255,255,255,0.08)', color: '#F0EBE0', outline: 'none', fontSize: '14px', resize: 'none' }} />
+                  <label style={{ fontSize: '12px', color: '#8E8E9A', fontFamily: 'Poppins' }}>{t('description')}</label>
+                  <textarea name="description" value={newProduct.description} onChange={handleInputChange} placeholder="Full product features and industrial details..." rows="3" required style={{ padding: '10px 14px', borderRadius: '10px', background: 'rgba(0, 0, 0, 0.015)', border: '1px solid rgba(0, 0, 0, 0.04)', color: '#1A1A2E', outline: 'none', fontSize: '14px', resize: 'none' }} />
                 </div>
 
                 {/* Price and Weight */}
                 <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px' }}>
                   <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
-                    <label style={{ fontSize: '12px', color: '#8A8070', fontFamily: 'Poppins' }}>{t('priceInrPerKg')}</label>
-                    <input type="number" name="price.amount" value={newProduct.price.amount} onChange={handleInputChange} required style={{ padding: '10px 14px', borderRadius: '10px', background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255,255,255,0.08)', color: '#F0EBE0', outline: 'none', fontSize: '14px' }} />
+                    <label style={{ fontSize: '12px', color: '#8E8E9A', fontFamily: 'Poppins' }}>{t('priceInrPerKg')}</label>
+                    <input type="number" name="price.amount" value={newProduct.price.amount} onChange={handleInputChange} required style={{ padding: '10px 14px', borderRadius: '10px', background: 'rgba(0, 0, 0, 0.015)', border: '1px solid rgba(0, 0, 0, 0.04)', color: '#1A1A2E', outline: 'none', fontSize: '14px' }} />
                   </div>
                   
                   <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
-                    <label style={{ fontSize: '12px', color: '#8A8070', fontFamily: 'Poppins' }}>{t('unitPackagingWeightKg')}</label>
-                    <input type="number" name="weight.value" value={newProduct.weight.value} onChange={handleInputChange} required style={{ padding: '10px 14px', borderRadius: '10px', background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255,255,255,0.08)', color: '#F0EBE0', outline: 'none', fontSize: '14px' }} />
+                    <label style={{ fontSize: '12px', color: '#8E8E9A', fontFamily: 'Poppins' }}>{t('unitPackagingWeightKg')}</label>
+                    <input type="number" name="weight.value" value={newProduct.weight.value} onChange={handleInputChange} required style={{ padding: '10px 14px', borderRadius: '10px', background: 'rgba(0, 0, 0, 0.015)', border: '1px solid rgba(0, 0, 0, 0.04)', color: '#1A1A2E', outline: 'none', fontSize: '14px' }} />
                   </div>
                 </div>
 
                 {/* Specifications subfields */}
-                <div style={{ background: 'rgba(255,255,255,0.01)', border: '1px solid rgba(255,255,255,0.03)', borderRadius: '12px', padding: '16px' }}>
-                  <h4 style={{ fontSize: '13px', fontWeight: 600, color: '#C9A84C', marginBottom: '12px', fontFamily: 'Space Grotesk' }}>{t('technicalSpecifications')}</h4>
+                <div style={{ background: 'rgba(0, 0, 0, 0.01)', border: '1px solid rgba(0, 0, 0, 0.02)', borderRadius: '12px', padding: '16px' }}>
+                  <h4 style={{ fontSize: '13px', fontWeight: 600, color: '#2D6A4F', marginBottom: '12px', fontFamily: 'Space Grotesk' }}>{t('technicalSpecifications')}</h4>
                   <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '10px 16px' }}>
                     <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
-                      <label style={{ fontSize: '11px', color: '#8A8070' }}>{t('tensileStrength')}</label>
-                      <input type="text" name="tensileStrength" value={newProduct.specifications.tensileStrength} onChange={handleSpecChange} placeholder="e.g. 250 kgf" style={{ padding: '8px 12px', borderRadius: '8px', background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255,255,255,0.06)', color: '#F0EBE0', fontSize: '13px' }} />
+                      <label style={{ fontSize: '11px', color: '#8E8E9A' }}>{t('tensileStrength')}</label>
+                      <input type="text" name="tensileStrength" value={newProduct.specifications.tensileStrength} onChange={handleSpecChange} placeholder="e.g. 250 kgf" style={{ padding: '8px 12px', borderRadius: '8px', background: 'rgba(0, 0, 0, 0.015)', border: '1px solid rgba(0, 0, 0, 0.03)', color: '#1A1A2E', fontSize: '13px' }} />
                     </div>
                     <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
-                      <label style={{ fontSize: '11px', color: '#8A8070' }}>{t('moistureLevel')}</label>
-                      <input type="text" name="moistureContent" value={newProduct.specifications.moistureContent} onChange={handleSpecChange} placeholder="e.g. 14%" style={{ padding: '8px 12px', borderRadius: '8px', background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255,255,255,0.06)', color: '#F0EBE0', fontSize: '13px' }} />
+                      <label style={{ fontSize: '11px', color: '#8E8E9A' }}>{t('moistureLevel')}</label>
+                      <input type="text" name="moistureContent" value={newProduct.specifications.moistureContent} onChange={handleSpecChange} placeholder="e.g. 14%" style={{ padding: '8px 12px', borderRadius: '8px', background: 'rgba(0, 0, 0, 0.015)', border: '1px solid rgba(0, 0, 0, 0.03)', color: '#1A1A2E', fontSize: '13px' }} />
                     </div>
                     <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
-                      <label style={{ fontSize: '11px', color: '#8A8070' }}>{t('thicknessDiameter')}</label>
-                      <input type="text" name="diameter" value={newProduct.specifications.diameter} onChange={handleSpecChange} placeholder="e.g. 10mm" style={{ padding: '8px 12px', borderRadius: '8px', background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255,255,255,0.06)', color: '#F0EBE0', fontSize: '13px' }} />
+                      <label style={{ fontSize: '11px', color: '#8E8E9A' }}>{t('thicknessDiameter')}</label>
+                      <input type="text" name="diameter" value={newProduct.specifications.diameter} onChange={handleSpecChange} placeholder="e.g. 10mm" style={{ padding: '8px 12px', borderRadius: '8px', background: 'rgba(0, 0, 0, 0.015)', border: '1px solid rgba(0, 0, 0, 0.03)', color: '#1A1A2E', fontSize: '13px' }} />
                     </div>
                     <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
-                      <label style={{ fontSize: '11px', color: '#8A8070' }}>{t('fiberComposition')}</label>
-                      <input type="text" name="fiberType" value={newProduct.specifications.fiberType} onChange={handleSpecChange} placeholder="e.g. Long Bristle" style={{ padding: '8px 12px', borderRadius: '8px', background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255,255,255,0.06)', color: '#F0EBE0', fontSize: '13px' }} />
+                      <label style={{ fontSize: '11px', color: '#8E8E9A' }}>{t('fiberComposition')}</label>
+                      <input type="text" name="fiberType" value={newProduct.specifications.fiberType} onChange={handleSpecChange} placeholder="e.g. Long Bristle" style={{ padding: '8px 12px', borderRadius: '8px', background: 'rgba(0, 0, 0, 0.015)', border: '1px solid rgba(0, 0, 0, 0.03)', color: '#1A1A2E', fontSize: '13px' }} />
                     </div>
                   </div>
                 </div>
@@ -515,20 +515,20 @@ export default function AdminInventory() {
                 {/* Stock Initial */}
                 <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px' }}>
                   <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
-                    <label style={{ fontSize: '12px', color: '#8A8070', fontFamily: 'Poppins' }}>{t('initialStockQtyKg')}</label>
-                    <input type="number" name="initialStock" value={newProduct.initialStock} onChange={handleInputChange} required style={{ padding: '10px 14px', borderRadius: '10px', background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255,255,255,0.08)', color: '#F0EBE0', outline: 'none', fontSize: '14px' }} />
+                    <label style={{ fontSize: '12px', color: '#8E8E9A', fontFamily: 'Poppins' }}>{t('initialStockQtyKg')}</label>
+                    <input type="number" name="initialStock" value={newProduct.initialStock} onChange={handleInputChange} required style={{ padding: '10px 14px', borderRadius: '10px', background: 'rgba(0, 0, 0, 0.015)', border: '1px solid rgba(0, 0, 0, 0.04)', color: '#1A1A2E', outline: 'none', fontSize: '14px' }} />
                   </div>
                   
                   <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
-                    <label style={{ fontSize: '12px', color: '#8A8070', fontFamily: 'Poppins' }}>{t('minStockAlertLimitKg')}</label>
-                    <input type="number" name="minStock" value={newProduct.minStock} onChange={handleInputChange} required style={{ padding: '10px 14px', borderRadius: '10px', background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255,255,255,0.08)', color: '#F0EBE0', outline: 'none', fontSize: '14px' }} />
+                    <label style={{ fontSize: '12px', color: '#8E8E9A', fontFamily: 'Poppins' }}>{t('minStockAlertLimitKg')}</label>
+                    <input type="number" name="minStock" value={newProduct.minStock} onChange={handleInputChange} required style={{ padding: '10px 14px', borderRadius: '10px', background: 'rgba(0, 0, 0, 0.015)', border: '1px solid rgba(0, 0, 0, 0.04)', color: '#1A1A2E', outline: 'none', fontSize: '14px' }} />
                   </div>
                 </div>
 
                 {/* Form Buttons */}
                 <div style={{ display: 'flex', gap: '12px', marginTop: '10px' }}>
-                  <button type="button" onClick={() => setShowAddForm(false)} style={{ flex: 1, padding: '12px', borderRadius: '12px', background: 'transparent', border: '1px solid rgba(255,255,255,0.1)', color: '#A09888', cursor: 'pointer', fontSize: '14px' }}>{t('cancelBtn')}</button>
-                  <button type="submit" disabled={formSubmitting} style={{ flex: 2, padding: '12px', borderRadius: '12px', background: 'linear-gradient(135deg, #8B6914 0%, #C9A84C 50%, #D4B896 100%)', color: '#08080F', fontWeight: 600, border: 'none', cursor: 'pointer', fontSize: '14px', boxShadow: '0 4px 15px rgba(201,168,76,0.2)' }}>
+                  <button type="button" onClick={() => setShowAddForm(false)} style={{ flex: 1, padding: '12px', borderRadius: '12px', background: 'transparent', border: '1px solid rgba(0, 0, 0, 0.05)', color: '#5C5C6B', cursor: 'pointer', fontSize: '14px' }}>{t('cancelBtn')}</button>
+                  <button type="submit" disabled={formSubmitting} style={{ flex: 2, padding: '12px', borderRadius: '12px', background: 'linear-gradient(135deg, #1B4332 0%, #2D6A4F 50%, #95D5B2 100%)', color: '#FFFFFF', fontWeight: 600, border: 'none', cursor: 'pointer', fontSize: '14px', boxShadow: '0 4px 15px rgba(45, 106, 79,0.2)' }}>
                     {formSubmitting ? t('registeringProduct') : t('createSeedProductBtn')}
                   </button>
                 </div>

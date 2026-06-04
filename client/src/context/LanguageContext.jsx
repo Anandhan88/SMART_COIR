@@ -11,11 +11,11 @@ const translations = {
 
     // Hero
     badge: 'Industry 4.0 Platform',
-    heroTitle1: 'Transforming',
-    heroTitle2: 'Coconut Fiber',
-    heroTitle3: 'into Sustainable',
-    heroTitle4: 'Industrial Products',
-    heroDesc: 'Smart Coir Manufacturing & Supply Chain Platform — End-to-end production monitoring, inventory management, and real-time supply chain intelligence.',
+    heroTitle1: 'Powering Industries',
+    heroTitle2: 'with Premium Coir',
+    heroTitle3: 'Sustainable',
+    heroTitle4: 'Fiber Solutions',
+    heroDesc: 'An all-in-one coir manufacturing and supply chain platform — monitor production in real time, manage inventory seamlessly, and gain intelligent supply chain insights.',
     viewInventory: 'View Inventory',
     tonsMonth: 'Tons / Month',
     countries: 'Countries',

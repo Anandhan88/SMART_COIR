@@ -13,7 +13,6 @@ const adminMenuItems = [
   { name: 'Manage Products', key: 'manageProducts', href: '/admin/inventory', icon: '🛠️' },
   { name: 'Client Orders', key: 'clientOrders', href: '/admin/orders', icon: '📥' },
   { name: 'Support Chat', key: 'chat', href: '/admin/chat', icon: '💬' },
-  { name: 'QR Scanner', key: 'scanner', href: '/admin/scanner', icon: '📷' },
   { name: 'Worker Directory', key: 'workers', href: '/admin/workers', icon: '👷' },
   { name: 'Supplier Directory', key: 'suppliers', href: '/admin/suppliers', icon: '🚛' },
 ];
@@ -120,8 +119,8 @@ export default function AdminLayout({ children }) {
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        background: '#08080F',
-        color: '#F0EBE0',
+        background: '#F8F5F0',
+        color: '#1A1A2E',
         fontFamily: 'Poppins',
       }}>
         {t('loading')} {t('adminPanel')}...
@@ -130,15 +129,14 @@ export default function AdminLayout({ children }) {
   }
 
   return (
-    <div style={{ minHeight: '100vh', display: 'flex', background: '#08080F', color: '#F0EBE0', fontFamily: 'Poppins' }}>
+    <div style={{ minHeight: '100vh', display: 'flex', background: '#F8F5F0', color: '#1A1A2E', fontFamily: 'Poppins' }}>
       
       {/* Desktop Admin Sidebar */}
       <motion.aside
         animate={{ width: sidebarOpen ? 260 : 80 }}
         style={{
-          background: 'rgba(255, 255, 255, 0.01)',
-          backdropFilter: 'blur(20px)',
-          borderRight: '1px solid rgba(255, 255, 255, 0.06)',
+          background: '#FFFFFF',
+          borderRight: '1px solid var(--border)',
           display: 'flex',
           flexDirection: 'column',
           zIndex: 40,
@@ -146,15 +144,15 @@ export default function AdminLayout({ children }) {
         className="hidden md:flex"
       >
         {/* Brand */}
-        <div style={{ padding: '24px', display: 'flex', alignItems: 'center', gap: '12px', borderBottom: '1px solid rgba(255, 255, 255, 0.04)' }}>
+        <div style={{ padding: '24px', display: 'flex', alignItems: 'center', gap: '12px', borderBottom: '1px solid var(--border)' }}>
           <img 
             src="/images/coconut_tree_logo.png?v=2" 
             alt="Smart Coir" 
             style={{ width: '32px', height: '32px', objectFit: 'contain' }} 
           />
           {sidebarOpen && (
-            <span style={{ fontSize: '18px', fontWeight: 700, fontFamily: 'Space Grotesk' }}>
-              Smart<span style={{ color: '#C9A84C' }}>Coir</span> {t('adminPanel')}
+            <span style={{ fontSize: '18px', fontWeight: 700, fontFamily: 'Space Grotesk', color: 'var(--text-1)' }}>
+              Smart<span style={{ color: 'var(--accent)' }}>Coir</span> {t('adminPanel')}
             </span>
           )}
         </div>
@@ -173,9 +171,9 @@ export default function AdminLayout({ children }) {
                   gap: '14px',
                   padding: '12px 16px',
                   borderRadius: '12px',
-                  background: isActive ? 'rgba(201, 168, 76, 0.08)' : 'transparent',
-                  border: isActive ? '1px solid rgba(201, 168, 76, 0.15)' : '1px solid transparent',
-                  color: isActive ? '#C9A84C' : '#A09888',
+                  background: isActive ? 'var(--accent-dim)' : 'transparent',
+                  border: isActive ? '1px solid rgba(45, 106, 79, 0.15)' : '1px solid transparent',
+                  color: isActive ? 'var(--accent)' : 'var(--text-2)',
                   textDecoration: 'none',
                   fontSize: '14px',
                   fontWeight: isActive ? 600 : 500,
@@ -184,14 +182,14 @@ export default function AdminLayout({ children }) {
                 }}
                 onMouseEnter={(e) => {
                   if (!isActive) {
-                    e.target.style.color = '#F0EBE0';
-                    e.target.style.background = 'rgba(255, 255, 255, 0.02)';
+                    e.currentTarget.style.color = 'var(--text-1)';
+                    e.currentTarget.style.background = 'rgba(0, 0, 0, 0.02)';
                   }
                 }}
                 onMouseLeave={(e) => {
                   if (!isActive) {
-                    e.target.style.color = '#A09888';
-                    e.target.style.background = 'transparent';
+                    e.currentTarget.style.color = 'var(--text-2)';
+                    e.currentTarget.style.background = 'transparent';
                   }
                 }}
               >
@@ -203,10 +201,10 @@ export default function AdminLayout({ children }) {
         </nav>
 
         {/* Sidebar Toggle */}
-        <div style={{ padding: '16px', borderTop: '1px solid rgba(255, 255, 255, 0.04)', display: 'flex', justifyContent: sidebarOpen ? 'flex-end' : 'center' }}>
+        <div style={{ padding: '16px', borderTop: '1px solid var(--border)', display: 'flex', justifyContent: sidebarOpen ? 'flex-end' : 'center' }}>
           <button 
             onClick={() => setSidebarOpen(!sidebarOpen)}
-            style={{ background: 'none', border: 'none', color: '#8A8070', cursor: 'pointer', fontSize: '18px', outline: 'none' }}
+            style={{ background: 'none', border: 'none', color: 'var(--text-3)', cursor: 'pointer', fontSize: '18px', outline: 'none' }}
           >
             {sidebarOpen ? '◀' : '▶'}
           </button>
@@ -219,13 +217,13 @@ export default function AdminLayout({ children }) {
         {/* Top Header */}
         <header style={{
           height: '70px',
-          background: 'rgba(8, 8, 15, 0.8)',
+          background: 'rgba(248, 245, 240, 0.8)',
           backdropFilter: 'blur(20px)',
-          borderBottom: '1px solid rgba(255, 255, 255, 0.06)',
+          borderBottom: '1px solid var(--border)',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'space-between',
-          padding: '0 24px',
+          padding: '0 64px',
           zIndex: 30,
           position: 'sticky',
           top: 0,
@@ -235,7 +233,7 @@ export default function AdminLayout({ children }) {
             <button 
               onClick={() => setMobileOpen(!mobileOpen)}
               className="md:hidden"
-              style={{ background: 'none', border: 'none', color: '#C9A84C', cursor: 'pointer', fontSize: '24px', outline: 'none' }}
+              style={{ background: 'none', border: 'none', color: 'var(--accent)', cursor: 'pointer', fontSize: '24px', outline: 'none' }}
             >
               ☰
             </button>
@@ -247,8 +245,8 @@ export default function AdminLayout({ children }) {
           {/* Right: User Menu */}
           <div style={{ display: 'flex', alignItems: 'center', gap: '20px', position: 'relative' }}>
             {/* System Status Indicator */}
-            <div style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '12px', color: '#44ef88' }} className="hidden sm:flex">
-              <span style={{ width: '6px', height: '6px', borderRadius: '50%', background: '#44ef88', boxShadow: '0 0 6px #44ef88' }} />
+            <div style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '12px', color: '#2D6A4F' }} className="hidden sm:flex">
+              <span style={{ width: '6px', height: '6px', borderRadius: '50%', background: '#2D6A4F', boxShadow: '0 0 6px rgba(45, 106, 79, 0.4)' }} />
               {t('systemStatus')}
             </div>
 
@@ -262,8 +260,8 @@ export default function AdminLayout({ children }) {
                   fontWeight: 600,
                   fontFamily: 'Poppins',
                   color: 'var(--text-2)',
-                  background: 'rgba(255,255,255,0.05)',
-                  border: '1px solid rgba(255,255,255,0.1)',
+                  background: 'rgba(0,0,0,0.03)',
+                  border: '1px solid var(--border)',
                   borderRadius: '10px',
                   cursor: 'pointer',
                   transition: 'all 0.3s',
@@ -287,11 +285,10 @@ export default function AdminLayout({ children }) {
                       position: 'absolute',
                       top: '110%',
                       right: 0,
-                      background: 'rgba(14, 14, 24, 0.98)',
-                      backdropFilter: 'blur(20px)',
-                      border: '1px solid rgba(255,255,255,0.1)',
+                      background: 'var(--bg-card)',
+                      border: '1px solid var(--border)',
                       borderRadius: '12px',
-                      boxShadow: '0 10px 30px rgba(0,0,0,0.5)',
+                      boxShadow: '0 10px 30px rgba(0,0,0,0.05)',
                       overflow: 'hidden',
                       minWidth: 140,
                       zIndex: 200,
@@ -312,7 +309,7 @@ export default function AdminLayout({ children }) {
                           fontFamily: 'Poppins',
                           fontWeight: lang === item.code ? 600 : 400,
                           color: lang === item.code ? 'var(--accent)' : 'var(--text-1)',
-                          background: lang === item.code ? 'rgba(201, 168, 76, 0.08)' : 'transparent',
+                          background: lang === item.code ? 'var(--accent-dim)' : 'transparent',
                           border: 'none',
                           cursor: 'pointer',
                           textAlign: 'left',
@@ -322,7 +319,7 @@ export default function AdminLayout({ children }) {
                           gap: 8,
                         }}
                         onMouseEnter={(e) => {
-                          if (lang !== item.code) e.currentTarget.style.background = 'rgba(255,255,255,0.03)';
+                          if (lang !== item.code) e.currentTarget.style.background = 'rgba(0,0,0,0.02)';
                         }}
                         onMouseLeave={(e) => {
                           if (lang !== item.code) e.currentTarget.style.background = 'transparent';
@@ -345,7 +342,7 @@ export default function AdminLayout({ children }) {
               {unreadCount > 0 && (
                 <span style={{ 
                   position: 'absolute', top: '-4px', right: '-4px', 
-                  background: '#C9A84C', color: '#08080F', fontSize: '9px',
+                  background: 'var(--accent)', color: '#FFFFFF', fontSize: '9px',
                   fontWeight: 700, padding: '2px 5px', borderRadius: '50%',
                   minWidth: '15px', textAlign: 'center', lineHeight: 1
                 }}>
@@ -363,21 +360,21 @@ export default function AdminLayout({ children }) {
                   exit={{ opacity: 0, y: 10 }}
                   style={{
                     position: 'absolute', top: '50px', right: '120px',
-                    width: '320px', background: '#12121E', border: '1px solid rgba(255, 255, 255, 0.08)',
-                    borderRadius: '16px', padding: '16px', boxShadow: '0 10px 40px rgba(0,0,0,0.4)',
+                    width: '320px', background: 'var(--bg-card)', border: '1px solid var(--border)',
+                    borderRadius: '16px', padding: '16px', boxShadow: '0 10px 40px rgba(0,0,0,0.08)',
                     zIndex: 50, maxHeight: '400px', overflowY: 'auto'
                   }}
                 >
-                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '14px', borderBottom: '1px solid rgba(255,255,255,0.04)', paddingBottom: '8px' }}>
-                    <h4 style={{ fontSize: '13px', fontWeight: 600, fontFamily: 'Space Grotesk', color: '#C9A84C' }}>{t('notifications')}</h4>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '14px', borderBottom: '1px solid var(--border)', paddingBottom: '8px' }}>
+                    <h4 style={{ fontSize: '13px', fontWeight: 600, fontFamily: 'Space Grotesk', color: 'var(--accent)' }}>{t('notifications')}</h4>
                     {unreadCount > 0 && (
-                      <button onClick={handleMarkAllRead} style={{ background: 'none', border: 'none', color: '#8A8070', fontSize: '11px', cursor: 'pointer', outline: 'none' }}>
+                      <button onClick={handleMarkAllRead} style={{ background: 'none', border: 'none', color: 'var(--text-3)', fontSize: '11px', cursor: 'pointer', outline: 'none' }}>
                         {t('markAllRead')}
                       </button>
                     )}
                   </div>
                   {notifications.length === 0 ? (
-                    <div style={{ padding: '20px 0', textAlign: 'center', color: '#8A8070', fontSize: '12px', fontFamily: 'Poppins' }}>
+                    <div style={{ padding: '20px 0', textAlign: 'center', color: 'var(--text-3)', fontSize: '12px', fontFamily: 'Poppins' }}>
                       {t('noNotifications')}
                     </div>
                   ) : (
@@ -388,21 +385,21 @@ export default function AdminLayout({ children }) {
                           onClick={() => handleNotificationClick(notif)}
                           style={{
                             padding: '10px', borderRadius: '8px', cursor: 'pointer',
-                            background: notif.read ? 'rgba(255,255,255,0.01)' : 'rgba(201, 168, 76, 0.04)',
-                            borderLeft: notif.read ? '2px solid transparent' : '2px solid #C9A84C',
+                            background: notif.read ? 'transparent' : 'rgba(45, 106, 79, 0.04)',
+                            borderLeft: notif.read ? '2px solid transparent' : '2px solid var(--accent)',
                             transition: 'all 0.2s',
                             textAlign: 'left'
                           }}
-                          onMouseEnter={(e)=>e.currentTarget.style.background='rgba(255,255,255,0.02)'}
-                          onMouseLeave={(e)=>e.currentTarget.style.background=notif.read ? 'rgba(255,255,255,0.01)' : 'rgba(201, 168, 76, 0.04)'}
+                          onMouseEnter={(e)=>e.currentTarget.style.background='rgba(0,0,0,0.02)'}
+                          onMouseLeave={(e)=>e.currentTarget.style.background=notif.read ? 'transparent' : 'rgba(45, 106, 79, 0.04)'}
                         >
-                          <div style={{ fontSize: '12.5px', fontWeight: notif.read ? 500 : 600, color: '#F0EBE0', marginBottom: '4px', fontFamily: 'Poppins' }}>
+                          <div style={{ fontSize: '12.5px', fontWeight: notif.read ? 500 : 600, color: 'var(--text-1)', marginBottom: '4px', fontFamily: 'Poppins' }}>
                             {notif.title}
                           </div>
-                          <div style={{ fontSize: '11px', color: '#A09888', lineHeight: 1.4, fontFamily: 'Poppins' }}>
+                          <div style={{ fontSize: '11px', color: 'var(--text-2)', lineHeight: 1.4, fontFamily: 'Poppins' }}>
                             {notif.message}
                           </div>
-                          <div style={{ fontSize: '9px', color: '#8A8070', marginTop: '6px', textAlign: 'right', fontFamily: 'Poppins' }}>
+                          <div style={{ fontSize: '9px', color: 'var(--text-3)', marginTop: '6px', textAlign: 'right', fontFamily: 'Poppins' }}>
                             {new Date(notif.createdAt).toLocaleDateString()} {new Date(notif.createdAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
                           </div>
                         </div>
@@ -417,16 +414,16 @@ export default function AdminLayout({ children }) {
             <div style={{ display: 'flex', alignItems: 'center', gap: '10px', cursor: 'pointer' }} onClick={() => setProfileDropdownOpen(!profileDropdownOpen)}>
               <div style={{
                 width: '36px', height: '36px', borderRadius: '50%',
-                background: 'linear-gradient(135deg, #8B6914, #C9A84C)',
+                background: 'linear-gradient(135deg, #1B4332, #2D6A4F)',
                 display: 'flex', alignItems: 'center', justifyContent: 'center',
-                color: '#08080F', fontWeight: 700, fontSize: '14px'
+                color: '#FFFFFF', fontWeight: 700, fontSize: '14px'
               }}>
                 {user.name.charAt(0).toUpperCase()}
               </div>
               <span style={{ fontSize: '14px', fontWeight: 500 }} className="hidden sm:inline">
                 {user.name} (Admin)
               </span>
-              <span style={{ fontSize: '10px', color: '#8A8070' }}>▼</span>
+              <span style={{ fontSize: '10px', color: 'var(--text-3)' }}>▼</span>
             </div>
 
             {/* Profile Dropdown Menu */}
@@ -441,11 +438,11 @@ export default function AdminLayout({ children }) {
                     top: '50px',
                     right: 0,
                     width: '180px',
-                    background: '#12121E',
-                    border: '1px solid rgba(255, 255, 255, 0.08)',
+                    background: 'var(--bg-card)',
+                    border: '1px solid var(--border)',
                     borderRadius: '12px',
                     padding: '8px',
-                    boxShadow: '0 10px 30px rgba(0,0,0,0.3)',
+                    boxShadow: '0 10px 30px rgba(0,0,0,0.05)',
                     zIndex: 50,
                   }}
                 >
@@ -494,16 +491,18 @@ export default function AdminLayout({ children }) {
               transition={{ type: 'tween', duration: 0.3 }}
               style={{
                 position: 'fixed', top: 0, bottom: 0, left: 0, width: '260px',
-                background: '#0E0E18', borderRight: '1px solid rgba(255, 255, 255, 0.08)',
+                background: 'var(--bg-card)', borderRight: '1px solid var(--border)',
                 display: 'flex', flexDirection: 'column', zIndex: 46,
               }}
             >
-              <div style={{ padding: '24px', display: 'flex', alignItems: 'center', gap: '12px', justify: 'space-between', borderBottom: '1px solid rgba(255, 255, 255, 0.04)' }}>
+              <div style={{ padding: '24px', display: 'flex', alignItems: 'center', gap: '12px', justifyContent: 'space-between', borderBottom: '1px solid var(--border)' }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
                   <img src="/images/coconut_tree_logo.png?v=2" alt="Smart Coir" style={{ width: '32px', height: '32px', objectFit: 'contain' }} />
-                  <span style={{ fontSize: '18px', fontWeight: 700, fontFamily: 'Space Grotesk' }}>SmartCoir</span>
+                  <span style={{ fontSize: '18px', fontWeight: 700, fontFamily: 'Space Grotesk', color: 'var(--text-1)' }}>
+                    Smart<span style={{ color: 'var(--accent)' }}>Coir</span> {t('adminPanel')}
+                  </span>
                 </div>
-                <button onClick={() => setMobileOpen(false)} style={{ background: 'none', border: 'none', color: '#A09888', fontSize: '20px', cursor: 'pointer' }}>×</button>
+                <button onClick={() => setMobileOpen(false)} style={{ background: 'none', border: 'none', color: 'var(--text-3)', fontSize: '20px', cursor: 'pointer' }}>×</button>
               </div>
               <nav style={{ flex: 1, padding: '24px 16px', display: 'flex', flexDirection: 'column', gap: '8px' }}>
                 {adminMenuItems.map((item) => {
@@ -516,8 +515,8 @@ export default function AdminLayout({ children }) {
                       style={{
                         display: 'flex', alignItems: 'center', gap: '14px',
                         padding: '12px 16px', borderRadius: '12px',
-                        background: isActive ? 'rgba(201, 168, 76, 0.08)' : 'transparent',
-                        color: isActive ? '#C9A84C' : '#A09888',
+                        background: isActive ? 'var(--accent-dim)' : 'transparent',
+                        color: isActive ? 'var(--accent)' : 'var(--text-2)',
                         textDecoration: 'none', fontSize: '14px', fontWeight: isActive ? 600 : 500,
                       }}
                     >

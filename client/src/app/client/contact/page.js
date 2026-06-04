@@ -35,14 +35,14 @@ export default function ClientContact() {
   };
 
   return (
-    <div style={{ padding: '32px 24px', maxWidth: '1200px', margin: '0 auto' }}>
+    <div style={{ padding: '40px 64px' }}>
       
       {/* Title */}
       <div style={{ marginBottom: '40px' }}>
-        <h1 style={{ fontSize: '32px', fontWeight: 700, fontFamily: 'Space Grotesk', color: '#F0EBE0', marginBottom: '8px' }}>
+        <h1 style={{ fontSize: '32px', fontWeight: 700, fontFamily: 'Space Grotesk', color: '#1A1A2E', marginBottom: '8px' }}>
           {t('contactAdmin')}
         </h1>
-        <p style={{ color: '#A09888', fontSize: '15px', fontFamily: 'Poppins' }}>
+        <p style={{ color: '#5C5C6B', fontSize: '15px', fontFamily: 'Poppins' }}>
           {t('contactAdminDesc')}
         </p>
       </div>
@@ -52,19 +52,19 @@ export default function ClientContact() {
         {/* Left Column: Office Details */}
         <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
           <div style={{
-            background: 'rgba(255, 255, 255, 0.01)',
-            border: '1px solid rgba(255,255,255,0.05)',
+            background: 'rgba(0, 0, 0, 0.01)',
+            border: '1px solid rgba(0, 0, 0, 0.03)',
             borderRadius: '16px',
             padding: '28px',
           }}>
-            <h3 style={{ fontSize: '16px', fontWeight: 600, fontFamily: 'Space Grotesk', color: '#C9A84C', marginBottom: '20px' }}>
+            <h3 style={{ fontSize: '16px', fontWeight: 600, fontFamily: 'Space Grotesk', color: '#2D6A4F', marginBottom: '20px' }}>
               {t('factoryHeadquarters')}
             </h3>
             
             <div style={{ display: 'flex', flexDirection: 'column', gap: '18px', fontSize: '14px', fontFamily: 'Poppins' }}>
               <div>
-                <div style={{ color: '#8A8070', fontSize: '12px', textTransform: 'uppercase', marginBottom: '4px' }}>{t('address')}</div>
-                <div style={{ color: '#F0EBE0', lineHeight: 1.6 }}>
+                <div style={{ color: '#8E8E9A', fontSize: '12px', textTransform: 'uppercase', marginBottom: '4px' }}>{t('address')}</div>
+                <div style={{ color: '#1A1A2E', lineHeight: 1.6 }}>
                   Smart Coir Decorticating & Spun Units,<br />
                   Palakkad Road, Pollachi,<br />
                   Tamil Nadu, India - 642001
@@ -72,25 +72,25 @@ export default function ClientContact() {
               </div>
               
               <div>
-                <div style={{ color: '#8A8070', fontSize: '12px', textTransform: 'uppercase', marginBottom: '4px' }}>{t('wholesaleHelpline')}</div>
-                <div style={{ color: '#F0EBE0', fontWeight: 500 }}>+91 98765 43210</div>
+                <div style={{ color: '#8E8E9A', fontSize: '12px', textTransform: 'uppercase', marginBottom: '4px' }}>{t('wholesaleHelpline')}</div>
+                <div style={{ color: '#1A1A2E', fontWeight: 500 }}>+91 98765 43210</div>
               </div>
 
               <div>
-                <div style={{ color: '#8A8070', fontSize: '12px', textTransform: 'uppercase', marginBottom: '4px' }}>{t('emailSupport')}</div>
-                <div style={{ color: '#F0EBE0', fontWeight: 500 }}>logistics@smartcoir.com</div>
+                <div style={{ color: '#8E8E9A', fontSize: '12px', textTransform: 'uppercase', marginBottom: '4px' }}>{t('emailSupport')}</div>
+                <div style={{ color: '#1A1A2E', fontWeight: 500 }}>logistics@smartcoir.com</div>
               </div>
             </div>
           </div>
 
           <div style={{
-            background: 'rgba(201, 168, 76, 0.02)',
-            border: '1px solid rgba(201, 168, 76, 0.08)',
+            background: 'rgba(45, 106, 79, 0.02)',
+            border: '1px solid rgba(45, 106, 79, 0.08)',
             borderRadius: '16px',
             padding: '28px',
             fontSize: '13px',
             lineHeight: 1.6,
-            color: '#A09888',
+            color: '#5C5C6B',
             fontFamily: 'Poppins',
           }}>
             ℹ️ <strong>{t('directBulkInquiries')}</strong><br />
@@ -100,9 +100,9 @@ export default function ClientContact() {
 
         {/* Right Column: Inquiry Form */}
         <div style={{
-          background: 'rgba(255, 255, 255, 0.02)',
+          background: 'rgba(0, 0, 0, 0.015)',
           backdropFilter: 'blur(20px)',
-          border: '1px solid rgba(255, 255, 255, 0.06)',
+          border: '1px solid rgba(0, 0, 0, 0.03)',
           borderRadius: '24px',
           padding: '36px',
           boxShadow: '0 20px 45px rgba(0,0,0,0.3)',
@@ -118,7 +118,7 @@ export default function ClientContact() {
           )}
 
           {errorMsg && (
-            <div style={{ padding: '12px 16px', background: 'rgba(239, 68, 68, 0.1)', border: '1px solid rgba(239, 68, 68, 0.2)', borderRadius: '12px', color: '#ef4444', fontSize: '13px', marginBottom: '20px', fontFamily: 'Poppins' }}>
+            <div style={{ padding: '12px 16px', background: 'rgba(239, 68, 68, 0.1)', border: '1px solid rgba(239, 68, 68, 0.2)', borderRadius: '12px', color: '#D00000', fontSize: '13px', marginBottom: '20px', fontFamily: 'Poppins' }}>
               {errorMsg}
             </div>
           )}
@@ -126,7 +126,7 @@ export default function ClientContact() {
           <form onSubmit={handleSubmitInquiry} style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
             
             <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
-              <label style={{ fontSize: '12px', fontWeight: 500, color: '#A09888', fontFamily: 'Poppins', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
+              <label style={{ fontSize: '12px', fontWeight: 500, color: '#5C5C6B', fontFamily: 'Poppins', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
                 {t('subject')}
               </label>
               <input
@@ -138,9 +138,9 @@ export default function ClientContact() {
                 style={{
                   padding: '12px 16px',
                   borderRadius: '12px',
-                  background: 'rgba(255,255,255,0.02)',
-                  border: '1px solid rgba(255,255,255,0.08)',
-                  color: '#F0EBE0',
+                  background: 'rgba(0, 0, 0, 0.015)',
+                  border: '1px solid rgba(0, 0, 0, 0.04)',
+                  color: '#1A1A2E',
                   outline: 'none',
                   fontFamily: 'Poppins',
                   fontSize: '14px',
@@ -149,7 +149,7 @@ export default function ClientContact() {
             </div>
 
             <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
-              <label style={{ fontSize: '12px', fontWeight: 500, color: '#A09888', fontFamily: 'Poppins', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
+              <label style={{ fontSize: '12px', fontWeight: 500, color: '#5C5C6B', fontFamily: 'Poppins', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
                 {t('message')}
               </label>
               <textarea
@@ -161,9 +161,9 @@ export default function ClientContact() {
                 style={{
                   padding: '12px 16px',
                   borderRadius: '12px',
-                  background: 'rgba(255,255,255,0.02)',
-                  border: '1px solid rgba(255,255,255,0.08)',
-                  color: '#F0EBE0',
+                  background: 'rgba(0, 0, 0, 0.015)',
+                  border: '1px solid rgba(0, 0, 0, 0.04)',
+                  color: '#1A1A2E',
                   outline: 'none',
                   fontFamily: 'Poppins',
                   fontSize: '14px',
@@ -179,14 +179,14 @@ export default function ClientContact() {
                 width: '100%',
                 padding: '14px',
                 borderRadius: '12px',
-                background: 'linear-gradient(135deg, #8B6914 0%, #C9A84C 50%, #D4B896 100%)',
-                color: '#08080F',
+                background: 'linear-gradient(135deg, #1B4332 0%, #2D6A4F 50%, #95D5B2 100%)',
+                color: '#FFFFFF',
                 fontWeight: 600,
                 fontSize: '14px',
                 fontFamily: 'Poppins',
                 border: 'none',
                 cursor: loading ? 'not-allowed' : 'pointer',
-                boxShadow: '0 4px 20px rgba(201, 168, 76, 0.2)',
+                boxShadow: '0 4px 20px rgba(45, 106, 79, 0.2)',
               }}
             >
               {loading ? t('submittingInquiry') : t('sendInquiryBtn')}

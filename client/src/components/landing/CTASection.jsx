@@ -46,7 +46,7 @@ export default function CTASection() {
       <div style={{
         position: 'absolute', top: '20%', right: '-5%',
         width: 600, height: 600, borderRadius: '50%',
-        background: 'radial-gradient(circle, rgba(201,168,76,0.04) 0%, transparent 70%)',
+        background: 'radial-gradient(circle, rgba(45,106,79,0.04) 0%, transparent 70%)',
         pointerEvents: 'none', filter: 'blur(80px)',
       }} />
 

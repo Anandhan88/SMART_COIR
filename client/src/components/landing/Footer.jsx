@@ -82,9 +82,9 @@ export default function Footer() {
             {/* Contact info */}
             <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
               {[
-                { icon: '📍', text: 'Pollachi, Tamil Nadu, India 642001' },
-                { icon: '📞', text: '+91 98765 43210' },
-                { icon: '✉️', text: 'info@smartcoir.com' },
+                { icon: '📍', text: 'Dharmapuri, Tamil Nadu, India 635111' },
+                { icon: '📞', text: '+91 93455 41664' },
+                { icon: '✉️', text: 'smartcoir@gmail.com' },
               ].map((c, i) => (
                 <div key={i} style={{ display: 'flex', alignItems: 'center', gap: 12, fontSize: 13, color: 'var(--text-2)' }}>
                   <span style={{ fontSize: 16 }}>{c.icon}</span>
