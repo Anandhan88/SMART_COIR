@@ -159,6 +159,9 @@ export default function InventoryBrowse() {
   };
 
   const getProductImage = (p) => {
+    if (p.images && p.images.length > 0 && p.images[0].url) {
+      return p.images[0].url;
+    }
     // If we have custom product image files in public
     if (p.category === 'coir-rope') return '/images/products/coir-rope.jpg';
     if (p.category === 'coir-yarn') return '/images/products/coir-yarn.jpg';

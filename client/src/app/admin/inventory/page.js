@@ -46,6 +46,19 @@ export default function AdminInventory() {
   const [formSubmitting, setFormSubmitting] = useState(false);
   const [successMsg, setSuccessMsg] = useState('');
   const [errorMsg, setErrorMsg] = useState('');
+  const [selectedFile, setSelectedFile] = useState(null);
+  const [imagePreview, setImagePreview] = useState('');
+
+  const getProductImage = (p) => {
+    if (p.images && p.images.length > 0 && p.images[0].url) {
+      return p.images[0].url;
+    }
+    if (p.category === 'coir-rope') return '/images/products/coir-rope.jpg';
+    if (p.category === 'coir-yarn') return '/images/products/coir-yarn.jpg';
+    if (p.category === 'coir-bundle') return '/images/products/coir-bundle.jpg';
+    if (p.category === 'raw-coir-fiber') return '/images/products/raw-fiber.jpg';
+    return '/images/products/coir-rope.jpg';
+  };
 
   useEffect(() => {
     fetchInventoryData();
@@ -103,6 +116,18 @@ export default function AdminInventory() {
     }));
   };
 
+  const handleFileChange = (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.onloadend = () => {
+      setSelectedFile(reader.result);
+      setImagePreview(reader.result);
+    };
+    reader.readAsDataURL(file);
+  };
+
   const handleAddProductSubmit = async (e) => {
     e.preventDefault();
     setFormSubmitting(true);
@@ -110,7 +135,20 @@ export default function AdminInventory() {
     setErrorMsg('');
 
     try {
-      // 1. Create the Product
+      // 1. Upload custom image if selected
+      let productImages = [{ url: `/images/products/${newProduct.category}.jpg`, alt: newProduct.name }];
+      
+      if (selectedFile) {
+        const uploadRes = await api.post('/products/upload-image', {
+          base64Data: selectedFile,
+          fileName: newProduct.name
+        });
+        if (uploadRes.data.success) {
+          productImages = [uploadRes.data.data];
+        }
+      }
+
+      // 2. Create the Product
       const productPayload = {
         name: newProduct.name,
         category: newProduct.category,
@@ -121,7 +159,7 @@ export default function AdminInventory() {
         price: { amount: Number(newProduct.price.amount), currency: newProduct.price.currency, perUnit: newProduct.price.perUnit },
         specifications: newProduct.specifications,
         sku: newProduct.sku || `SKU-${Date.now().toString().slice(-6)}`,
-        images: [{ url: `/images/products/${newProduct.category}.jpg`, alt: newProduct.name }]
+        images: productImages
       };
 
       const productRes = await api.post('/products', productPayload);
@@ -131,7 +169,7 @@ export default function AdminInventory() {
       
       const createdProduct = productRes.data.data;
 
-      // 2. Create the Inventory entry for the product
+      // 3. Create the Inventory entry for the product
       const inventoryPayload = {
         product: createdProduct._id,
         quantity: Number(newProduct.initialStock),
@@ -144,6 +182,8 @@ export default function AdminInventory() {
         setSuccessMsg(`Successfully created product "${createdProduct.name}" and entered ${newProduct.initialStock} units in stock!`);
         setShowAddForm(false);
         // Reset form
+        setSelectedFile(null);
+        setImagePreview('');
         setNewProduct({
           name: '',
           category: 'coir-rope',
@@ -303,9 +343,18 @@ export default function AdminInventory() {
                   return (
                     <tr key={item._id} style={{ borderBottom: '1px solid rgba(0, 0, 0, 0.02)', color: '#1A1A2E' }}>
                       <td style={{ padding: '16px 8px' }}>
-                        <div style={{ fontWeight: 600 }}>{p.name || 'Unknown Product'}</div>
-                        <div style={{ fontSize: '12px', color: '#8E8E9A', textTransform: 'capitalize' }}>
-                          {p.category?.replace('-', ' ')} • {p.qualityGrade} Grade
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+                          <img 
+                            src={getProductImage(p)} 
+                            alt={p.name || 'Product'} 
+                            style={{ width: '44px', height: '44px', borderRadius: '8px', objectFit: 'cover', background: '#F5EFEB', border: '1px solid rgba(0,0,0,0.05)', flexShrink: 0 }} 
+                          />
+                          <div>
+                            <div style={{ fontWeight: 600 }}>{p.name || 'Unknown Product'}</div>
+                            <div style={{ fontSize: '12px', color: '#8E8E9A', textTransform: 'capitalize' }}>
+                              {p.category?.replace('-', ' ')} • {p.qualityGrade} Grade
+                            </div>
+                          </div>
                         </div>
                       </td>
                       <td style={{ padding: '16px 8px', color: '#5C5C6B', fontFamily: 'Space Grotesk' }}>
@@ -471,9 +520,32 @@ export default function AdminInventory() {
                   </div>
                 </div>
 
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
+                 <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
                   <label style={{ fontSize: '12px', color: '#8E8E9A', fontFamily: 'Poppins' }}>{t('description')}</label>
                   <textarea name="description" value={newProduct.description} onChange={handleInputChange} placeholder="Full product features and industrial details..." rows="3" required style={{ padding: '10px 14px', borderRadius: '10px', background: 'rgba(0, 0, 0, 0.015)', border: '1px solid rgba(0, 0, 0, 0.04)', color: '#1A1A2E', outline: 'none', fontSize: '14px', resize: 'none' }} />
+                </div>
+
+                {/* Product Image File Selection */}
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', background: 'rgba(0, 0, 0, 0.015)', border: '1px solid rgba(0, 0, 0, 0.03)', borderRadius: '12px', padding: '16px' }}>
+                  <label style={{ fontSize: '12px', fontWeight: 600, color: '#2D6A4F', fontFamily: 'Poppins' }}>Product Image (Manual Upload)</label>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
+                    <div style={{ flex: 1 }}>
+                      <input
+                        type="file"
+                        accept="image/*"
+                        onChange={handleFileChange}
+                        style={{ fontSize: '13px', fontFamily: 'Poppins', color: '#5C5C6B' }}
+                      />
+                      <p style={{ fontSize: '11px', color: '#8E8E9A', marginTop: '4px', margin: 0, fontFamily: 'Poppins' }}>
+                        Leave empty to auto-assign default category image.
+                      </p>
+                    </div>
+                    {imagePreview && (
+                      <div style={{ width: '64px', height: '64px', borderRadius: '8px', border: '1px solid rgba(0,0,0,0.1)', overflow: 'hidden', background: '#FFFFFF', flexShrink: 0 }}>
+                        <img src={imagePreview} alt="Preview" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                      </div>
+                    )}
+                  </div>
                 </div>
 
                 {/* Price and Weight */}

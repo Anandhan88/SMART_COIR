@@ -111,6 +111,41 @@ exports.deleteProduct = async (req, res) => {
   }
 };
 
+// @desc    Upload product image (base64)
+// @route   POST /api/products/upload-image
+exports.uploadImage = async (req, res) => {
+  try {
+    const { base64Data, fileName } = req.body;
+    if (!base64Data) {
+      return res.status(400).json({ success: false, message: 'No image data provided' });
+    }
+
+    const matches = base64Data.match(/^data:([A-Za-z-+\/]+);base64,(.+)$/);
+    if (!matches || matches.length !== 3) {
+      return res.status(400).json({ success: false, message: 'Invalid base64 image format' });
+    }
+
+    const fs = require('fs');
+    const path = require('path');
+    const imageBuffer = Buffer.from(matches[2], 'base64');
+    const extension = matches[1].split('/')[1] || 'png';
+    const uniqueFileName = `prod_${Date.now()}_${Math.floor(Math.random() * 1000)}.${extension}`;
+    const uploadPath = path.join(__dirname, '..', 'uploads', uniqueFileName);
+
+    fs.writeFileSync(uploadPath, imageBuffer);
+
+    res.json({
+      success: true,
+      data: {
+        url: `/uploads/${uniqueFileName}`,
+        alt: fileName || 'Uploaded product image',
+      }
+    });
+  } catch (error) {
+    res.status(500).json({ success: false, message: 'Server error saving image', error: error.message });
+  }
+};
+
 // @desc    Get product categories
 // @route   GET /api/products/categories
 exports.getCategories = async (req, res) => {
