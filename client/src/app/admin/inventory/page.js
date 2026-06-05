@@ -48,6 +48,7 @@ export default function AdminInventory() {
   const [errorMsg, setErrorMsg] = useState('');
   const [selectedFile, setSelectedFile] = useState(null);
   const [imagePreview, setImagePreview] = useState('');
+  const [editingProduct, setEditingProduct] = useState(null);
 
   const getProductImage = (p) => {
     if (p.images && p.images.length > 0 && p.images[0].url) {
@@ -126,6 +127,139 @@ export default function AdminInventory() {
       setImagePreview(reader.result);
     };
     reader.readAsDataURL(file);
+  };
+
+  const handleEditClick = (item) => {
+    const p = item.product || {};
+    setEditingProduct({
+      _id: item._id,
+      product: {
+        _id: p._id || '',
+        name: p.name || '',
+        category: p.category || 'coir-rope',
+        shortDescription: p.shortDescription || '',
+        description: p.description || '',
+        qualityGrade: p.qualityGrade || 'Standard',
+        weight: { value: p.weight?.value || 50, unit: p.weight?.unit || 'kg' },
+        price: { amount: p.price?.amount || 120, currency: p.price?.currency || 'INR', perUnit: p.price?.perUnit || 'kg' },
+        specifications: {
+          length: p.specifications?.length || '220m',
+          diameter: p.specifications?.diameter || '10mm',
+          tensileStrength: p.specifications?.tensileStrength || '250 kgf',
+          moistureContent: p.specifications?.moistureContent || '14%',
+          color: p.specifications?.color || 'Golden Brown',
+          fiberType: p.specifications?.fiberType || 'Bristle Fiber',
+        },
+        sku: p.sku || '',
+        images: p.images || []
+      },
+      warehouse: item.warehouse || 'Main Warehouse A',
+      minStock: item.minStock || 20,
+    });
+    setImagePreview(p.images && p.images.length > 0 ? p.images[0].url : '');
+    setSelectedFile(null);
+  };
+
+  const handleEditInputChange = (e) => {
+    const { name, value } = e.target;
+    setEditingProduct(prev => {
+      if (!prev) return null;
+      const copy = { ...prev };
+      
+      if (name.startsWith('product.')) {
+        const productPath = name.substring(8);
+        const productCopy = { ...copy.product };
+        
+        if (productPath.includes('.')) {
+          const [parent, child] = productPath.split('.');
+          productCopy[parent] = {
+            ...productCopy[parent],
+            [child]: value
+          };
+        } else {
+          productCopy[productPath] = value;
+        }
+        copy.product = productCopy;
+      } else {
+        copy[name] = value;
+      }
+      return copy;
+    });
+  };
+
+  const handleEditSpecInputChange = (e) => {
+    const { name, value } = e.target;
+    setEditingProduct(prev => {
+      if (!prev) return null;
+      const copy = { ...prev };
+      const productCopy = { ...copy.product };
+      productCopy.specifications = {
+        ...productCopy.specifications,
+        [name]: value
+      };
+      copy.product = productCopy;
+      return copy;
+    });
+  };
+
+  const handleEditProductSubmit = async (e) => {
+    e.preventDefault();
+    if (!editingProduct) return;
+    setFormSubmitting(true);
+    setSuccessMsg('');
+    setErrorMsg('');
+
+    try {
+      const p = editingProduct.product || {};
+      let productImages = p.images || [];
+
+      if (selectedFile) {
+        const uploadRes = await api.post('/products/upload-image', {
+          base64Data: selectedFile,
+          fileName: p.name
+        });
+        if (uploadRes.data.success) {
+          productImages = [uploadRes.data.data];
+        }
+      }
+
+      const productPayload = {
+        name: p.name,
+        category: p.category,
+        shortDescription: p.shortDescription || p.description.substring(0, 100),
+        description: p.description,
+        qualityGrade: p.qualityGrade,
+        weight: { value: Number(p.weight.value), unit: p.weight.unit || 'kg' },
+        price: { amount: Number(p.price.amount), currency: p.price.currency || 'INR', perUnit: p.price.perUnit || 'kg' },
+        specifications: p.specifications,
+        sku: p.sku,
+        images: productImages
+      };
+
+      const productRes = await api.put(`/products/${p._id}`, productPayload);
+      if (!productRes.data.success) {
+        throw new Error('Failed to update product record.');
+      }
+
+      const inventoryPayload = {
+        warehouse: editingProduct.warehouse,
+        minStock: Number(editingProduct.minStock)
+      };
+
+      const inventoryRes = await api.put(`/inventory/${editingProduct._id}`, inventoryPayload);
+      if (inventoryRes.data.success) {
+        setSuccessMsg(`Successfully updated product "${p.name}" details!`);
+        setEditingProduct(null);
+        setSelectedFile(null);
+        setImagePreview('');
+        await fetchInventoryData();
+      }
+    } catch (err) {
+      console.error(err);
+      setErrorMsg(err.response?.data?.message || err.message || 'An error occurred during submission.');
+    } finally {
+      setFormSubmitting(false);
+    }
   };
 
   const handleAddProductSubmit = async (e) => {
@@ -377,7 +511,13 @@ export default function AdminInventory() {
                         </span>
                       </td>
                       <td style={{ padding: '16px 8px', textAlign: 'right' }}>
-                        <div style={{ display: 'flex', gap: '8px', justifyContent: 'flex-end' }}>
+                        <div style={{ display: 'flex', gap: '12px', justifyContent: 'flex-end' }}>
+                          <button
+                            onClick={() => handleEditClick(item)}
+                            style={{ background: 'none', border: 'none', color: '#2D6A4F', cursor: 'pointer', fontSize: '13px', fontWeight: 600 }}
+                          >
+                            📝 Edit
+                          </button>
                           <button
                             onClick={() => {
                               setAdjustingItem(item);
@@ -611,6 +751,166 @@ export default function AdminInventory() {
         )}
       </AnimatePresence>
 
+      {/* Edit Product Dialog Overlay */}
+      <AnimatePresence>
+        {editingProduct && (
+          <>
+            <div onClick={() => { setEditingProduct(null); setSelectedFile(null); setImagePreview(''); }} style={{ position: 'fixed', inset: 0, background: 'rgba(0,0,0,0.7)', zIndex: 90 }} />
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: 30 }}
+              style={{
+                position: 'fixed', top: '10%', bottom: '10%', left: '50%', transform: 'translateX(-50%)',
+                width: '90%', maxWidth: '600px', background: '#EFEBE4', border: '1px solid rgba(0, 0, 0, 0.04)',
+                borderRadius: '24px', padding: '36px', zIndex: 100, boxShadow: '0 20px 60px rgba(0,0,0,0.6)',
+                overflowY: 'auto', display: 'flex', flexDirection: 'column', gap: '20px'
+              }}
+            >
+              <div>
+                <h3 style={{ fontSize: '20px', fontWeight: 700, fontFamily: 'Space Grotesk', color: '#2D6A4F', marginBottom: '6px' }}>
+                  Edit Product Details
+                </h3>
+                <p style={{ fontSize: '13px', color: '#8E8E9A', fontFamily: 'Poppins' }}>
+                  Update technical specifications, pricing, and stock settings.
+                </p>
+              </div>
+
+              {errorMsg && (
+                <div style={{ padding: '12px 16px', background: 'rgba(239, 68, 68, 0.1)', border: '1px solid rgba(239, 68, 68, 0.2)', borderRadius: '12px', color: '#D00000', fontSize: '13px', fontFamily: 'Poppins' }}>
+                  {errorMsg}
+                </div>
+              )}
+
+              <form onSubmit={handleEditProductSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '20px', flex: 1 }}>
+                
+                {/* Basic Info */}
+                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px' }}>
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
+                    <label style={{ fontSize: '12px', color: '#8E8E9A', fontFamily: 'Poppins' }}>{t('prodName')}</label>
+                    <input type="text" name="product.name" value={editingProduct.product?.name || ''} onChange={handleEditInputChange} placeholder="E.g. Extra Soft Coir Pith" required style={{ padding: '10px 14px', borderRadius: '10px', background: 'rgba(0, 0, 0, 0.015)', border: '1px solid rgba(0, 0, 0, 0.04)', color: '#1A1A2E', outline: 'none', fontSize: '14px' }} />
+                  </div>
+                  
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
+                    <label style={{ fontSize: '12px', color: '#8E8E9A', fontFamily: 'Poppins' }}>{t('categories')}</label>
+                    <select name="product.category" value={editingProduct.product?.category || 'coir-rope'} onChange={handleEditInputChange} style={{ padding: '10px 14px', borderRadius: '10px', background: '#FFFFFF', border: '1px solid rgba(0, 0, 0, 0.04)', color: '#1A1A2E', outline: 'none', fontSize: '14px' }}>
+                      <option value="coir-rope">Coir Rope</option>
+                      <option value="coir-yarn">Coir Yarn</option>
+                      <option value="coir-bundle">Fiber Bundle</option>
+                      <option value="raw-coir-fiber">Raw Coir Fiber</option>
+                      <option value="coir-pith">Coir Pith / Soil</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div style={{ display: 'grid', gridTemplateColumns: '1.5fr 1fr', gap: '16px' }}>
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
+                    <label style={{ fontSize: '12px', color: '#8E8E9A', fontFamily: 'Poppins' }}>{t('skuLabel')}</label>
+                    <input type="text" name="product.sku" value={editingProduct.product?.sku || ''} onChange={handleEditInputChange} placeholder="E.g. CP-SOFT-PITH" required style={{ padding: '10px 14px', borderRadius: '10px', background: 'rgba(0, 0, 0, 0.015)', border: '1px solid rgba(0, 0, 0, 0.04)', color: '#1A1A2E', outline: 'none', fontSize: '14px', fontFamily: 'Space Grotesk' }} />
+                  </div>
+
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
+                    <label style={{ fontSize: '12px', color: '#8E8E9A', fontFamily: 'Poppins' }}>{t('qualityGradeLabel')}</label>
+                    <select name="product.qualityGrade" value={editingProduct.product?.qualityGrade || 'Standard'} onChange={handleEditInputChange} style={{ padding: '10px 14px', borderRadius: '10px', background: '#FFFFFF', border: '1px solid rgba(0, 0, 0, 0.04)', color: '#1A1A2E', outline: 'none', fontSize: '14px' }}>
+                      <option value="Premium">Premium</option>
+                      <option value="Standard">Standard</option>
+                      <option value="Export Grade">Export Grade</option>
+                      <option value="Industrial">Industrial</option>
+                      <option value="Economy">Economy</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
+                  <label style={{ fontSize: '12px', color: '#8E8E9A', fontFamily: 'Poppins' }}>{t('description')}</label>
+                  <textarea name="product.description" value={editingProduct.product?.description || ''} onChange={handleEditInputChange} placeholder="Full product features and industrial details..." rows="3" required style={{ padding: '10px 14px', borderRadius: '10px', background: 'rgba(0, 0, 0, 0.015)', border: '1px solid rgba(0, 0, 0, 0.04)', color: '#1A1A2E', outline: 'none', fontSize: '14px', resize: 'none' }} />
+                </div>
+
+                {/* Product Image File Selection */}
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', background: 'rgba(0, 0, 0, 0.015)', border: '1px solid rgba(0, 0, 0, 0.03)', borderRadius: '12px', padding: '16px' }}>
+                  <label style={{ fontSize: '12px', fontWeight: 600, color: '#2D6A4F', fontFamily: 'Poppins' }}>Product Image (Manual Upload)</label>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
+                    <div style={{ flex: 1 }}>
+                      <input
+                        type="file"
+                        accept="image/*"
+                        onChange={handleFileChange}
+                        style={{ fontSize: '13px', fontFamily: 'Poppins', color: '#5C5C6B' }}
+                      />
+                      <p style={{ fontSize: '11px', color: '#8E8E9A', marginTop: '4px', margin: 0, fontFamily: 'Poppins' }}>
+                        Leave empty to keep existing or default category image.
+                      </p>
+                    </div>
+                    {imagePreview && (
+                      <div style={{ width: '64px', height: '64px', borderRadius: '8px', border: '1px solid rgba(0,0,0,0.1)', overflow: 'hidden', background: '#FFFFFF', flexShrink: 0 }}>
+                        <img src={imagePreview} alt="Preview" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                      </div>
+                    )}
+                  </div>
+                </div>
+
+                {/* Price and Weight */}
+                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px' }}>
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
+                    <label style={{ fontSize: '12px', color: '#8E8E9A', fontFamily: 'Poppins' }}>{t('priceInrPerKg')}</label>
+                    <input type="number" name="product.price.amount" value={editingProduct.product?.price?.amount || 0} onChange={handleEditInputChange} required style={{ padding: '10px 14px', borderRadius: '10px', background: 'rgba(0, 0, 0, 0.015)', border: '1px solid rgba(0, 0, 0, 0.04)', color: '#1A1A2E', outline: 'none', fontSize: '14px' }} />
+                  </div>
+                  
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
+                    <label style={{ fontSize: '12px', color: '#8E8E9A', fontFamily: 'Poppins' }}>{t('unitPackagingWeightKg')}</label>
+                    <input type="number" name="product.weight.value" value={editingProduct.product?.weight?.value || 0} onChange={handleEditInputChange} required style={{ padding: '10px 14px', borderRadius: '10px', background: 'rgba(0, 0, 0, 0.015)', border: '1px solid rgba(0, 0, 0, 0.04)', color: '#1A1A2E', outline: 'none', fontSize: '14px' }} />
+                  </div>
+                </div>
+
+                {/* Specifications subfields */}
+                <div style={{ background: 'rgba(0, 0, 0, 0.01)', border: '1px solid rgba(0, 0, 0, 0.02)', borderRadius: '12px', padding: '16px' }}>
+                  <h4 style={{ fontSize: '13px', fontWeight: 600, color: '#2D6A4F', marginBottom: '12px', fontFamily: 'Space Grotesk' }}>{t('technicalSpecifications')}</h4>
+                  <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '10px 16px' }}>
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
+                      <label style={{ fontSize: '11px', color: '#8E8E9A' }}>{t('tensileStrength')}</label>
+                      <input type="text" name="tensileStrength" value={editingProduct.product?.specifications?.tensileStrength || ''} onChange={handleEditSpecInputChange} placeholder="e.g. 250 kgf" style={{ padding: '8px 12px', borderRadius: '8px', background: 'rgba(0, 0, 0, 0.015)', border: '1px solid rgba(0, 0, 0, 0.03)', color: '#1A1A2E', fontSize: '13px' }} />
+                    </div>
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
+                      <label style={{ fontSize: '11px', color: '#8E8E9A' }}>{t('moistureLevel')}</label>
+                      <input type="text" name="moistureContent" value={editingProduct.product?.specifications?.moistureContent || ''} onChange={handleEditSpecInputChange} placeholder="e.g. 14%" style={{ padding: '8px 12px', borderRadius: '8px', background: 'rgba(0, 0, 0, 0.015)', border: '1px solid rgba(0, 0, 0, 0.03)', color: '#1A1A2E', fontSize: '13px' }} />
+                    </div>
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
+                      <label style={{ fontSize: '11px', color: '#8E8E9A' }}>{t('thicknessDiameter')}</label>
+                      <input type="text" name="diameter" value={editingProduct.product?.specifications?.diameter || ''} onChange={handleEditSpecInputChange} placeholder="e.g. 10mm" style={{ padding: '8px 12px', borderRadius: '8px', background: 'rgba(0, 0, 0, 0.015)', border: '1px solid rgba(0, 0, 0, 0.03)', color: '#1A1A2E', fontSize: '13px' }} />
+                    </div>
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
+                      <label style={{ fontSize: '11px', color: '#8E8E9A' }}>{t('fiberComposition')}</label>
+                      <input type="text" name="fiberType" value={editingProduct.product?.specifications?.fiberType || ''} onChange={handleEditSpecInputChange} placeholder="e.g. Long Bristle" style={{ padding: '8px 12px', borderRadius: '8px', background: 'rgba(0, 0, 0, 0.015)', border: '1px solid rgba(0, 0, 0, 0.03)', color: '#1A1A2E', fontSize: '13px' }} />
+                    </div>
+                  </div>
+                </div>
+
+                {/* Warehouse & Stock Alert */}
+                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px' }}>
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
+                    <label style={{ fontSize: '12px', color: '#8E8E9A', fontFamily: 'Poppins' }}>Warehouse</label>
+                    <input type="text" name="warehouse" value={editingProduct.warehouse || ''} onChange={handleEditInputChange} required style={{ padding: '10px 14px', borderRadius: '10px', background: 'rgba(0, 0, 0, 0.015)', border: '1px solid rgba(0, 0, 0, 0.04)', color: '#1A1A2E', outline: 'none', fontSize: '14px' }} />
+                  </div>
+                  
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
+                    <label style={{ fontSize: '12px', color: '#8E8E9A', fontFamily: 'Poppins' }}>{t('minStockAlertLimitKg')}</label>
+                    <input type="number" name="minStock" value={editingProduct.minStock || 0} onChange={handleEditInputChange} required style={{ padding: '10px 14px', borderRadius: '10px', background: 'rgba(0, 0, 0, 0.015)', border: '1px solid rgba(0, 0, 0, 0.04)', color: '#1A1A2E', outline: 'none', fontSize: '14px' }} />
+                  </div>
+                </div>
+
+                {/* Form Buttons */}
+                <div style={{ display: 'flex', gap: '12px', marginTop: '10px' }}>
+                  <button type="button" onClick={() => { setEditingProduct(null); setSelectedFile(null); setImagePreview(''); }} style={{ flex: 1, padding: '12px', borderRadius: '12px', background: 'transparent', border: '1px solid rgba(0, 0, 0, 0.05)', color: '#5C5C6B', cursor: 'pointer', fontSize: '14px' }}>{t('cancelBtn')}</button>
+                  <button type="submit" disabled={formSubmitting} style={{ flex: 2, padding: '12px', borderRadius: '12px', background: 'linear-gradient(135deg, #1B4332 0%, #2D6A4F 50%, #95D5B2 100%)', color: '#FFFFFF', fontWeight: 600, border: 'none', cursor: 'pointer', fontSize: '14px', boxShadow: '0 4px 15px rgba(45, 106, 79,0.2)' }}>
+                    {formSubmitting ? 'Saving...' : 'Save Changes'}
+                  </button>
+                </div>
+
+              </form>
+            </motion.div>
+          </>
+        )}
+      </AnimatePresence>
     </div>
   );
 }
