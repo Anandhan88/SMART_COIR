@@ -28,6 +28,26 @@ export default function ClientOrders() {
     }
   };
 
+  const handleDownloadPDF = async () => {
+    try {
+      const response = await api.get(`/orders/${selectedOrder._id}/pdf`, {
+        responseType: 'blob',
+      });
+      const blob = new Blob([response.data], { type: 'application/pdf' });
+      const url = window.URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.href = url;
+      link.setAttribute('download', `invoice-${selectedOrder.orderNumber || selectedOrder._id}.pdf`);
+      document.body.appendChild(link);
+      link.click();
+      link.parentNode.removeChild(link);
+      window.URL.revokeObjectURL(url);
+    } catch (err) {
+      console.error('Error downloading PDF:', err);
+      alert('Failed to download invoice PDF.');
+    }
+  };
+
   const getStatusColor = (status) => {
     switch (status) {
       case 'pending': return { text: '#E8C55A', bg: 'rgba(232, 197, 90, 0.1)' };
@@ -172,8 +192,36 @@ export default function ClientOrders() {
                     {t('status' + selectedOrder.status.charAt(0).toUpperCase() + selectedOrder.status.slice(1))}
                   </span>
                 </div>
-                <div style={{ fontSize: '13px', color: '#8E8E9A', fontFamily: 'Poppins' }}>
-                  Reference: #{selectedOrder.orderNumber || selectedOrder._id.toUpperCase()}
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: '12px' }}>
+                  <div style={{ fontSize: '13px', color: '#8E8E9A', fontFamily: 'Poppins' }}>
+                    Reference: #{selectedOrder.orderNumber || selectedOrder._id.toUpperCase()}
+                  </div>
+                  <button
+                    onClick={handleDownloadPDF}
+                    style={{
+                      background: 'rgba(45, 106, 79, 0.1)',
+                      border: '1px solid #2D6A4F',
+                      color: '#2D6A4F',
+                      padding: '6px 12px',
+                      borderRadius: '8px',
+                      cursor: 'pointer',
+                      fontSize: '12px',
+                      fontWeight: 600,
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: '6px',
+                      fontFamily: 'Poppins',
+                      transition: 'all 0.3s'
+                    }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.background = 'rgba(45, 106, 79, 0.2)';
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.background = 'rgba(45, 106, 79, 0.1)';
+                    }}
+                  >
+                    📄 {t('downloadInvoice')}
+                  </button>
                 </div>
               </div>
 

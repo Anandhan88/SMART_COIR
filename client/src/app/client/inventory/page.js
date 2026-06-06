@@ -568,11 +568,13 @@ export default function InventoryBrowse() {
                       position: 'relative',
                       borderBottom: '1px solid rgba(0,0,0,0.02)',
                     }}>
-                      <img
-                        src={getProductImage(p)}
-                        alt={p.name}
-                        style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-                      />
+                      <Link href={`/client/products/${p._id}`} style={{ width: '100%', height: '100%', display: 'block' }}>
+                        <img
+                          src={getProductImage(p)}
+                          alt={p.name}
+                          style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                        />
+                      </Link>
                       
                       {/* Interactive slide controls overlay */}
                       <div style={{ position: 'absolute', left: '10px', width: '24px', height: '24px', borderRadius: '50%', background: 'rgba(255,255,255,0.7)', backdropFilter: 'blur(4px)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '10px', color: '#5C5C6B', cursor: 'pointer' }}>◀</div>
@@ -607,9 +609,13 @@ export default function InventoryBrowse() {
                     <div style={{ padding: '24px', flex: 1, display: 'flex', flexDirection: 'column' }}>
                       
                       {/* Name & Location */}
-                      <h3 style={{ fontSize: '16px', fontWeight: 700, fontFamily: 'Space Grotesk', color: '#1A1A2E', marginBottom: '4px', lineHeight: 1.3 }}>
-                        {p.name}
-                      </h3>
+                      <Link href={`/client/products/${p._id}`} style={{ textDecoration: 'none' }}>
+                        <h3 style={{ fontSize: '16px', fontWeight: 700, fontFamily: 'Space Grotesk', color: '#1A1A2E', marginBottom: '4px', lineHeight: 1.3 }}
+                            onMouseEnter={e => e.currentTarget.style.color = '#2D6A4F'}
+                            onMouseLeave={e => e.currentTarget.style.color = '#1A1A2E'}>
+                          {p.name}
+                        </h3>
+                      </Link>
                       
                       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }}>
                         <span style={{ fontSize: '12px', color: '#8E8E9A', display: 'flex', alignItems: 'center', gap: '4px' }}>
@@ -662,24 +668,53 @@ export default function InventoryBrowse() {
                           </div>
                         </div>
 
-                        <button
-                          onClick={() => handleContactSupplier(p)}
-                          style={{
-                            padding: '10px 18px',
-                            background: '#0F766E', // Emerald teal matching screenshot
-                            color: '#FFFFFF',
-                            border: 'none',
-                            borderRadius: '10px',
-                            fontWeight: 600,
-                            fontSize: '12px',
-                            cursor: 'pointer',
-                            transition: 'background 0.2s',
-                          }}
-                          onMouseEnter={e => e.currentTarget.style.background = '#0D9488'}
-                          onMouseLeave={e => e.currentTarget.style.background = '#0F766E'}
-                        >
-                          Contact Supplier
-                        </button>
+                        <div style={{ display: 'flex', gap: '8px' }}>
+                          <button
+                            onClick={() => handleContactSupplier(p)}
+                            style={{
+                              padding: '8px 12px',
+                              background: 'rgba(15, 118, 110, 0.08)',
+                              border: '1.5px solid #0F766E',
+                              color: '#0F766E',
+                              borderRadius: '8px',
+                              fontWeight: 600,
+                              fontSize: '11.5px',
+                              cursor: 'pointer',
+                              transition: 'all 0.2s',
+                              fontFamily: 'Poppins',
+                            }}
+                            onMouseEnter={e => {
+                              e.currentTarget.style.background = 'rgba(15, 118, 110, 0.15)';
+                            }}
+                            onMouseLeave={e => {
+                              e.currentTarget.style.background = 'rgba(15, 118, 110, 0.08)';
+                            }}
+                          >
+                            Inquire
+                          </button>
+                          <Link
+                            href={`/client/products/${p._id}`}
+                            style={{
+                              padding: '8px 14px',
+                              background: '#0F766E',
+                              color: '#FFFFFF',
+                              borderRadius: '8px',
+                              fontWeight: 600,
+                              fontSize: '11.5px',
+                              textDecoration: 'none',
+                              cursor: 'pointer',
+                              display: 'inline-flex',
+                              alignItems: 'center',
+                              justifyContent: 'center',
+                              transition: 'background 0.2s',
+                              fontFamily: 'Poppins',
+                            }}
+                            onMouseEnter={e => e.currentTarget.style.background = '#0D9488'}
+                            onMouseLeave={e => e.currentTarget.style.background = '#0F766E'}
+                          >
+                            {t('placeOrder')}
+                          </Link>
+                        </div>
                       </div>
 
                       {/* Supplier Badge details */}

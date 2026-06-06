@@ -38,6 +38,26 @@ export default function AdminOrders() {
     }
   };
 
+  const handleDownloadPDF = async () => {
+    try {
+      const response = await api.get(`/orders/${selectedOrder._id}/pdf`, {
+        responseType: 'blob',
+      });
+      const blob = new Blob([response.data], { type: 'application/pdf' });
+      const url = window.URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.href = url;
+      link.setAttribute('download', `invoice-${selectedOrder.orderNumber || selectedOrder._id}.pdf`);
+      document.body.appendChild(link);
+      link.click();
+      link.parentNode.removeChild(link);
+      window.URL.revokeObjectURL(url);
+    } catch (err) {
+      console.error('Error downloading PDF:', err);
+      alert('Failed to download invoice PDF.');
+    }
+  };
+
   const updateStatus = async (orderId, status, notes = '') => {
     try {
       setActionLoading(true);
@@ -231,6 +251,32 @@ export default function AdminOrders() {
                   <h4 style={{ fontSize: '18px', fontWeight: 700, fontFamily: 'Space Grotesk', color: '#1A1A2E' }}>
                     {t('processOrderTitle')} #{selectedOrder.orderNumber || selectedOrder._id.substring(0,8).toUpperCase()}
                   </h4>
+                  <button
+                    onClick={handleDownloadPDF}
+                    style={{
+                      background: 'rgba(45, 106, 79, 0.1)',
+                      border: '1px solid #2D6A4F',
+                      color: '#2D6A4F',
+                      padding: '6px 12px',
+                      borderRadius: '8px',
+                      cursor: 'pointer',
+                      fontSize: '12px',
+                      fontWeight: 600,
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: '6px',
+                      fontFamily: 'Poppins',
+                      transition: 'all 0.3s'
+                    }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.background = 'rgba(45, 106, 79, 0.2)';
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.background = 'rgba(45, 106, 79, 0.1)';
+                    }}
+                  >
+                    📄 {t('downloadInvoice')}
+                  </button>
                 </div>
                 <div style={{ fontSize: '13px', color: '#5C5C6B', fontFamily: 'Poppins' }}>
                   {t('clientLabel')} <strong>{selectedOrder.client?.name}</strong> ({selectedOrder.client?.company})
