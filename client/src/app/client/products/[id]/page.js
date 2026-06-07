@@ -20,6 +20,9 @@ export default function ProductDetail({ params }) {
   const [orderSuccess, setOrderSuccess] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
   const [qrExpanded, setQrExpanded] = useState(false);
+  const [upiModalOpen, setUpiModalOpen] = useState(false);
+  const [simulatingPayment, setSimulatingPayment] = useState(false);
+  const [paymentVerified, setPaymentVerified] = useState(false);
 
   // Unpack dynamic router params
   useEffect(() => {
@@ -63,15 +66,18 @@ export default function ProductDetail({ params }) {
   };
 
   const handlePlaceOrder = async (e) => {
-    e.preventDefault();
+    if (e) e.preventDefault();
     if (!shippingAddress) {
       setErrorMessage(t('provideAddress'));
+      return;
+    }
+    if (paymentMethod === 'upi' && !paymentVerified) {
+      setUpiModalOpen(true);
       return;
     }
     setSubmittingOrder(true);
     setErrorMessage('');
     try {
-      const billing = calculateBilling();
       const orderPayload = {
         items: [
           {
@@ -87,6 +93,51 @@ export default function ProductDetail({ params }) {
       const res = await api.post('/orders', orderPayload);
       if (res.data.success) {
         setOrderSuccess(true);
+        setTimeout(() => {
+          router.push('/client/orders');
+        }, 2500);
+      }
+    } catch (err) {
+      setErrorMessage(err.response?.data?.message || t('inquirySubmittedError'));
+    } finally {
+      setSubmittingOrder(false);
+    }
+  };
+
+  const handleSimulatePayment = async () => {
+    setSimulatingPayment(true);
+    try {
+      await new Promise((resolve) => setTimeout(resolve, 2000));
+      setPaymentVerified(true);
+      setSimulatingPayment(false);
+      await submitVerifiedOrder();
+    } catch (err) {
+      console.error(err);
+      setSimulatingPayment(false);
+      setErrorMessage('UPI Payment Verification Failed.');
+    }
+  };
+
+  const submitVerifiedOrder = async () => {
+    setSubmittingOrder(true);
+    setErrorMessage('');
+    try {
+      const orderPayload = {
+        items: [
+          {
+            product: product._id,
+            quantity: orderQuantity,
+            unitPrice: product.price.amount
+          }
+        ],
+        shippingAddress,
+        notes,
+        paymentMethod: 'upi'
+      };
+      const res = await api.post('/orders', orderPayload);
+      if (res.data.success) {
+        setOrderSuccess(true);
+        setUpiModalOpen(false);
         setTimeout(() => {
           router.push('/client/orders');
         }, 2500);
@@ -335,6 +386,7 @@ export default function ProductDetail({ params }) {
                     }}
                   >
                     <option value="bank-transfer">{t('bankTransferOption')}</option>
+                    <option value="upi">{t('upiOption')}</option>
                     <option value="letter-of-credit">{t('lcOption')}</option>
                     <option value="net-30">{t('net30Option')}</option>
                   </select>
@@ -508,9 +560,163 @@ export default function ProductDetail({ params }) {
         )}
       </AnimatePresence>
 
+      {/* UPI QR Modal */}
+      <AnimatePresence>
+        {upiModalOpen && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={() => {
+              if (!simulatingPayment) setUpiModalOpen(false);
+            }}
+            style={{
+              position: 'fixed',
+              inset: 0,
+              zIndex: 999,
+              background: 'rgba(0, 0, 0, 0.6)',
+              backdropFilter: 'blur(8px)',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              padding: '24px',
+            }}
+          >
+            <motion.div
+              initial={{ scale: 0.9, y: 20 }}
+              animate={{ scale: 1, y: 0 }}
+              exit={{ scale: 0.9, y: 20 }}
+              onClick={(e) => e.stopPropagation()}
+              style={{
+                background: '#FFFFFF',
+                borderRadius: '24px',
+                padding: '36px',
+                width: '100%',
+                maxWidth: '420px',
+                textAlign: 'center',
+                boxShadow: '0 20px 50px rgba(0, 0, 0, 0.3)',
+              }}
+            >
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px' }}>
+                <h3 style={{ fontSize: '18px', fontWeight: 700, fontFamily: 'Space Grotesk', color: '#1A1A2E', margin: 0 }}>
+                  UPI QR Payment
+                </h3>
+                {!simulatingPayment && (
+                  <button
+                    onClick={() => setUpiModalOpen(false)}
+                    style={{
+                      border: 'none',
+                      background: 'rgba(0,0,0,0.05)',
+                      borderRadius: '50%',
+                      width: '32px',
+                      height: '32px',
+                      cursor: 'pointer',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      fontSize: '16px',
+                      color: '#8E8E9A',
+                    }}
+                  >
+                    ✕
+                  </button>
+                )}
+              </div>
+
+              {simulatingPayment ? (
+                <div style={{ padding: '40px 0' }}>
+                  <div className="payment-spinner" style={{
+                    width: '50px',
+                    height: '50px',
+                    border: '5px solid rgba(45, 106, 79, 0.1)',
+                    borderTopColor: '#2D6A4F',
+                    borderRadius: '50%',
+                    animation: 'spin 1s linear infinite',
+                    margin: '0 auto 20px auto'
+                  }} />
+                  <div style={{ fontWeight: 600, color: '#1A1A2E', fontSize: '15px', fontFamily: 'Poppins' }}>
+                    Verifying payment transaction...
+                  </div>
+                  <div style={{ color: '#8E8E9A', fontSize: '12px', marginTop: '6px', fontFamily: 'Poppins' }}>
+                    Do not close or reload the browser.
+                  </div>
+                </div>
+              ) : paymentVerified ? (
+                <div style={{ padding: '40px 0' }}>
+                  <div style={{ fontSize: '48px', marginBottom: '16px' }}>✅</div>
+                  <div style={{ fontWeight: 600, color: '#2ecc71', fontSize: '16px', fontFamily: 'Poppins' }}>
+                    Payment Successful!
+                  </div>
+                  <div style={{ color: '#8E8E9A', fontSize: '12px', marginTop: '6px', fontFamily: 'Poppins' }}>
+                    Creating order in system...
+                  </div>
+                </div>
+              ) : (
+                <>
+                  <div style={{
+                    background: '#F8F5F0',
+                    padding: '20px',
+                    borderRadius: '16px',
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    border: '1px solid rgba(0,0,0,0.04)',
+                    marginBottom: '20px',
+                  }}>
+                    <img
+                      src={`https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=upi://pay?pa=pay@smartcoir%26pn=Smart%20Coir%20Ltd%26am=${total}%26cu=INR`}
+                      alt="Payment QR Code"
+                      style={{ width: '180px', height: '180px', objectFit: 'contain' }}
+                    />
+                  </div>
+
+                  <div style={{ fontSize: '14px', fontFamily: 'Poppins', color: '#5C5C6B', marginBottom: '24px', textAlign: 'left', background: 'rgba(0,0,0,0.015)', padding: '16px', borderRadius: '12px', border: '1px solid rgba(0,0,0,0.02)' }}>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '6px' }}>
+                      <span>Payee:</span>
+                      <strong style={{ color: '#1A1A2E' }}>Smart Coir Ltd</strong>
+                    </div>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '6px' }}>
+                      <span>UPI ID:</span>
+                      <strong style={{ color: '#1A1A2E' }}>pay@smartcoir</strong>
+                    </div>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', borderTop: '1px solid rgba(0,0,0,0.04)', paddingTop: '8px', marginTop: '8px' }}>
+                      <span>Amount Due:</span>
+                      <strong style={{ color: '#2D6A4F', fontSize: '16px' }}>₹{total.toLocaleString('en-IN')}</strong>
+                    </div>
+                  </div>
+
+                  <button
+                    onClick={handleSimulatePayment}
+                    style={{
+                      width: '100%',
+                      padding: '14px',
+                      borderRadius: '12px',
+                      background: 'linear-gradient(135deg, #1B4332 0%, #2D6A4F 50%, #95D5B2 100%)',
+                      color: '#FFFFFF',
+                      fontWeight: 600,
+                      fontSize: '14px',
+                      fontFamily: 'Poppins',
+                      border: 'none',
+                      cursor: 'pointer',
+                      boxShadow: '0 4px 20px rgba(45, 106, 79, 0.2)',
+                    }}
+                  >
+                    Simulate App Scan & Pay
+                  </button>
+                </>
+              )}
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
       <style jsx>{`
         @media (max-width: 900px) {
           .detail-grid { grid-template-columns: 1fr !important; }
+        }
+        @keyframes spin {
+          0% { transform: rotate(0deg); }
+          100% { transform: rotate(360deg); }
         }
       `}</style>
     </div>

@@ -46,7 +46,7 @@ const orderSchema = new mongoose.Schema({
   },
   paymentMethod: {
     type: String,
-    enum: ['bank-transfer', 'credit-card', 'upi', 'cash', 'cheque'],
+    enum: ['bank-transfer', 'credit-card', 'upi', 'cash', 'cheque', 'letter-of-credit', 'net-30'],
   },
   deliveryTracking: {
     carrier: String,

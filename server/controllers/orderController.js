@@ -85,6 +85,7 @@ exports.createOrder = async (req, res) => {
       shippingAddress,
       notes,
       paymentMethod,
+      paymentStatus: paymentMethod === 'upi' ? 'paid' : 'pending',
       statusHistory: [{
         status: 'pending',
         changedBy: req.user.id,
