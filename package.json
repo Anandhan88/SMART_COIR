@@ -4,6 +4,8 @@
   "private": true,
   "description": "Smart Coir Manufacturing & Supply Chain Management System Workspace",
   "scripts": {
+    "build": "npm --prefix client run build",
+    "vercel-build": "npm --prefix client run build",
     "dev:server": "npm --prefix server run dev",
     "dev:client": "npm --prefix client run dev",
     "start:server": "npm --prefix server start",
