@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "next dev --webpack",
     "build": "next build",
+    "postbuild": "cp package.json .next/package.json 2>/dev/null || copy package.json .next\\package.json",
     "start": "next start",
     "lint": "eslint"
   },
