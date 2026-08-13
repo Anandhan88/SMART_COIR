@@ -4,7 +4,8 @@
   "private": true,
   "description": "Smart Coir Manufacturing & Supply Chain Management System Workspace",
   "scripts": {
-    "build": "npm --prefix client run build",
+    "build": "cd client && npm install && npm run build && cp -r .next .. && cp package.json ../.next/package.json",
+    "vercel-build": "cd client && npm install && npm run build && cp -r .next .. && cp package.json ../.next/package.json",
     "dev:server": "npm --prefix server run dev",
     "dev:client": "npm --prefix client run dev",
     "start:server": "npm --prefix server start",
