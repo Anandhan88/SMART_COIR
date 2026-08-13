@@ -1,5 +1,0 @@
-{
-  "buildCommand": "cd client && npm install && npm run build && cp -r .next .. && cp package.json ../.next/package.json",
-  "outputDirectory": ".next",
-  "framework": "nextjs"
-}
