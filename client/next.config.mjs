@@ -7,7 +7,7 @@ const __dirname = path.dirname(__filename);
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: false,
-  outputFileTracingRoot: __dirname,
+  outputFileTracingRoot: path.join(__dirname, '../'),
   transpilePackages: ['three'],
   images: {
     remotePatterns: [
@@ -22,14 +22,16 @@ const nextConfig = {
     ],
   },
   async rewrites() {
+    const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'https://smart-coir-backend.onrender.com/api';
+    const baseUrl = apiUrl.replace(/\/api\/?$/, '');
     return [
       {
         source: '/api/:path*',
-        destination: 'http://localhost:5000/api/:path*',
+        destination: `${baseUrl}/api/:path*`,
       },
       {
         source: '/uploads/:path*',
-        destination: 'http://localhost:5000/uploads/:path*',
+        destination: `${baseUrl}/uploads/:path*`,
       },
     ];
   },
