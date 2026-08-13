@@ -501,7 +501,7 @@ export default function AdminOrders() {
         )}
       </AnimatePresence>
 
-      <style jsx>{`
+      <style>{`
         @media (max-width: 900px) {
           .admin-orders-grid { grid-template-columns: 1fr !important; }
         }

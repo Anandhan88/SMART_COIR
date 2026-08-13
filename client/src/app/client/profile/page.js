@@ -277,7 +277,7 @@ export default function ClientProfile() {
         </form>
       </motion.div>
 
-      <style jsx>{`
+      <style>{`
         @media (max-width: 600px) {
           .form-row { grid-template-columns: 1fr !important; }
         }

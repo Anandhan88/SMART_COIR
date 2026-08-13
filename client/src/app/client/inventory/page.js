@@ -860,7 +860,7 @@ export default function InventoryBrowse() {
       </AnimatePresence>
 
       {/* CSS adjustments */}
-      <style jsx>{`
+      <style>{`
         @media (max-width: 992px) {
           .directory-layout {
             grid-template-columns: 1fr !important;

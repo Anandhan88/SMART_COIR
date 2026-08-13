@@ -13,7 +13,22 @@ export default function LoginPage() {
   const [loading, setLoading] = useState(false);
   const [errorMsg, setErrorMsg] = useState('');
   
-  const { login } = useAuth();
+  const { login, socialLogin } = useAuth();
+
+  const handleSocial = async (provider) => {
+    // For demo purposes, we auto-generate a mockup profile
+    const mockProfile = {
+      email: `${provider}@example.com`,
+      name: 'Test user',
+      avatar: '',
+      provider: provider
+    };
+    try {
+      await socialLogin(mockProfile);
+    } catch (err) {
+      setErrorMsg(err.message || 'Social login failed.');
+    }
+  };
 
   const handleRoleToggle = (mode) => {
     setRoleMode(mode);
@@ -109,10 +124,10 @@ export default function LoginPage() {
               Smart<span style={{ color: '#2D6A4F' }}>Coir</span>
             </span>
           </Link>
-          <h2 style={{ fontSize: '20px', fontWeight: 600, color: '#1A1A2E', fontFamily: 'Space Grotesk', marginBottom: '6px' }}>
+          <h1 style={{ fontSize: '20px', fontWeight: 600, color: '#1A1A2E', fontFamily: 'Space Grotesk', marginBottom: '6px' }}>
             {t('signInPortal')}
-          </h2>
-          <p style={{ fontSize: '13px', color: '#8E8E9A', fontFamily: 'Poppins' }}>
+          </h1>
+          <p style={{ fontSize: '13px', color: '#475569', fontFamily: 'Poppins' }}>
             {t('selectRole')}
           </p>
         </div>
@@ -134,7 +149,7 @@ export default function LoginPage() {
               borderRadius: '8px',
               border: 'none',
               background: roleMode === 'client' ? 'rgba(45, 106, 79,0.1)' : 'transparent',
-              color: roleMode === 'client' ? '#2D6A4F' : '#8E8E9A',
+              color: roleMode === 'client' ? '#1B4332' : '#475569',
               fontWeight: 600,
               fontSize: '13px',
               cursor: 'pointer',
@@ -152,7 +167,7 @@ export default function LoginPage() {
               borderRadius: '8px',
               border: 'none',
               background: roleMode === 'admin' ? 'rgba(45, 106, 79,0.1)' : 'transparent',
-              color: roleMode === 'admin' ? '#2D6A4F' : '#8E8E9A',
+              color: roleMode === 'admin' ? '#1B4332' : '#475569',
               fontWeight: 600,
               fontSize: '13px',
               cursor: 'pointer',
@@ -187,7 +202,7 @@ export default function LoginPage() {
         {/* Form */}
         <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
           <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-            <label htmlFor="email" style={{ fontSize: '12px', fontWeight: 500, color: '#5C5C6B', fontFamily: 'Poppins', letterSpacing: '1px', textTransform: 'uppercase' }}>
+            <label htmlFor="email" style={{ fontSize: '12px', fontWeight: 600, color: '#374151', fontFamily: 'Poppins', letterSpacing: '1px', textTransform: 'uppercase' }}>
               {t('emailAddress')}
             </label>
             <input
@@ -224,10 +239,10 @@ export default function LoginPage() {
 
           <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-              <label htmlFor="password" style={{ fontSize: '12px', fontWeight: 500, color: '#5C5C6B', fontFamily: 'Poppins', letterSpacing: '1px', textTransform: 'uppercase' }}>
+              <label htmlFor="password" style={{ fontSize: '12px', fontWeight: 600, color: '#374151', fontFamily: 'Poppins', letterSpacing: '1px', textTransform: 'uppercase' }}>
                 {t('password')}
               </label>
-              <Link href="/login/forgot" style={{ fontSize: '12px', color: '#2D6A4F', fontFamily: 'Poppins', textDecoration: 'none' }}>
+              <Link href="/login/forgot" style={{ fontSize: '12px', color: '#2D6A4F', fontFamily: 'Poppins', textDecoration: 'none', fontWeight: 600 }}>
                 {t('forgotPassword')}
               </Link>
             </div>
@@ -299,11 +314,66 @@ export default function LoginPage() {
           </button>
         </form>
 
+        {/* Separator */}
+        <div style={{ display: 'flex', alignItems: 'center', gap: '16px', marginTop: '28px', marginBottom: '20px' }}>
+          <div style={{ flex: 1, height: '1px', background: 'rgba(0, 0, 0, 0.05)' }} />
+          <span style={{ fontSize: '12px', color: '#475569', fontFamily: 'Poppins', fontWeight: 500 }}>or continue with</span>
+          <div style={{ flex: 1, height: '1px', background: 'rgba(0, 0, 0, 0.05)' }} />
+        </div>
+
+        {/* Social Logins */}
+        <div style={{ display: 'flex', gap: '16px' }}>
+          <button
+             onClick={() => handleSocial('google')}
+             style={{
+               flex: 1,
+               padding: '12px',
+               borderRadius: '12px',
+               border: '1px solid rgba(0, 0, 0, 0.04)',
+               background: '#FFFFFF',
+               display: 'flex',
+               alignItems: 'center',
+               justifyContent: 'center',
+               gap: '10px',
+               cursor: 'pointer',
+               fontFamily: 'Poppins',
+               fontSize: '13px',
+               fontWeight: 500,
+               color: '#1A1A2E'
+            }}
+          >
+            <img src="https://authjs.dev/img/providers/google.svg" alt="Google" style={{ width: '18px', height: '18px' }}/>
+            Google
+          </button>
+          <button
+             onClick={() => handleSocial('facebook')}
+             style={{
+               flex: 1,
+               padding: '12px',
+               borderRadius: '12px',
+               border: '1px solid rgba(0, 0, 0, 0.04)',
+               background: '#FFFFFF',
+               display: 'flex',
+               alignItems: 'center',
+               justifyContent: 'center',
+               gap: '10px',
+               cursor: 'pointer',
+               fontFamily: 'Poppins',
+               fontSize: '13px',
+               fontWeight: 500,
+               color: '#1A1A2E'
+            }}
+          >
+            <img src="https://authjs.dev/img/providers/facebook.svg" alt="Facebook" style={{ width: '18px', height: '18px' }}/>
+            Facebook
+          </button>
+        </div>
+
         {/* Register footer link */}
         {roleMode === 'client' && (
-          <div style={{ marginTop: '32px', textAlign: 'center', fontSize: '13px', color: '#8E8E9A', fontFamily: 'Poppins' }}>
+          <div style={{ marginTop: '32px', textAlign: 'center', fontSize: '13px', color: '#475569', fontFamily: 'Poppins' }}>
             {t('dontHaveAccount')}{' '}
-            <Link href="/register" style={{ color: '#2D6A4F', fontWeight: 500, textDecoration: 'none' }}>
+            <Link href="/register" style={{ color: '#2D6A4F', fontWeight: 600, textDecoration: 'none' }}>
               {t('createOneNow')}
             </Link>
           </div>

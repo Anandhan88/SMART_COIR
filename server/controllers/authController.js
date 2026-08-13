@@ -209,3 +209,144 @@ exports.updateProfile = async (req, res) => {
     res.status(500).json({ success: false, message: 'Server error' });
   }
 };
+
+// @desc    Social Login
+// @route   POST /api/auth/social-login
+exports.socialLogin = async (req, res) => {
+  try {
+    const { email, name, avatar, provider } = req.body;
+
+    if (!email) {
+      return res.status(400).json({
+        success: false,
+        message: 'Email is required for social login',
+      });
+    }
+
+    // Check if user exists
+    let user = await User.findOne({ email });
+
+    if (user) {
+      if (!user.isActive) {
+        return res.status(401).json({
+          success: false,
+          message: 'Account has been deactivated',
+        });
+      }
+
+      // Update last login
+      user.lastLogin = new Date();
+      if (avatar && !user.avatar) {
+        user.avatar = avatar;
+      }
+    } else {
+      // Generate a secure random password for the user schema
+      const randomPassword = require('crypto').randomBytes(16).toString('hex');
+      user = new User({
+        name: name || email.split('@')[0],
+        email,
+        password: randomPassword,
+        role: 'client',
+        avatar: avatar || '',
+        company: 'Social User',
+        phone: '',
+      });
+      user.lastLogin = new Date();
+    }
+
+    const token = generateToken(user._id);
+    const refreshToken = generateRefreshToken(user._id);
+    user.refreshToken = refreshToken;
+    await user.save();
+
+    res.json({
+      success: true,
+      data: {
+        user: {
+          id: user._id,
+          name: user.name,
+          email: user.email,
+          role: user.role,
+          company: user.company,
+          avatar: user.avatar,
+          phone: user.phone,
+        },
+        token,
+        refreshToken,
+      },
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: 'Server error',
+      error: error.message,
+    });
+  }
+};
+
+// @desc    Forgot Password
+// @route   POST /api/auth/forgot-password
+exports.forgotPassword = async (req, res) => {
+  try {
+    const { email } = req.body;
+    if (!email) {
+      return res.status(400).json({ success: false, message: 'Email is required' });
+    }
+
+    const user = await User.findOne({ email });
+    if (!user) {
+      return res.status(404).json({ success: false, message: 'No user found with that email' });
+    }
+
+    // Generate 6-digit random code
+    const code = Math.floor(100000 + Math.random() * 900000).toString();
+
+    // Store in DB with 10 mins expiry
+    user.resetPasswordToken = code;
+    user.resetPasswordExpire = Date.now() + 10 * 60 * 1000;
+    await user.save();
+
+    // Log the code for local testing/simulation
+    console.log(`[PASSWORD_RESET] Email: ${email} | Code: ${code}`);
+
+    res.json({
+      success: true,
+      message: 'Password reset code logged/sent to email',
+    });
+  } catch (error) {
+    res.status(500).json({ success: false, message: 'Server error', error: error.message });
+  }
+};
+
+// @desc    Reset Password
+// @route   POST /api/auth/reset-password
+exports.resetPassword = async (req, res) => {
+  try {
+    const { code, password } = req.body;
+    if (!code || !password) {
+      return res.status(400).json({ success: false, message: 'Code and password are required' });
+    }
+
+    const user = await User.findOne({
+      resetPasswordToken: code,
+      resetPasswordExpire: { $gt: Date.now() },
+    });
+
+    if (!user) {
+      return res.status(400).json({ success: false, message: 'Invalid or expired reset code' });
+    }
+
+    // Set new password (the model pre-save hook will hash it)
+    user.password = password;
+    user.resetPasswordToken = undefined;
+    user.resetPasswordExpire = undefined;
+    await user.save();
+
+    res.json({
+      success: true,
+      message: 'Password reset successful',
+    });
+  } catch (error) {
+    res.status(500).json({ success: false, message: 'Server error', error: error.message });
+  }
+};

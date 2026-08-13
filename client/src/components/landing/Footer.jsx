@@ -158,7 +158,7 @@ export default function Footer() {
         </div>
       </div>
 
-      <style jsx>{`
+      <style>{`
         @media (max-width: 1024px) {
           .footer-grid { grid-template-columns: 1fr 1fr !important; }
         }

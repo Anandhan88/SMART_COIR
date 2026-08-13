@@ -710,7 +710,7 @@ export default function ProductDetail({ params }) {
         )}
       </AnimatePresence>
 
-      <style jsx>{`
+      <style>{`
         @media (max-width: 900px) {
           .detail-grid { grid-template-columns: 1fr !important; }
         }

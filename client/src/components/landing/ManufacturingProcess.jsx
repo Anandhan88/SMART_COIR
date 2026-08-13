@@ -94,7 +94,7 @@ export default function ManufacturingProcess() {
         </div>
       </div>
 
-      <style jsx>{`
+      <style>{`
         @media (max-width: 1024px) {
           .process-row { grid-template-columns: 1fr !important; }
           .process-row > div { order: unset !important; text-align: left !important; }

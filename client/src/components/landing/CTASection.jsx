@@ -146,7 +146,7 @@ export default function CTASection() {
         </div>
       </div>
 
-      <style jsx>{`
+      <style>{`
         @media (max-width: 1024px) {
           .cta-grid { grid-template-columns: 1fr !important; gap: 60px !important; }
         }

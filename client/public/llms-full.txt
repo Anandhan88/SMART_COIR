@@ -1,0 +1,21 @@
+# Smart Coir Manufacturing & Supply Chain Management System - Complete Overview
+
+> Smart Coir is an enterprise-grade digital ecosystem for coir manufacturing management, raw material quality tracking, inventory logistics, and wholesale buyer order fulfillment.
+
+## Platform Capabilities
+
+### 1. Buyer & Client Services
+- Product Catalog Browsing: Coir Blocks, Coir Pith, Coir Fiber, Coco Peat, Geotextiles.
+- Bulk Order Processing with Automated GST Tax calculation and Shipping Logistics.
+- Invoice Generation & PDF Downloading.
+- Order Tracking with Status Timelines: Pending -> Confirmed -> Processing -> Shipped -> Delivered.
+
+### 2. Admin & Supply Chain Management
+- Inventory Control: Track raw material batches, quality test scores, moisture content, and EC levels.
+- Order Fulfillment & Carrier Tracking Assignment.
+- Analytics & Reports.
+
+### 3. API Integrations & Auth
+- JWT Authentication & Session Token Refresh.
+- Socket.IO Real-time Communication.
+- OpenAI-powered Logistics Assistant.

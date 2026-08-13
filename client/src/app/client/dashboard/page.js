@@ -78,12 +78,12 @@ export default function ClientDashboard() {
 
   const getStatusColor = (status) => {
     switch (status) {
-      case 'pending': return { text: '#E8C55A', bg: 'rgba(232, 197, 90, 0.1)' };
-      case 'confirmed': return { text: '#2D6A4F', bg: 'rgba(45, 106, 79, 0.1)' };
-      case 'processing': return { text: '#3498db', bg: 'rgba(52, 152, 219, 0.1)' };
-      case 'shipped': return { text: '#9b59b6', bg: 'rgba(155, 89, 182, 0.1)' };
-      case 'delivered': return { text: '#2ecc71', bg: 'rgba(46, 204, 113, 0.1)' };
-      default: return { text: '#5C5C6B', bg: 'rgba(0, 0, 0, 0.03)' };
+      case 'pending': return { text: '#9A6A00', bg: 'rgba(232, 197, 90, 0.15)' };
+      case 'confirmed': return { text: '#1B4332', bg: 'rgba(45, 106, 79, 0.15)' };
+      case 'processing': return { text: '#1D4ED8', bg: 'rgba(52, 152, 219, 0.15)' };
+      case 'shipped': return { text: '#6D28D9', bg: 'rgba(155, 89, 182, 0.15)' };
+      case 'delivered': return { text: '#15803D', bg: 'rgba(46, 204, 113, 0.15)' };
+      default: return { text: '#374151', bg: 'rgba(0, 0, 0, 0.05)' };
     }
   };
 
@@ -112,7 +112,7 @@ export default function ClientDashboard() {
           <h1 style={{ fontSize: '26px', fontWeight: 700, fontFamily: 'Space Grotesk', color: '#1A1A2E', marginBottom: '8px' }}>
             {t('welcome')}, {user.name} 👋
           </h1>
-          <p style={{ fontSize: '14px', color: '#5C5C6B', fontFamily: 'Poppins' }}>
+          <p style={{ fontSize: '14px', color: '#475569', fontFamily: 'Poppins' }}>
             {t('repOf')} <strong style={{ color: '#2D6A4F' }}>{user.company || 'Direct Buyer'}</strong>. {t('manageCoirOrders')}
           </p>
         </div>
@@ -156,7 +156,7 @@ export default function ClientDashboard() {
             }}
           >
             <div>
-              <div style={{ fontSize: '12px', color: '#8E8E9A', fontFamily: 'Poppins', marginBottom: '8px', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
+              <div style={{ fontSize: '12px', color: '#475569', fontFamily: 'Poppins', marginBottom: '8px', textTransform: 'uppercase', letterSpacing: '0.5px', fontWeight: 600 }}>
                 {s.label}
               </div>
               <div style={{ fontSize: '24px', fontWeight: 700, fontFamily: 'Space Grotesk', color: '#1A1A2E' }}>
@@ -180,27 +180,27 @@ export default function ClientDashboard() {
           padding: '28px',
         }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '24px' }}>
-            <h3 style={{ fontSize: '18px', fontWeight: 600, fontFamily: 'Space Grotesk' }}>
+            <h2 style={{ fontSize: '18px', fontWeight: 600, fontFamily: 'Space Grotesk' }}>
               {t('recentOrders')}
-            </h3>
-            <Link href="/client/orders" style={{ fontSize: '13px', color: '#2D6A4F', textDecoration: 'none' }}>
+            </h2>
+            <Link href="/client/orders" style={{ fontSize: '13px', color: '#2D6A4F', textDecoration: 'none', fontWeight: 600 }}>
               {t('viewAllOrders')} →
             </Link>
           </div>
 
           {ordersLoading ? (
-            <div style={{ color: '#8E8E9A', fontSize: '14px', textAlign: 'center', padding: '40px' }}>
+            <div style={{ color: '#475569', fontSize: '14px', textAlign: 'center', padding: '40px' }}>
               {t('loadingRecentOrders')}
             </div>
           ) : orders.length === 0 ? (
-            <div style={{ color: '#8E8E9A', fontSize: '14px', textAlign: 'center', padding: '40px' }}>
+            <div style={{ color: '#475569', fontSize: '14px', textAlign: 'center', padding: '40px' }}>
               {t('noOrdersFoundClickHere')}
             </div>
           ) : (
             <div style={{ overflowX: 'auto' }}>
               <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left', fontSize: '14px' }}>
                 <thead>
-                  <tr style={{ borderBottom: '1px solid rgba(0, 0, 0, 0.03)', color: '#8E8E9A' }}>
+                  <tr style={{ borderBottom: '1px solid rgba(0, 0, 0, 0.06)', color: '#475569', fontWeight: 600 }}>
                     <th style={{ padding: '12px 8px' }}>{t('orderRef')}</th>
                     <th style={{ padding: '12px 8px' }}>{t('items')}</th>
                     <th style={{ padding: '12px 8px' }}>{t('totalAmount')}</th>
@@ -216,7 +216,7 @@ export default function ClientDashboard() {
                         <td style={{ padding: '16px 8px', fontWeight: 600, fontFamily: 'Space Grotesk' }}>
                           #{order.orderNumber || order._id.substring(order._id.length - 6).toUpperCase()}
                         </td>
-                        <td style={{ padding: '16px 8px', color: '#5C5C6B' }}>
+                        <td style={{ padding: '16px 8px', color: '#475569' }}>
                           {order.items?.length || 1} {t('productsUnit')}
                         </td>
                         <td style={{ padding: '16px 8px', fontWeight: 500 }}>
@@ -231,12 +231,12 @@ export default function ClientDashboard() {
                             textTransform: 'uppercase',
                             background: st.bg,
                             color: st.text,
-                            border: `1px solid ${st.text}20`,
+                            border: `1px solid ${st.text}30`,
                           }}>
                             {t('status' + order.status.charAt(0).toUpperCase() + order.status.slice(1))}
                           </span>
                         </td>
-                        <td style={{ padding: '16px 8px', color: '#8E8E9A', fontSize: '12px' }}>
+                        <td style={{ padding: '16px 8px', color: '#475569', fontSize: '12px' }}>
                           {new Date(order.createdAt).toLocaleDateString()}
                         </td>
                       </tr>
@@ -259,17 +259,17 @@ export default function ClientDashboard() {
             borderRadius: '20px',
             padding: '24px',
           }}>
-            <h4 style={{ fontSize: '15px', fontWeight: 600, fontFamily: 'Space Grotesk', marginBottom: '16px', color: '#2D6A4F' }}>
+            <h2 style={{ fontSize: '15px', fontWeight: 600, fontFamily: 'Space Grotesk', marginBottom: '16px', color: '#2D6A4F' }}>
               {t('quickActions')}
-            </h4>
+            </h2>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
-              <Link href="/client/inventory" style={{ display: 'flex', alignItems: 'center', gap: '10px', color: '#5C5C6B', fontSize: '13px', textDecoration: 'none', padding: '10px', borderRadius: '8px', background: 'rgba(0, 0, 0, 0.01)' }} onMouseEnter={(e)=>e.target.style.color='#1A1A2E'} onMouseLeave={(e)=>e.target.style.color='#5C5C6B'}>
+              <Link href="/client/inventory" style={{ display: 'flex', alignItems: 'center', gap: '10px', color: '#374151', fontSize: '13px', textDecoration: 'none', padding: '10px', borderRadius: '8px', background: 'rgba(0, 0, 0, 0.01)' }} onMouseEnter={(e)=>e.target.style.color='#1A1A2E'} onMouseLeave={(e)=>e.target.style.color='#374151'}>
                 {t('orderCoirProducts')}
               </Link>
-              <Link href="/client/profile" style={{ display: 'flex', alignItems: 'center', gap: '10px', color: '#5C5C6B', fontSize: '13px', textDecoration: 'none', padding: '10px', borderRadius: '8px', background: 'rgba(0, 0, 0, 0.01)' }} onMouseEnter={(e)=>e.target.style.color='#1A1A2E'} onMouseLeave={(e)=>e.target.style.color='#5C5C6B'}>
+              <Link href="/client/profile" style={{ display: 'flex', alignItems: 'center', gap: '10px', color: '#374151', fontSize: '13px', textDecoration: 'none', padding: '10px', borderRadius: '8px', background: 'rgba(0, 0, 0, 0.01)' }} onMouseEnter={(e)=>e.target.style.color='#1A1A2E'} onMouseLeave={(e)=>e.target.style.color='#374151'}>
                 {t('updateCompanyProfile')}
               </Link>
-              <Link href="/client/contact" style={{ display: 'flex', alignItems: 'center', gap: '10px', color: '#5C5C6B', fontSize: '13px', textDecoration: 'none', padding: '10px', borderRadius: '8px', background: 'rgba(0, 0, 0, 0.01)' }} onMouseEnter={(e)=>e.target.style.color='#1A1A2E'} onMouseLeave={(e)=>e.target.style.color='#5C5C6B'}>
+              <Link href="/client/contact" style={{ display: 'flex', alignItems: 'center', gap: '10px', color: '#374151', fontSize: '13px', textDecoration: 'none', padding: '10px', borderRadius: '8px', background: 'rgba(0, 0, 0, 0.01)' }} onMouseEnter={(e)=>e.target.style.color='#1A1A2E'} onMouseLeave={(e)=>e.target.style.color='#374151'}>
                 {t('supportInquiry')}
               </Link>
             </div>
@@ -282,10 +282,10 @@ export default function ClientDashboard() {
             borderRadius: '20px',
             padding: '24px',
           }}>
-            <h4 style={{ fontSize: '15px', fontWeight: 600, fontFamily: 'Space Grotesk', marginBottom: '8px', color: '#2D6A4F' }}>
+            <h2 style={{ fontSize: '15px', fontWeight: 600, fontFamily: 'Space Grotesk', marginBottom: '8px', color: '#2D6A4F' }}>
               {t('needAssistance')}
-            </h4>
-            <p style={{ fontSize: '12px', color: '#8E8E9A', lineHeight: 1.6, marginBottom: '16px', fontFamily: 'Poppins' }}>
+            </h2>
+            <p style={{ fontSize: '12px', color: '#475569', lineHeight: 1.6, marginBottom: '16px', fontFamily: 'Poppins' }}>
               {t('assistanceDesc')}
             </p>
             <Link href="/client/contact" className="btn-ghost" style={{ padding: '8px 16px', fontSize: '11px', display: 'inline-block', textDecoration: 'none' }}>
@@ -295,7 +295,7 @@ export default function ClientDashboard() {
         </div>
       </div>
 
-      <style jsx>{`
+      <style>{`
         @media (max-width: 900px) {
           .grid-responsive { grid-template-columns: 1fr !important; }
         }

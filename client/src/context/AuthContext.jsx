@@ -123,6 +123,32 @@ export function AuthProvider({ children }) {
     }
   };
 
+  // Social Login handler
+  const socialLogin = async (profile) => {
+    setLoading(true);
+    setError(null);
+    try {
+      const res = await api.post('/auth/social-login', profile);
+      if (res.data.success) {
+        const { user: userData, token, refreshToken } = res.data.data;
+
+        localStorage.setItem('token', token);
+        localStorage.setItem('refreshToken', refreshToken);
+        localStorage.setItem('user', JSON.stringify(userData));
+
+        setUser(userData);
+        router.push('/client/dashboard');
+        return { success: true };
+      }
+    } catch (err) {
+      const msg = err.response?.data?.message || 'Social login failed.';
+      setError(msg);
+      throw new Error(msg);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   const clearError = () => setError(null);
 
   return (
@@ -134,6 +160,7 @@ export function AuthProvider({ children }) {
         login,
         register,
         logout,
+        socialLogin,
         clearError,
         isAuthenticated: !!user,
         isAdmin: user?.role === 'admin' || user?.role === 'superadmin',

@@ -19,8 +19,8 @@
   --color-gold-light: #95D5B2;
   --color-sand: #B7E4C7;
   --color-text-primary: #1A1A2E;
-  --color-text-secondary: #5C5C6B;
-  --color-text-muted: #8E8E9A;
+  --color-text-secondary: #374151;
+  --color-text-muted: #475569;
 }
 
 /* ================================================
@@ -43,8 +43,8 @@
   --sand: #95D5B2;
   
   --text-1: #1A1A2E;
-  --text-2: #5C5C6B;
-  --text-3: #8E8E9A;
+  --text-2: #374151;
+  --text-3: #475569;
   
   --border: rgba(0, 0, 0, 0.08);
   --border-hover: rgba(45, 106, 79, 0.3);

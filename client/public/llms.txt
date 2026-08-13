@@ -1,0 +1,22 @@
+# Smart Coir Manufacturing & Supply Chain System
+
+> Smart Coir is an AI-powered smart manufacturing, quality control, inventory management, and supply chain ecosystem for coir product producers and buyers.
+
+## Key System Modules & Features
+
+- [Client Portal Dashboard](/client/dashboard): B2B ordering, real-time shipment tracking, inventory status, and order history.
+- [Product Inventory Catalog](/client/inventory): Coir pith, coir fiber, coco peat blocks, coir geotextiles, and custom dimensions.
+- [Order Management](/client/orders): Automated invoice generation, shipment tracking, and logistics updates.
+- [Live Support](/client/contact): Direct assistance for wholesale supply, technical specifications, and bulk quotes.
+
+## Technical Stack & API Overview
+
+- **Frontend**: Next.js 16 (React 19), Webpack, Tailwind CSS, Framer Motion, Three.js
+- **Backend API**: Node.js, Express, MongoDB (Mongoose), Socket.io, JWT Authentication
+- **AI Integrations**: OpenAI API for intelligent supply chain assistance and automated support
+- **Export Capabilities**: PDFKit invoice generation, QR Code product tracking
+
+## Standard Information
+- Website: https://smartcoir.com
+- Contact Email: support@smartcoir.com
+- Documentation: /llms-full.txt

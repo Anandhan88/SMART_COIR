@@ -50,12 +50,12 @@ export default function ClientOrders() {
 
   const getStatusColor = (status) => {
     switch (status) {
-      case 'pending': return { text: '#E8C55A', bg: 'rgba(232, 197, 90, 0.1)' };
-      case 'confirmed': return { text: '#2D6A4F', bg: 'rgba(45, 106, 79, 0.1)' };
-      case 'processing': return { text: '#3498db', bg: 'rgba(52, 152, 219, 0.1)' };
-      case 'shipped': return { text: '#9b59b6', bg: 'rgba(155, 89, 182, 0.1)' };
-      case 'delivered': return { text: '#2ecc71', bg: 'rgba(46, 204, 113, 0.1)' };
-      default: return { text: '#5C5C6B', bg: 'rgba(0, 0, 0, 0.03)' };
+      case 'pending': return { text: '#9A6A00', bg: 'rgba(232, 197, 90, 0.15)' };
+      case 'confirmed': return { text: '#1B4332', bg: 'rgba(45, 106, 79, 0.15)' };
+      case 'processing': return { text: '#1D4ED8', bg: 'rgba(52, 152, 219, 0.15)' };
+      case 'shipped': return { text: '#6D28D9', bg: 'rgba(155, 89, 182, 0.15)' };
+      case 'delivered': return { text: '#15803D', bg: 'rgba(46, 204, 113, 0.15)' };
+      default: return { text: '#374151', bg: 'rgba(0, 0, 0, 0.05)' };
     }
   };
 
@@ -73,7 +73,7 @@ export default function ClientOrders() {
         <h1 style={{ fontSize: '32px', fontWeight: 700, fontFamily: 'Space Grotesk', color: '#1A1A2E', marginBottom: '8px' }}>
           {t('orderHistory')}
         </h1>
-        <p style={{ color: '#5C5C6B', fontSize: '15px', fontFamily: 'Poppins' }}>
+        <p style={{ color: '#374151', fontSize: '15px', fontFamily: 'Poppins' }}>
           {t('manageCoirOrders')}
         </p>
       </div>
@@ -88,16 +88,16 @@ export default function ClientOrders() {
           borderRadius: '20px',
           padding: '28px',
         }}>
-          <h3 style={{ fontSize: '18px', fontWeight: 600, fontFamily: 'Space Grotesk', marginBottom: '24px' }}>
+          <h2 style={{ fontSize: '18px', fontWeight: 600, fontFamily: 'Space Grotesk', marginBottom: '24px' }}>
             {t('incomingOrdersTitle')}
-          </h3>
+          </h2>
 
           {loading ? (
-            <div style={{ color: '#8E8E9A', fontSize: '14px', textAlign: 'center', padding: '60px' }}>
+            <div style={{ color: '#475569', fontSize: '14px', textAlign: 'center', padding: '60px' }}>
               {t('loadingRecentOrders')}
             </div>
           ) : orders.length === 0 ? (
-            <div style={{ color: '#8E8E9A', fontSize: '14px', textAlign: 'center', padding: '60px' }}>
+            <div style={{ color: '#475569', fontSize: '14px', textAlign: 'center', padding: '60px' }}>
               {t('noOrders')}
             </div>
           ) : (
@@ -131,10 +131,10 @@ export default function ClientOrders() {
                       <div style={{ fontSize: '15px', fontWeight: 700, fontFamily: 'Space Grotesk', color: '#1A1A2E', marginBottom: '4px' }}>
                         #{order.orderNumber || order._id.substring(order._id.length - 6).toUpperCase()}
                       </div>
-                      <div style={{ fontSize: '12px', color: '#8E8E9A', fontFamily: 'Poppins', marginBottom: '6px' }}>
+                      <div style={{ fontSize: '12px', color: '#475569', fontFamily: 'Poppins', marginBottom: '6px' }}>
                         {t('date')}: {new Date(order.createdAt).toLocaleDateString()}
                       </div>
-                      <div style={{ fontSize: '13px', color: '#5C5C6B', fontWeight: 500 }}>
+                      <div style={{ fontSize: '13px', color: '#374151', fontWeight: 500 }}>
                         {order.items?.length || 1} {t('productsUnit')} • ₹{(order.grandTotal || order.totalAmount).toLocaleString('en-IN')}
                       </div>
                     </div>
@@ -147,7 +147,7 @@ export default function ClientOrders() {
                       textTransform: 'uppercase',
                       background: st.bg,
                       color: st.text,
-                      border: `1px solid ${st.text}20`,
+                      border: `1px solid ${st.text}30`,
                     }}>
                       {t('status' + order.status.charAt(0).toUpperCase() + order.status.slice(1))}
                     </span>
@@ -177,9 +177,9 @@ export default function ClientOrders() {
               {/* Order Detail Header */}
               <div style={{ borderBottom: '1px solid rgba(0, 0, 0, 0.03)', paddingBottom: '20px', marginBottom: '24px' }}>
                 <div style={{ display: 'flex', justify: 'space-between', alignItems: 'center', marginBottom: '8px' }}>
-                  <h4 style={{ fontSize: '18px', fontWeight: 700, fontFamily: 'Space Grotesk', color: '#1A1A2E' }}>
+                  <h3 style={{ fontSize: '18px', fontWeight: 700, fontFamily: 'Space Grotesk', color: '#1A1A2E' }}>
                     {t('productDetails')}
-                  </h4>
+                  </h3>
                   <span style={{
                     padding: '4px 10px',
                     borderRadius: '20px',
@@ -193,7 +193,7 @@ export default function ClientOrders() {
                   </span>
                 </div>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: '12px' }}>
-                  <div style={{ fontSize: '13px', color: '#8E8E9A', fontFamily: 'Poppins' }}>
+                  <div style={{ fontSize: '13px', color: '#475569', fontFamily: 'Poppins' }}>
                     Reference: #{selectedOrder.orderNumber || selectedOrder._id.toUpperCase()}
                   </div>
                   <button
@@ -227,9 +227,9 @@ export default function ClientOrders() {
 
               {/* Status Timeline */}
               <div style={{ marginBottom: '32px' }}>
-                <h5 style={{ fontSize: '12px', fontWeight: 600, color: '#8E8E9A', textTransform: 'uppercase', letterSpacing: '0.5px', marginBottom: '16px', fontFamily: 'Poppins' }}>
+                <h4 style={{ fontSize: '12px', fontWeight: 600, color: '#475569', textTransform: 'uppercase', letterSpacing: '0.5px', marginBottom: '16px', fontFamily: 'Poppins' }}>
                   {t('estimatedDelivery')}
-                </h5>
+                </h4>
                 <div style={{ display: 'flex', justifyContent: 'space-between', position: 'relative', padding: '0 10px' }}>
                   
                   {/* Timeline Bar Background */}
@@ -254,12 +254,12 @@ export default function ClientOrders() {
                           background: isDone ? '#2D6A4F' : '#FFFFFF',
                           border: isDone ? 'none' : '2px solid rgba(0, 0, 0, 0.05)',
                           display: 'flex', alignItems: 'center', justifyContent: 'center',
-                          color: isDone ? '#F8F5F0' : '#8E8E9A', fontSize: '10px', fontWeight: 800,
+                          color: isDone ? '#F8F5F0' : '#475569', fontSize: '10px', fontWeight: 800,
                           boxShadow: isCurrent ? '0 0 10px #2D6A4F' : 'none'
                         }}>
                           {isDone ? '✓' : idx + 1}
                         </div>
-                        <span style={{ fontSize: '9px', marginTop: '6px', fontWeight: isDone ? 600 : 400, color: isDone ? '#2D6A4F' : '#8E8E9A', fontFamily: 'Poppins' }}>
+                        <span style={{ fontSize: '9px', marginTop: '6px', fontWeight: isDone ? 600 : 400, color: isDone ? '#2D6A4F' : '#475569', fontFamily: 'Poppins' }}>
                           {t('status' + stepName)}
                         </span>
                       </div>
@@ -270,15 +270,15 @@ export default function ClientOrders() {
 
               {/* Order Items */}
               <div style={{ borderBottom: '1px solid rgba(0, 0, 0, 0.03)', paddingBottom: '20px', marginBottom: '24px' }}>
-                <h5 style={{ fontSize: '12px', fontWeight: 600, color: '#8E8E9A', textTransform: 'uppercase', letterSpacing: '0.5px', marginBottom: '12px', fontFamily: 'Poppins' }}>
+                <h4 style={{ fontSize: '12px', fontWeight: 600, color: '#475569', textTransform: 'uppercase', letterSpacing: '0.5px', marginBottom: '12px', fontFamily: 'Poppins' }}>
                   {t('purchasedItems')}
-                </h5>
+                </h4>
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
                   {selectedOrder.items?.map((item, idx) => (
                     <div key={idx} style={{ display: 'flex', justifyContent: 'space-between', fontSize: '14px', fontFamily: 'Poppins' }}>
                       <div>
                         <div style={{ color: '#1A1A2E', fontWeight: 500 }}>{item.product?.name || 'Coir Product'}</div>
-                        <div style={{ fontSize: '12px', color: '#8E8E9A' }}>{t('quantityLabel')} {item.quantity} kg</div>
+                        <div style={{ fontSize: '12px', color: '#475569' }}>{t('quantityLabel')} {item.quantity} kg</div>
                       </div>
                       <span style={{ color: '#2D6A4F', fontWeight: 600 }}>₹{item.totalPrice?.toLocaleString('en-IN') || (item.quantity * item.unitPrice).toLocaleString('en-IN')}</span>
                     </div>
@@ -292,20 +292,20 @@ export default function ClientOrders() {
                   background: 'rgba(0, 0, 0, 0.01)', borderRadius: '12px', padding: '16px', fontSize: '13px',
                   fontFamily: 'Poppins', border: '1px solid rgba(0, 0, 0, 0.015)', marginBottom: '24px'
                 }}>
-                  <h5 style={{ fontSize: '11px', fontWeight: 600, color: '#2D6A4F', textTransform: 'uppercase', letterSpacing: '0.5px', marginBottom: '8px' }}>
+                  <h4 style={{ fontSize: '11px', fontWeight: 600, color: '#2D6A4F', textTransform: 'uppercase', letterSpacing: '0.5px', marginBottom: '8px' }}>
                     {t('shippingLogistics')}
-                  </h5>
+                  </h4>
                   <div style={{ display: 'flex', justify: 'space-between', marginBottom: '4px' }}>
-                    <span style={{ color: '#8E8E9A' }}>{t('logisticsCarrierLabel')}</span>
+                    <span style={{ color: '#475569' }}>{t('logisticsCarrierLabel')}</span>
                     <span style={{ color: '#1A1A2E', fontWeight: 500 }}>{selectedOrder.deliveryTracking.carrier}</span>
                   </div>
                   <div style={{ display: 'flex', justify: 'space-between', marginBottom: '4px' }}>
-                    <span style={{ color: '#8E8E9A' }}>{t('trackingNumberLabel')}</span>
+                    <span style={{ color: '#475569' }}>{t('trackingNumberLabel')}</span>
                     <span style={{ color: '#1A1A2E', fontWeight: 500 }}>{selectedOrder.deliveryTracking.trackingNumber}</span>
                   </div>
                   {selectedOrder.deliveryTracking.estimatedDelivery && (
                     <div style={{ display: 'flex', justify: 'space-between' }}>
-                      <span style={{ color: '#8E8E9A' }}>{t('estimatedDeliveryDateLabel')}</span>
+                      <span style={{ color: '#475569' }}>{t('estimatedDeliveryDateLabel')}</span>
                       <span style={{ color: '#1A1A2E', fontWeight: 500 }}>{new Date(selectedOrder.deliveryTracking.estimatedDelivery).toLocaleDateString()}</span>
                     </div>
                   )}
@@ -313,7 +313,7 @@ export default function ClientOrders() {
               )}
 
               {/* Grand Billing Summary */}
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', fontSize: '13px', fontFamily: 'Poppins', color: '#5C5C6B' }}>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', fontSize: '13px', fontFamily: 'Poppins', color: '#374151' }}>
                 <div style={{ display: 'flex', justify: 'space-between' }}>
                   <span>{t('subtotal')}</span>
                   <span>₹{selectedOrder.totalAmount?.toLocaleString('en-IN')}</span>
@@ -339,7 +339,7 @@ export default function ClientOrders() {
               borderRadius: '20px',
               padding: '48px 24px',
               textAlign: 'center',
-              color: '#8E8E9A',
+              color: '#475569',
               fontSize: '14px',
               fontFamily: 'Poppins',
             }}>
@@ -349,7 +349,7 @@ export default function ClientOrders() {
         </div>
       </div>
 
-      <style jsx>{`
+      <style>{`
         @media (max-width: 900px) {
           .orders-grid { grid-template-columns: 1fr !important; }
         }

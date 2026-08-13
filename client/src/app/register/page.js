@@ -130,10 +130,10 @@ export default function RegisterPage() {
               Smart<span style={{ color: '#2D6A4F' }}>Coir</span>
             </span>
           </Link>
-          <h2 style={{ fontSize: '20px', fontWeight: 600, color: '#1A1A2E', fontFamily: 'Space Grotesk', marginBottom: '6px' }}>
+          <h1 style={{ fontSize: '20px', fontWeight: 600, color: '#1A1A2E', fontFamily: 'Space Grotesk', marginBottom: '6px' }}>
             {t('createAccountPortal')}
-          </h2>
-          <p style={{ fontSize: '13px', color: '#8E8E9A', fontFamily: 'Poppins' }}>
+          </h1>
+          <p style={{ fontSize: '13px', color: '#475569', fontFamily: 'Poppins' }}>
             {step === 1 ? `${t('step')} 1: ${t('personalDetails')}` : `${t('step')} 2: ${t('companyDetails')}`}
           </p>
         </div>
@@ -179,7 +179,7 @@ export default function RegisterPage() {
                 style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}
               >
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-                  <label style={{ fontSize: '11px', fontWeight: 500, color: '#5C5C6B', fontFamily: 'Poppins', letterSpacing: '1px', textTransform: 'uppercase' }}>
+                  <label style={{ fontSize: '11px', fontWeight: 600, color: '#374151', fontFamily: 'Poppins', letterSpacing: '1px', textTransform: 'uppercase' }}>
                     {t('fullName')}
                   </label>
                   <input
@@ -204,7 +204,7 @@ export default function RegisterPage() {
                 </div>
 
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-                  <label style={{ fontSize: '11px', fontWeight: 500, color: '#5C5C6B', fontFamily: 'Poppins', letterSpacing: '1px', textTransform: 'uppercase' }}>
+                  <label style={{ fontSize: '11px', fontWeight: 600, color: '#374151', fontFamily: 'Poppins', letterSpacing: '1px', textTransform: 'uppercase' }}>
                     {t('emailAddress')}
                   </label>
                   <input
@@ -229,7 +229,7 @@ export default function RegisterPage() {
                 </div>
 
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-                  <label style={{ fontSize: '11px', fontWeight: 500, color: '#5C5C6B', fontFamily: 'Poppins', letterSpacing: '1px', textTransform: 'uppercase' }}>
+                  <label style={{ fontSize: '11px', fontWeight: 600, color: '#374151', fontFamily: 'Poppins', letterSpacing: '1px', textTransform: 'uppercase' }}>
                     {t('phone')}
                   </label>
                   <input
@@ -254,7 +254,7 @@ export default function RegisterPage() {
                 </div>
 
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-                  <label style={{ fontSize: '11px', fontWeight: 500, color: '#5C5C6B', fontFamily: 'Poppins', letterSpacing: '1px', textTransform: 'uppercase' }}>
+                  <label style={{ fontSize: '11px', fontWeight: 600, color: '#374151', fontFamily: 'Poppins', letterSpacing: '1px', textTransform: 'uppercase' }}>
                     {t('password')}
                   </label>
                   <input
@@ -311,7 +311,7 @@ export default function RegisterPage() {
                 style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}
               >
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-                  <label style={{ fontSize: '11px', fontWeight: 500, color: '#5C5C6B', fontFamily: 'Poppins', letterSpacing: '1px', textTransform: 'uppercase' }}>
+                  <label style={{ fontSize: '11px', fontWeight: 600, color: '#374151', fontFamily: 'Poppins', letterSpacing: '1px', textTransform: 'uppercase' }}>
                     {t('companyName')}
                   </label>
                   <input
@@ -336,7 +336,7 @@ export default function RegisterPage() {
                 </div>
 
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-                  <label style={{ fontSize: '11px', fontWeight: 500, color: '#5C5C6B', fontFamily: 'Poppins', letterSpacing: '1px', textTransform: 'uppercase' }}>
+                  <label style={{ fontSize: '11px', fontWeight: 600, color: '#374151', fontFamily: 'Poppins', letterSpacing: '1px', textTransform: 'uppercase' }}>
                     {t('role')}
                   </label>
                   <select
@@ -404,9 +404,9 @@ export default function RegisterPage() {
         </form>
 
         {/* Login footer link */}
-        <div style={{ marginTop: '32px', textAlign: 'center', fontSize: '13px', color: '#8E8E9A', fontFamily: 'Poppins' }}>
+        <div style={{ marginTop: '32px', textAlign: 'center', fontSize: '13px', color: '#475569', fontFamily: 'Poppins' }}>
           {t('alreadyHaveAccount')}{' '}
-          <Link href="/login" style={{ color: '#2D6A4F', fontWeight: 500, textDecoration: 'none' }}>
+          <Link href="/login" style={{ color: '#2D6A4F', fontWeight: 600, textDecoration: 'none' }}>
             {t('backToLogin')}
           </Link>
         </div>

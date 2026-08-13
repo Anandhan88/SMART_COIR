@@ -195,7 +195,7 @@ export default function ClientContact() {
         </div>
       </div>
 
-      <style jsx>{`
+      <style>{`
         @media (max-width: 900px) {
           .contact-grid { grid-template-columns: 1fr !important; }
         }

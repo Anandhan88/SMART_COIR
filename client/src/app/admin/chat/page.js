@@ -519,7 +519,7 @@ export default function AdminSupportChat() {
 
       </div>
 
-      <style jsx>{`
+      <style>{`
         @media (max-width: 768px) {
           .chat-grid-responsive {
             grid-template-columns: 1fr !important;

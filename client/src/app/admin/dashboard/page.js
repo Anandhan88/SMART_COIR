@@ -811,7 +811,7 @@ export default function AdminDashboard() {
         )}
       </AnimatePresence>
 
-      <style jsx>{`
+      <style>{`
         @media (max-width: 900px) {
           .grid-responsive { grid-template-columns: 1fr !important; }
         }
