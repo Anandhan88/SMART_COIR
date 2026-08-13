@@ -27,14 +27,33 @@ connectDB();
 
 // Middleware
 app.use(helmet({ crossOriginResourcePolicy: { policy: 'cross-origin' } }));
-app.use(cors({ origin: config.clientUrl, credentials: true }));
+
+// Flexible CORS for Localhost & Production deployments
+const allowedOrigins = [
+  config.clientUrl,
+  'http://localhost:3000',
+  'https://smart-coir-client.onrender.com',
+];
+
+app.use(cors({
+  origin: (origin, callback) => {
+    // Allow requests with no origin (like mobile apps, curl, or Postman)
+    if (!origin) return callback(null, true);
+    if (allowedOrigins.includes(origin) || process.env.NODE_ENV !== 'production' || origin.endsWith('.onrender.com') || origin.endsWith('.vercel.app')) {
+      return callback(null, true);
+    }
+    return callback(null, true);
+  },
+  credentials: true,
+}));
+
 app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ extended: true }));
 
 // Rate limiting
 const limiter = rateLimit({
   windowMs: 15 * 60 * 1000, // 15 minutes
-  max: 100,
+  max: 200,
   message: { success: false, message: 'Too many requests, please try again later.' },
 });
 app.use('/api/', limiter);
@@ -47,6 +66,18 @@ const fs = require('fs');
 if (!fs.existsSync(path.join(__dirname, 'uploads'))) {
   fs.mkdirSync(path.join(__dirname, 'uploads'), { recursive: true });
 }
+
+// Root Status Page
+app.get('/', (req, res) => {
+  res.json({
+    success: true,
+    service: 'Smart Coir Backend API',
+    status: 'Online 🚀',
+    health: '/api/health',
+    documentation: '/llms.txt',
+    timestamp: new Date()
+  });
+});
 
 // API Routes
 app.use('/api/auth', require('./routes/auth'));
