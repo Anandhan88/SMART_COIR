@@ -80,8 +80,8 @@ export default function Navbar() {
           </div>
         </Link>
 
-        {/* Desktop Controls (Hidden on mobile) */}
-        <div className="hidden md:flex" style={{ alignItems: 'center', gap: 10 }}>
+        {/* Desktop Controls */}
+        <div className="nav-desktop-controls" style={{ alignItems: 'center', gap: 10 }}>
           {/* Language Selector */}
           <div style={{ position: 'relative' }}>
             <button
@@ -201,8 +201,8 @@ export default function Navbar() {
           </button>
         </div>
 
-        {/* Mobile Header Controls (Visible only on small screens) */}
-        <div className="flex md:hidden" style={{ alignItems: 'center', gap: 8, zIndex: 110 }}>
+        {/* Mobile Header Controls */}
+        <div className="nav-mobile-controls" style={{ alignItems: 'center', gap: 8, zIndex: 110 }}>
           {/* Compact Language Selector */}
           <div style={{ position: 'relative' }}>
             <button
@@ -298,7 +298,7 @@ export default function Navbar() {
         </div>
       </div>
 
-      {/* Mobile Menu Dropdown */}
+      {/* Mobile Menu Dropdown Drawer */}
       <AnimatePresence>
         {mobileOpen && (
           <motion.div
@@ -311,7 +311,7 @@ export default function Navbar() {
               background: scrolled ? '#F8F5F0' : '#08080F',
               borderBottom: '1px solid rgba(255, 255, 255, 0.1)',
             }}
-            className="block md:hidden"
+            className="nav-mobile-drawer"
           >
             <div style={{ padding: '20px 24px 28px', display: 'flex', flexDirection: 'column', gap: 16 }}>
               <Link
@@ -379,6 +379,19 @@ export default function Navbar() {
           </motion.div>
         )}
       </AnimatePresence>
+
+      <style>{`
+        @media (min-width: 768px) {
+          .nav-desktop-controls { display: flex !important; }
+          .nav-mobile-controls { display: none !important; }
+          .nav-mobile-drawer { display: none !important; }
+        }
+        @media (max-width: 767px) {
+          .nav-desktop-controls { display: none !important; }
+          .nav-mobile-controls { display: flex !important; }
+          .nav-mobile-drawer { display: block !important; }
+        }
+      `}</style>
     </motion.header>
   );
 }
