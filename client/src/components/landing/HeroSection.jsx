@@ -111,6 +111,7 @@ export default function HeroSection() {
             initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.8 }}
+            className="hero-cta-group"
             style={{ display: 'flex', flexWrap: 'wrap', gap: 16, marginBottom: 80 }}
           >
             <Link href="/login" className="btn-gold">
@@ -130,6 +131,7 @@ export default function HeroSection() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 1.1 }}
+            className="hero-stats-row"
             style={{
               display: 'flex',
               gap: 56,
@@ -206,6 +208,27 @@ export default function HeroSection() {
           <div style={{ width: 3, height: 8, borderRadius: 2, background: '#C9A84C' }} />
         </motion.div>
       </motion.div>
+
+      <style>{`
+        @media (max-width: 640px) {
+          .hero-cta-group {
+            flex-direction: column !important;
+            align-items: stretch !important;
+            gap: 12px !important;
+            margin-bottom: 48px !important;
+          }
+          .hero-cta-group a {
+            width: 100% !important;
+            justify-content: center !important;
+            text-align: center !important;
+          }
+          .hero-stats-row {
+            flex-wrap: wrap !important;
+            gap: 24px 32px !important;
+            padding-top: 28px !important;
+          }
+        }
+      `}</style>
     </section>
   );
 }
