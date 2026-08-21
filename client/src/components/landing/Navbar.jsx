@@ -66,10 +66,10 @@ export default function Navbar() {
             style={{ width: 40, height: 40, objectFit: 'contain' }}
           />
           <div>
-            <div style={{ fontSize: 20, fontWeight: 700, fontFamily: 'Space Grotesk', color: '#111122', lineHeight: 1.2 }}>
-              Smart<span style={{ color: '#2D6A4F' }}>Coir</span>
+            <div style={{ fontSize: 20, fontWeight: 700, fontFamily: 'Space Grotesk', color: scrolled ? '#111122' : '#FFFFFF', lineHeight: 1.2, transition: 'color 0.3s ease' }}>
+              Smart<span style={{ color: scrolled ? '#2D6A4F' : '#52B788', transition: 'color 0.3s ease' }}>Coir</span>
             </div>
-            <div style={{ fontSize: 9, letterSpacing: 3, textTransform: 'uppercase', color: '#737380', fontFamily: 'Poppins' }}>
+            <div style={{ fontSize: 9, letterSpacing: 3, textTransform: 'uppercase', color: scrolled ? '#737380' : 'rgba(255, 255, 255, 0.7)', fontFamily: 'Poppins', transition: 'color 0.3s ease' }}>
               Manufacturing
             </div>
           </div>

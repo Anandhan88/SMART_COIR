@@ -65,35 +65,6 @@ export default function HeroSection() {
       {/* Content */}
       <div className="container-main" style={{ position: 'relative', zIndex: 10, paddingTop: 160, paddingBottom: 120 }}>
         <div style={{ maxWidth: 650 }}>
-          {/* Badge */}
-          <motion.div
-            initial={{ opacity: 0, y: 24 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.2 }}
-            style={{
-              display: 'inline-flex',
-              alignItems: 'center',
-              gap: 10,
-              padding: '10px 22px',
-              borderRadius: 'var(--radius-full)',
-              background: 'rgba(201, 168, 76, 0.1)',
-              border: '1px solid rgba(201, 168, 76, 0.2)',
-              marginBottom: 40,
-            }}
-          >
-            <span style={{
-              width: 7, height: 7, borderRadius: '50%',
-              background: '#C9A84C',
-              boxShadow: '0 0 10px #C9A84C',
-            }} />
-            <span style={{
-              fontSize: 10, fontWeight: 600, letterSpacing: 3,
-              textTransform: 'uppercase', color: '#C9A84C',
-              fontFamily: 'Poppins',
-            }}>
-              Industry 4.0 Platform
-            </span>
-          </motion.div>
 
           {/* Heading */}
           <motion.h1
